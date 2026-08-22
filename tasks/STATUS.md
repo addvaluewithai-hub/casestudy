@@ -38,14 +38,19 @@ Secondary/follow-up story: scaling high-quality product content and application 
 - Confirmed new catalog search/filter UX from supplied screenshots.
 - Created this dedicated case-study workspace and task system.
 - Created Cloudinary folder `casestudy/alamaar` for curated media.
+- Added Playwright capture tooling and a GitHub Actions workflow for matched screenshots plus initial WebM recordings.
+- Added workflow triggers for manual, hourly scheduled, and capture-code push runs.
+- Created an hourly ChatGPT task that follows `tasks/HOURLY_AGENT.md`, advances real work, and records progress.
+- Verified Cloudinary upload connectivity by importing the public Alaska Wood 5225 SF product-card image.
+- Verified current English, Arabic, and Hindi public routes are crawlable.
 
 ## Immediate next work
 
-1. Add automated Playwright evidence capture for old/new desktop + mobile screenshots and short recordings.
-2. Run/inspect captures and curate the strongest media.
+1. Inspect the first GitHub Actions capture run/artifact; fix capture tooling if needed.
+2. Curate the strongest matched captures and upload selected media to Cloudinary.
 3. Capture mobile PageSpeed evidence for old/new.
-4. Build final storyboard from proof, not from generic portfolio conventions.
-5. Draft copy only after media slots are locked.
+4. Resolve multilingual QA blocker before recording the language-switch proof.
+5. Lock final storyboard from proof, then draft copy.
 6. Update `yasserhawas.site` case-study component model to support richer media blocks and implement the final page.
 
 ## Blockers / unknowns
@@ -54,3 +59,4 @@ Secondary/follow-up story: scaling high-quality product content and application 
 - Primary customer segment and buying process are unknown. Avoid claims that depend on these facts.
 - UI designer name/credit is not yet known. Use generic `UI Designer` until supplied.
 - Need to verify whether collection counts can overlap (54 + 55 vs 98 total finishes) before interpreting the numbers.
+- **Multilingual QA blocker:** the current Arabic homepage crawl exposes English image-generation prompt text inside at least the Ruby Collection and Classic Wood content. Do not record a polished EN/AR/HI case-study video until this visible content issue is fixed and re-verified.
