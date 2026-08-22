@@ -10,7 +10,7 @@ on:
     - cron: '17 * * * *'
 
 permissions:
-  contents: read
+  contents: write
 
 env:
   CI: true
@@ -50,3 +50,20 @@ jobs:
           path: capture/evidence
           if-no-files-found: warn
           retention-days: 14
+
+      - name: Publish bootstrap evidence to repository
+        if: success() && github.event_name == 'push'
+        run: |
+          cd "$GITHUB_WORKSPACE"
+          rm -rf evidence/bootstrap
+          mkdir -p evidence/bootstrap
+          cp -R capture/evidence/. evidence/bootstrap/
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add evidence/bootstrap
+          if git diff --cached --quiet; then
+            echo "No capture changes to publish"
+          else
+            git commit -m "Store bootstrap Alamaar capture evidence"
+            git push
+          fi
