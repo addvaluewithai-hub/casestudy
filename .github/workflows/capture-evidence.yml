@@ -2,6 +2,10 @@ name: Capture Alamaar evidence
 
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - 'capture/**'
+      - '.github/workflows/capture-evidence.yml'
   schedule:
     - cron: '17 * * * *'
 
