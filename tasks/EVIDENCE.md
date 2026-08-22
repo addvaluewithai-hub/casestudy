@@ -7,7 +7,9 @@ Use this file as the source of truth for media and measurable proof. Add Cloudin
 | ID | Type | URL | Status | Notes |
 |---|---|---|---|---|
 | site-old | old production snapshot | https://feedbackcentral.site/ | verified by user | Preserved old Alamaar site |
-| site-new | current production | https://alamaarhpl.com/ | verified by user | New 2026 redesign |
+| site-new | current production | https://alamaarhpl.com/ | verified by user + crawl | New 2026 redesign |
+| site-new-ar | current Arabic route | https://alamaarhpl.com/ar/home/ | verified by crawl | RTL route; currently has prompt-leak QA issue |
+| site-new-hi | current Hindi route | https://alamaarhpl.com/hi/home/ | verified by crawl | Hindi route available |
 
 ## Supplied screenshot evidence
 
@@ -43,7 +45,11 @@ Folder: `casestudy/alamaar`
 
 | ID | Kind | Cloudinary URL | Capture source | Approved use |
 |---|---|---|---|---|
-| _pending_ | | | | |
+| alaska-card-source | image | https://res.cloudinary.com/as9o12al/image/upload/v1787438474/alaska-5225-card-source.webp | current production product-card source image | durable source/reference only; not a final case-study screenshot |
+
+## Public-site QA evidence
+
+- Current Arabic homepage crawl exposes English image-generation prompt text inside collection content (including Ruby Collection / Classic Wood text). Treat this as a production QA issue and block polished multilingual evidence capture until resolved.
 
 ## Evidence still needed
 
@@ -52,7 +58,7 @@ Folder: `casestudy/alamaar`
 - Mobile PageSpeed old/new.
 - Hero montage video.
 - Catalog filter/search recording.
-- Language-switch recording.
+- Language-switch recording after Arabic prompt leakage is fixed.
 - WordPress editor recording if authenticated access is provided.
 
 ## Evidence rules
