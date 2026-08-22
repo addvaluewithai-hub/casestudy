@@ -3,7 +3,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "capture": "node capture.mjs"
+    "capture": "node capture.mjs",
+    "audit": "node audit.mjs"
   },
   "dependencies": {
     "playwright": "^1.55.0"
