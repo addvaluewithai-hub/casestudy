@@ -110,9 +110,11 @@ Folder: `casestudy/alamaar`
 ## Portfolio QA evidence
 
 - The release-preview branch is `feat/alamaar-rebuild-release-preview`, based on `release/new-site`.
-- The prior cross-repository QA workflow in this workspace was still checking superseded `feat/alamaar-rebuild-case-study` and its old generated-route path; its last published `evidence/portfolio-qa/run-status.json` therefore showed skipped results and is not evidence for the current preview.
-- The portfolio branch now contains a self-publishing `Alamaar rebuild release QA` workflow that runs build/crawlable/responsive/reduced-motion checks and writes `qa-artifacts/alamaar/` back to the feature branch on push. Because no published `qa-artifacts/alamaar/run-status.json` exists yet, responsive QA remains open.
-- On 2026-08-23 the release QA was also extended with a `pull_request` trigger targeting `release/new-site`, so subsequent PR synchronizations produce an inspectable Actions run even if the branch self-publish path fails. This is diagnostic redundancy, not evidence of a pass by itself.
+- PR #11's Cloudflare bot reports the stable Branch Preview URL as `https://feat-alamaar-rebuild-release.yasserhawas-preview.pages.dev`.
+- Earlier preview-QA failures did not produce the expected report, so they are not evidence of a responsive page defect.
+- Root cause identified on 2026-08-23: the capture package's `portfolio-qa` command still invoked stale `portfolio-preview-qa.mjs`, while the hardened diagnostic implementation lived in `portfolio-qa.mjs`. Commit `0f05139ce83bd8098953beada959ec25fe2d70ac` changes the actual npm entrypoint to invoke `portfolio-qa.mjs`, passes the Cloudflare preview URL explicitly, and writes output into `evidence/portfolio-preview` so the normal evidence publisher can retain `qa.json` and screenshots.
+- The hardened script uses `domcontentloaded` as the primary navigation gate, a bounded best-effort network-idle wait, structured navigation diagnostics, desktop/tablet/mobile screenshots, horizontal-overflow/page-error checks, required-story assertions and normal/reduced-motion video checks.
+- Responsive/reduced-motion QA remains open until the first run after the corrected entrypoint publishes `evidence/bootstrap/portfolio-preview/qa.json` and screenshots and those images are visually reviewed.
 
 ## Public-site QA evidence
 
@@ -121,7 +123,7 @@ Folder: `casestudy/alamaar`
 
 ## Evidence still needed
 
-- Responsive portfolio QA report/screenshots from the release-preview workflow, followed by visual inspection.
+- Responsive portfolio QA report/screenshots from the corrected preview QA entrypoint, followed by visual inspection.
 - Language-switch recording after Arabic prompt leakage is fixed.
 - WordPress editor recording if authenticated access is provided.
 - Verify whether collection membership counts overlap before interpreting 54 + 55 against 98 total finishes.
