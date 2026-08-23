@@ -48,6 +48,8 @@ Mobile: new homepage, products, Alaska Wood PDP, contact page at 390px width.
 
 Videos: `new-site-montage.webm` (20.24s bootstrap montage; useful source but longer than the desired final 10–15s hero) and `catalog-search-filter.webm` (8.88s; target-length interaction proof).
 
+A focused hero capture script (`capture/hero.mjs`) was added on 2026-08-23. It deliberately limits the sequence to homepage → products → Alaska PDP and targets 10–15 seconds, avoiding the long four-page bootstrap recording. The GitHub Actions workflow now runs this capture; approve it only after the generated artifact is inspected.
+
 ## Technical repository evidence
 
 Source: `addvaluewithai-hub/alamaarhpl-website`.
@@ -77,6 +79,7 @@ Folder: `casestudy/alamaar`
 | new-alaska-mobile | image | https://res.cloudinary.com/as9o12al/image/upload/v1787442292/new-alaska-mobile.png | automated capture, 390px | responsive PDP proof |
 | new-contact-mobile | image | https://res.cloudinary.com/as9o12al/image/upload/v1787442298/new-contact-mobile.png | automated capture, 390px | responsive enquiry proof |
 | new-site-montage-bootstrap | video | https://res.cloudinary.com/as9o12al/video/upload/v1787442304/new-site-montage.webm | automated 1440x900 capture | source for final hero edit; 20.24s, not final length |
+| new-site-montage-12s-trim | video | https://res.cloudinary.com/as9o12al/video/upload/du_12/v1787442304/new-site-montage.webm | Cloudinary derived trim of bootstrap source | provisional 12s candidate only; replace with focused capture if better |
 | catalog-search-filter | video | https://res.cloudinary.com/as9o12al/video/upload/v1787442311/catalog-search-filter.webm | automated 1440x900 capture | interaction proof; 8.88s |
 
 ## Public-site QA evidence
@@ -86,7 +89,7 @@ Folder: `casestudy/alamaar`
 ## Evidence still needed
 
 - Mobile PageSpeed old/new.
-- Final trimmed/polished 10–15s hero montage (bootstrap source is 20.24s).
+- Inspect and approve the new focused 10–15s hero montage; a provisional 12s Cloudinary trim exists but is not automatically the final choice.
 - Language-switch recording after Arabic prompt leakage is fixed.
 - WordPress editor recording if authenticated access is provided.
 - Verify whether collection membership counts overlap before interpreting 54 + 55 against 98 total finishes.
