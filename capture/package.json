@@ -5,7 +5,8 @@
   "scripts": {
     "capture": "node capture.mjs && node validate-capture.mjs",
     "hero": "node hero.mjs",
-    "audit": "node audit.mjs"
+    "audit": "node audit.mjs",
+    "portfolio-qa": "node portfolio-preview-qa.mjs"
   },
   "dependencies": {
     "playwright": "^1.55.0"
