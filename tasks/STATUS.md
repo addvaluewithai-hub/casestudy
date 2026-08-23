@@ -56,29 +56,25 @@ The later 98-product content/AI production system remains a separate follow-up s
 - Completed the final editorial pass on the release-preview source.
 - Synced the storyboard's performance chapter to the reviewed portfolio heading `More visual, faster in lab tests` and recorded the verified mobile methodology there.
 - Added final deployed-preview Lighthouse automation: `capture/portfolio-audit.mjs` runs mobile and desktop Lighthouse against the Cloudflare branch preview, retains raw reports plus a compact summary, and is wired into `capture-evidence.yml` as a required QA stage.
-- Run 43 produced a fully green automated preview QA result: capture, hero, Alamaar mobile audit, portfolio responsive QA and portfolio Lighthouse all succeeded.
-- Run 43 responsive checks passed at 1440px, 834px and 390px with HTTP 200, the current H1, all required narrative headings, no runtime errors and no horizontal overflow. Reduced-motion video behavior also passed.
-- Run 43 established a first retained portfolio-preview Lighthouse baseline: mobile Performance 80 / Accessibility 98 / Best Practices 100 / SEO 69; desktop 95 / 98 / 100 / 69. This is preview lab evidence, not an Alamaar-site outcome.
-- The raw Lighthouse report exposed an avoidable ~8.9 MB page payload dominated by untransformed Cloudinary PNG evidence. Portfolio commit `19637914b7ff6320aa443a89847387bd6b22eb36` now delivers Alamaar evidence images through Cloudinary `f_auto/q_auto` while retaining the same source assets and content.
-- Cloudflare Pages confirmed commit `19637914b7ff6320aa443a89847387bd6b22eb36` deployed successfully to the release-preview branch; the bot reported immutable preview `https://09ce347b.yasserhawas-preview.pages.dev` and the stable branch preview URL.
+- Run 43 produced a fully green automated preview QA result and established the first retained portfolio-preview Lighthouse baseline.
+- The initial final-preview Lighthouse evidence exposed an avoidable ~8.9 MB page payload dominated by untransformed Cloudinary PNG evidence. Portfolio commit `19637914b7ff6320aa443a89847387bd6b22eb36` now delivers Alamaar evidence images through Cloudinary `f_auto/q_auto` while retaining the same source assets and content.
+- Cloudflare Pages confirmed commit `19637914b7ff6320aa443a89847387bd6b22eb36` deployed successfully to the release-preview branch at 2026-08-23T19:43:30Z; the bot reported immutable preview `https://09ce347b.yasserhawas-preview.pages.dev` and the stable branch preview URL.
 - Hardened the final portfolio Lighthouse audit in case-study commit `b2e92aa237daba8a5e6f038cf5cf081fc25b0800`: each profile now records total byte weight, largest network resources, and counts optimized vs unoptimized known Alamaar evidence-image requests. The audit fails if a known evidence image is still requested without `/image/upload/f_auto/q_auto/`, making the post-optimization verification deterministic rather than inferred from score movement alone.
-- Copied the retained run-43 desktop/tablet/mobile full-page QA captures into Cloudinary as `qa-run43-desktop`, `qa-run43-tablet`, and `qa-run43-mobile` for durable visual-review access while preserving the original repository evidence.
+- Copied the retained full-page QA captures into Cloudinary as `qa-run43-desktop`, `qa-run43-tablet`, and `qa-run43-mobile` for durable visual-review access while preserving the original repository evidence.
 
 ## Latest capture / preview QA evidence
 
-- Latest committed scheduled capture evidence is run 43. `evidence/bootstrap/run-status.json` reports `capture: success`, `hero: success`, `audit: success`, `portfolio: success`, and `portfolio_audit: success`.
-- `evidence/bootstrap/portfolio-preview/qa.json` reports `status: success` with no failures.
-- Desktop, tablet and mobile all returned HTTP 200 with the correct new H1, no page errors and no horizontal overflow (1440/1440, 834/834 and 390/390 respectively).
-- Normal video safeguards passed: the hero is muted, plays inline and uses metadata preload. Reduced-motion behavior passed: autoplay=false, loop=false, controls=true, paused=true.
-- First retained final-preview Lighthouse baseline: mobile Performance 80, Accessibility 98, Best Practices 100, SEO 69, FCP 2.23s, LCP 4.78s, TBT 54.5ms, CLS 0.0017; desktop Performance 95, Accessibility 98, Best Practices 100, SEO 69, FCP 0.90s, LCP 1.32s, TBT 0ms, CLS 0.00037.
-- The desktop Lighthouse diagnostics report a total page payload around 8,945 KiB. The largest resources were the original Cloudinary PNG captures, including `new-home-desktop.png` (~2.96 MB), `new-products-desktop.png` (~1.69 MB), `old-products-desktop.png` (~1.05 MB) and `old-home-desktop.png` (~1.00 MB).
-- The portfolio branch now automatically requests optimized Cloudinary image delivery (`f_auto/q_auto`) for evidence images, and Cloudflare confirmed that optimization commit is deployed. A fresh capture run was triggered by the hardened audit commit so the next retained summary can verify transformed delivery and measure the new payload/LCP/Performance directly.
+- Latest committed scheduled capture evidence is **run 44**. `evidence/bootstrap/run-status.json` reports `capture: success`, `hero: success`, `audit: success`, `portfolio: success`, and `portfolio_audit: success`.
+- Run 44 responsive QA remained green: HTTP 200 at desktop/tablet/mobile, correct current H1 and required narrative headings, no runtime errors, no horizontal overflow, and reduced-motion autoplay=false / loop=false / controls=true / paused=true.
+- Run 44 portfolio Lighthouse was generated at 19:42:17Z, with mobile fetch at 19:42:20Z and desktop fetch at 19:42:33Z. That is **before** Cloudflare confirmed the optimization deployment at 19:43:30Z, so run 44 is not valid post-optimization evidence and must not be used to close final PageSpeed QA.
+- Run 44 pre-optimization preview scores were mobile Performance 74 / Accessibility 98 / Best Practices 100 / SEO 69, LCP 5.00s; desktop Performance 96 / Accessibility 98 / Best Practices 100 / SEO 69, LCP 1.33s. These values illustrate normal lab variance and are retained, not promoted as final results.
+- The hardened audit commit `b2e92aa237daba8a5e6f038cf5cf081fc25b0800` was pushed after the confirmed Cloudflare deployment and triggers the next capture run. Its resulting summary will include payload diagnostics and explicit transformed-image verification.
 - PR #11's Cloudflare Pages bot reports the stable Branch Preview URL as `https://feat-alamaar-rebuild-release.yasserhawas-preview.pages.dev`; the capture workflow targets that URL.
 
 ## Immediate next work
 
-1. Inspect the fresh capture run triggered after deployed image optimization and read `portfolio-lighthouse/summary.json`; require zero unoptimized known evidence-image requests, then compare total byte weight and mobile LCP/Performance against the run-43 baseline before closing final PageSpeed QA.
-2. Visually inspect the retained desktop/tablet/mobile full-page screenshots, now also copied to Cloudinary as `qa-run43-desktop`, `qa-run43-tablet`, and `qa-run43-mobile`, before closing the remaining responsive visual-review items. Automated layout/runtime/reduced-motion checks are already green.
+1. Inspect the capture run triggered by `b2e92aa237daba8a5e6f038cf5cf081fc25b0800`; require zero unoptimized known evidence-image requests, then compare total byte weight and mobile LCP/Performance against the earlier baseline before closing final PageSpeed QA.
+2. Visually inspect the retained desktop/tablet/mobile full-page screenshots, also copied to Cloudinary as `qa-run43-desktop`, `qa-run43-tablet`, and `qa-run43-mobile`, before closing the remaining responsive visual-review items. Automated layout/runtime/reduced-motion checks are already green.
 3. Verify whether collection counts 54 + 55 overlap only if product-membership evidence becomes available; do not infer it from totals alone.
 4. Keep multilingual recording blocked until the Arabic `Generate ...` prompt leakage is fixed and re-verified.
 5. Keep PR #11 in draft until the optimized final PageSpeed measurement and visual screenshot review are complete.
