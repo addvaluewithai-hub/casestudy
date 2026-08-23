@@ -8,16 +8,16 @@ Use this file as the source of truth for media and measurable proof. Add Cloudin
 |---|---|---|---|---|
 | site-old | old production snapshot | https://feedbackcentral.site/ | verified | Preserved old Alamaar site |
 | site-new | current production | https://alamaarhpl.com/ | verified | New 2026 redesign |
-| old-products | old product archive | https://feedbackcentral.site/shop/ | automated capture verified | matched archive route |
+| old-products | old product archive | https://feedbackcentral.site/product/ | automated capture verified | latest route discovery in run 21 |
 | new-products | new product archive | https://alamaarhpl.com/shop/ | automated capture verified | 98-finish discovery interface |
-| old-contact | old contact | https://feedbackcentral.site/contact/ | automated capture verified | information-led contact page |
-| new-contact | new contact | https://alamaarhpl.com/contact/ | automated capture verified | project-enquiry flow |
-| old-alaska | old Alaska Wood PDP | https://feedbackcentral.site/product/alaska-wood-5225-sf-2/ | automated capture verified | same product/code family before state |
-| new-alaska | new Alaska Wood PDP | https://alamaarhpl.com/shop/finishes/alaska-wood-5225-sf/ | automated capture verified | same product after state |
+| old-contact | old contact | https://feedbackcentral.site/contact-us/ | automated capture verified | latest route discovery in run 21 |
+| new-contact | new contact | https://alamaarhpl.com/contact-us/ | automated capture verified | project-enquiry flow |
+| old-alaska | old Alaska Wood PDP | https://feedbackcentral.site/product/alaska-wood/ | automated capture verified | matched Alaska before state |
+| new-alaska | new Alaska Wood PDP | https://alamaarhpl.com/product/alaska-wood-5225-sf/ | automated capture verified | matched Alaska after state |
 | site-new-ar | current Arabic route | https://alamaarhpl.com/ar/home/ | verified by crawl | RTL route; currently has prompt-leak QA issue |
 | site-new-hi | current Hindi route | https://alamaarhpl.com/hi/home/ | verified by crawl | Hindi route available |
 
-Automated capture manifest generated 2026-08-22T22:43:13Z and committed in `evidence/bootstrap/manifest.json`.
+Latest automated route discovery is run 21, completed 2026-08-23T09:19:40.975Z and committed under `evidence/bootstrap/`. Its `run-status.json` reports `capture: success`, `hero: success`, `audit: success`, with no errors, and its manifest contains all eight matched old/new routes above.
 
 ## Supplied screenshot evidence
 
@@ -48,7 +48,7 @@ Mobile: new homepage, products, Alaska Wood PDP, contact page at 390px width.
 
 Videos: `new-site-montage.webm` (20.24s bootstrap montage; source only), `catalog-search-filter.webm` (8.88s interaction proof), and `hero-montage.webm` (focused homepage → products → Alaska capture).
 
-The scheduled evidence run now publishes deterministic status. Run 14 reports `capture: success`, `hero: success`, and `audit: success` in `evidence/bootstrap/run-status.json`.
+The latest published capture-health evidence is run 21: `capture: success`, `hero: success`, `audit: success`, with an empty errors array. This confirms the hardened validators continue to report a complete paired capture rather than the false-success behavior seen in run 15.
 
 Focused hero capture metadata after Cloudinary import: 1440×900, VP8/WebM, 25fps, 9.88s, 1,255,730 bytes. This is the preferred hero asset over the earlier blind 12-second trim.
 
@@ -71,6 +71,8 @@ Methodology: Lighthouse CLI mobile form factor, simulated throttling, GitHub Act
 | CLS | 0.0002 | 0 |
 
 These are automated lab measurements, not analytics, conversion, or business outcomes. The exceptionally poor old-site mobile timing should be presented with the methodology note rather than generalized into a universal real-user claim.
+
+The canonical published mobile comparison remains verified run 14 rather than being silently swapped for later valid runs; this avoids cherry-picking normal Lighthouse variance.
 
 ## Technical repository evidence
 
@@ -105,12 +107,19 @@ Folder: `casestudy/alamaar`
 | hero-montage-focused | video | https://res.cloudinary.com/as9o12al/video/upload/v1787463716/hero-montage-focused.webm | focused automated capture, run 14 | preferred hero; 9.88s homepage → products → Alaska sequence |
 | catalog-search-filter | video | https://res.cloudinary.com/as9o12al/video/upload/v1787442311/catalog-search-filter.webm | automated 1440x900 capture | interaction proof; 8.88s |
 
+## Portfolio QA evidence
+
+- The release-preview branch is `feat/alamaar-rebuild-release-preview`, based on `release/new-site`.
+- The prior cross-repository QA workflow in this workspace was still checking superseded `feat/alamaar-rebuild-case-study` and its old generated-route path; its last published `evidence/portfolio-qa/run-status.json` therefore showed skipped results and is not evidence for the current preview.
+- On 2026-08-23 the workflow was corrected to check out `feat/alamaar-rebuild-release-preview`, validate `dist/case-studies/alamaar-website-rebuild.html`, run the responsive/media Playwright checks, and publish the resulting screenshots/report back to `evidence/portfolio-qa/`. Do not mark responsive QA complete until that new evidence is published and visually inspected.
+
 ## Public-site QA evidence
 
 - Current Arabic homepage crawl exposes English image-generation prompt text inside collection content (including Ruby Collection / Classic Wood text). Treat this as a production QA issue and block polished multilingual evidence capture until resolved.
 
 ## Evidence still needed
 
+- Responsive portfolio QA artifact/report from the corrected release-preview workflow, followed by visual inspection.
 - Language-switch recording after Arabic prompt leakage is fixed.
 - WordPress editor recording if authenticated access is provided.
 - Verify whether collection membership counts overlap before interpreting 54 + 55 against 98 total finishes.
