@@ -61,13 +61,13 @@ The later 98-product content/AI production system remains a separate follow-up s
 - Run 30 reports `capture: success`, `hero: success`, `audit: success`, `portfolio: failure`.
 - Run-30 mobile Lighthouse measured old/new performance 37 → 90, LCP ~33.77s → 2.90s, and TBT ~729.5ms → 0ms. These later valid measurements remain supporting evidence and do not replace canonical run 14 in the published case study, avoiding cherry-picking normal Lighthouse variance.
 - The expected portfolio responsive report was not published by run 30, so run 30 is not evidence of a page-level responsive failure.
-- **Preview alias diagnosis corrected on 2026-08-23:** PR #11's Cloudflare Pages bot comment explicitly reports the stable Branch Preview URL as `https://feat-alamaar-rebuild-release.yasserhawas-preview.pages.dev`. The earlier assumption that this shortened alias was wrong was itself incorrect. The capture workflow has been restored to Cloudflare's reported alias in commit `c8f2fae7c4402caead13f574a9cb7043cf8859c5`.
-- The portfolio QA script was also hardened in commit `ee846d9b306e0469f16beb01e464d814fbbf1335`: navigation failures now become structured `qa.json` diagnostics rather than throwing before a report can be written; `domcontentloaded` is used as the primary navigation gate with a bounded best-effort network-idle wait.
-- Updating the capture workflow triggers a fresh capture run automatically; inspect the next committed evidence/report before closing responsive/reduced-motion QA.
+- PR #11's Cloudflare Pages bot comment reports the stable Branch Preview URL as `https://feat-alamaar-rebuild-release.yasserhawas-preview.pages.dev`; the capture workflow targets that URL.
+- **Root cause found on 2026-08-23:** the `portfolio-qa` npm script was still invoking `portfolio-preview-qa.mjs`, while the diagnostic navigation/reporting fixes had been applied to a different file, `portfolio-qa.mjs`. The hardened code therefore never ran in the capture workflow. Commit `0f05139ce83bd8098953beada959ec25fe2d70ac` switches the workflow entrypoint to the hardened script and passes the Cloudflare preview URL plus `evidence/portfolio-preview` output path explicitly.
+- This capture-file change triggers a fresh workflow run automatically. Inspect the next committed `evidence/bootstrap/portfolio-preview/qa.json` and screenshots before closing responsive/reduced-motion QA.
 
 ## Immediate next work
 
-1. Inspect the first capture run after `c8f2fae7c4402caead13f574a9cb7043cf8859c5`. If `portfolio: success`, review its desktop/tablet/mobile screenshots and `qa.json` before closing responsive/reduced-motion QA. If it fails, use the now-guaranteed structured navigation diagnostics to identify the exact failure.
+1. Inspect the first capture run after `0f05139ce83bd8098953beada959ec25fe2d70ac`. If `portfolio: success`, review its desktop/tablet/mobile screenshots and `qa.json` before closing responsive/reduced-motion QA. If it fails, use the structured navigation diagnostics now produced by the actual invoked script.
 2. Run final PageSpeed on the deployed release-preview case-study page once responsive QA is clean.
 3. Verify whether collection counts 54 + 55 overlap only if product-membership evidence becomes available; do not infer it from totals alone.
 4. Keep multilingual recording blocked until the Arabic `Generate ...` prompt leakage is fixed and re-verified.
