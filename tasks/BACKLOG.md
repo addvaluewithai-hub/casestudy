@@ -29,15 +29,16 @@ Work top-to-bottom unless a task is blocked. Every completed task should update 
 
 ## P2 — Portfolio implementation
 
-- [x] Upgrade `yasserhawas.site` case-study schema to support video, before/after, gallery, stats, and rich media blocks. Implemented on `feat/alamaar-rebuild-case-study`; legacy image field retained for compatibility.
-- [x] Implement Alamaar website-rebuild case study as separate story from catalog automation. The branch now contains the full seven-part rebuild narrative wired to curated Cloudinary evidence.
-- [x] Remove/replace conflicting 67-product Alamaar framing where it can mislead readers about the current 98-product project. The primary Alamaar data object now represents the 2026 website rebuild and no longer presents the old 67-product catalog-system headline/metrics.
-- [x] Add media lazy-loading/performance safeguards. Content images use lazy loading + async decoding, videos use metadata preload, and autoplaying case-study/hero videos now respect `prefers-reduced-motion` by disabling autoplay/loop and exposing controls.
-- [x] Replace provisional hero URL in portfolio data with the focused Cloudinary hero and add verified mobile Lighthouse proof without changing the evidence guardrails.
-- [x] Add build-time dedicated Alamaar case-study HTML generation with route-specific metadata and crawlable progressive fallback content. Implementation is complete; automated build verification is still pending before the crawlability QA item is closed.
-- [x] Add cross-repo automated portfolio QA workflow for type/build, generated-route verification, desktop/tablet/mobile screenshots, overflow checks, narrative rendering and video/reduced-motion behavior.
-- [ ] Add responsive/mobile QA for the case-study page. Automation added; close only after `evidence/portfolio-qa/` is reviewed.
-- [ ] Ensure all important narrative copy is crawlable HTML and metadata, not visual-only client rendering. Implementation added; close after generated output is verified.
+- [x] Upgrade `yasserhawas.site` case-study schema to support video, before/after, gallery, stats, and rich media blocks. Legacy image field retained for compatibility.
+- [x] Implement Alamaar website-rebuild case study as separate story from catalog automation on `feat/alamaar-rebuild-release-preview`, based directly on the approved `release/new-site` beige design.
+- [x] Remove/replace conflicting 67-product Alamaar framing where it can mislead readers about the current 98-product rebuild story; the catalog-production case study remains a separate next chapter.
+- [x] Add media lazy-loading/performance safeguards. Content images use lazy loading + async decoding, videos use metadata preload, and autoplaying case-study/hero videos respect `prefers-reduced-motion`.
+- [x] Replace provisional hero URL with the focused Cloudinary hero and add verified mobile Lighthouse proof without changing evidence guardrails.
+- [x] Add build-time dedicated Alamaar case-study HTML generation with route-specific metadata and crawlable progressive fallback content.
+- [x] Fix the custom-route content split: `AlamaarWebsiteRebuildStory.tsx` now renders the shared new case-study data rather than maintaining the old Elementor narrative separately.
+- [x] Add release-branch QA guardrails that reject the superseded Elementor/67-product wording and require the custom story to render shared headline/sections.
+- [ ] Add responsive/mobile QA for the case-study page. Automated production-build QA now captures desktop 1440×1000, tablet 834×1112 and mobile 390×844, checks overflow/runtime/narrative/video behavior, and uploads an `alamaar-responsive-qa` artifact. Close only after that artifact is reviewed.
+- [x] Ensure important narrative copy is crawlable HTML and route-specific metadata; build-time output and QA assertions are implemented.
 
 ## P3 — Final QA
 
@@ -45,7 +46,7 @@ Work top-to-bottom unless a task is blocked. Every completed task should update 
 - [ ] Confirm no unrelated testimonial is shown.
 - [ ] Confirm UI designer is credited accurately if name becomes available.
 - [ ] Verify media captions distinguish factual evidence from retrospective diagrams.
-- [ ] Test case study at desktop/tablet/mobile.
-- [ ] Test video autoplay/mute/playsInline/reduced-motion behavior.
+- [ ] Test case study at desktop/tablet/mobile. Automated artifact pending review.
+- [ ] Test video autoplay/mute/playsInline/reduced-motion behavior. Automated assertions pending run review.
 - [ ] Run PageSpeed on final portfolio case-study page.
 - [ ] Final editorial pass: remove hype, redundancy, unexplained jargon, and claims not backed by proof.
