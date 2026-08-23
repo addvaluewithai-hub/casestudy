@@ -48,24 +48,30 @@ The later 98-product content/AI production system remains a separate follow-up s
 - Case-study video respects `prefers-reduced-motion`.
 - Verified run-14 mobile Lighthouse evidence is preserved separately as the canonical paired mobile comparison.
 - Capture scripts were hardened after run 15 exposed false-success behavior: required capture validation now fails missing routes/media, and Lighthouse retries then exits non-zero when either target fails.
-- Capture validation is confirmed in practice: run 20 was complete, and the newer published **run 21** also reports `capture: success`, `hero: success`, `audit: success`, with no errors.
-- **Run-21 route evidence was rechecked against the actual committed `evidence/bootstrap/manifest.json` and the task ledger was corrected.** Exact run-21 discovery is old products `/shop/`, old contact `/contact/`, old Alaska `/product/alaska-wood-5225-sf-2/`, new products `/shop/`, new contact `/contact/`, and new Alaska `/shop/finishes/alaska-wood-5225-sf/`. Earlier `/product/`, `/contact-us/`, and alternate Alaska variants are no longer labelled as canonical automated evidence.
+- Capture validation is confirmed in practice: run 20 was complete, and the newer published run 21 also reports `capture: success`, `hero: success`, `audit: success`, with no errors.
+- Run-21 route evidence was rechecked against `evidence/bootstrap/manifest.json`; the canonical automated routes are old/new `/shop/`, old/new `/contact/`, old Alaska `/product/alaska-wood-5225-sf-2/`, and new Alaska `/shop/finishes/alaska-wood-5225-sf/`.
 - Added dedicated `Alamaar rebuild release QA` on `feat/alamaar-rebuild-release-preview` for `npm run check`, narrative guardrails and crawlable-route validation.
-- Fixed a release-preview rendering mismatch discovered in Cloudflare: the listing card was reading the new `alamaarWebsiteRebuildCaseStudy.ts` data while `/case-studies/alamaar-website-rebuild` still rendered an older hard-coded `AlamaarWebsiteRebuildStory.tsx`. The custom beige story now renders `study.headline`, `study.summary`, metrics and `study.sections` from the shared new data source.
-- Added automated responsive QA to the release branch. `scripts/alamaar-responsive-qa.mjs` launches the production build at desktop/tablet/mobile widths, captures full-page screenshots, checks for horizontal overflow, runtime/console errors, the new headline/98-finish narrative, absence of superseded Elementor copy, video flags and reduced-motion behavior.
-- Diagnosed a QA evidence blind spot: no `qa-artifacts/alamaar/run-status.json` has yet been published from the self-publishing push workflow. The workflow now also listens to `pull_request` updates targeting `release/new-site`, so PR synchronizations create an additional inspectable QA run even if branch self-publishing fails. Commit: `334d2fac68eec0cb8069d5b9cfb2aa1764232c1d`.
-- **The new PR-triggered release QA is now observable, but it is currently failing before any workflow step starts.** Run 9 (`32634593790`) failed with an empty step list and no artifacts; a manual rerun produced the same pre-step failure. This means the current blocker is GitHub Actions execution/runner infrastructure for the private portfolio repo, not a demonstrated build or responsive failure in the page itself. Do not mark responsive QA passed or failed from this run.
-- Fresh live shop verification still reports `Showing 1–16 of 98 results` and exposes collection navigation, but public HTML/source evidence remains insufficient to prove whether the supplied collection counts 54 + 55 overlap. The claim remains intentionally unresolved rather than inferred.
-- **Completed a line-by-line factual portfolio audit against the current release-preview data/story and source evidence.** The 98 live count, matched Alaska before/after, desktop and canonical run-14 mobile Lighthouse numbers, Gutenberg/FSE + ACF architecture, and shared English/Arabic/Hindi structure are all reconciled. The Alamaar source README separately records a 99-finish staging snapshot on 2026-08-20; this is now explicitly documented as a staging snapshot and is not conflated with the current live 98-result catalog.
-- Confirmed the custom Alamaar rebuild story contains no testimonial block and uses the accurate generic collaborating-UI-designer credit. Current media captions describe matched/live evidence or explicitly label conceptual application imagery; no retrospective diagram is presented as historical process evidence.
+- Fixed the release-preview rendering mismatch: the custom beige Alamaar story now renders shared case-study data rather than an older hard-coded Elementor narrative.
+- Added automated responsive QA for desktop/tablet/mobile, overflow/runtime checks, story assertions and reduced-motion video behavior.
+- The PR-triggered release QA is observable but remains blocked at GitHub Actions infrastructure level: run 9 (`32634593790`) and its rerun failed before any workflow step started, with no artifact. This is not evidence of a page-level responsive/build failure.
+- Fresh live shop verification still reports 98 results, but public/source evidence remains insufficient to prove whether collection counts 54 + 55 overlap.
+- Completed a line-by-line factual portfolio audit. Current live 98 count, matched Alaska evidence, retained desktop/run-14 mobile Lighthouse figures, Gutenberg/FSE + ACF architecture and shared English/Arabic/Hindi structure are reconciled. The source repo's separate 99-finish staging snapshot remains explicitly distinguished from current live production.
+- Confirmed the custom rebuild story contains no testimonial and uses the accurate generic collaborating-UI-designer credit. Media captions distinguish matched/live evidence from conceptual imagery.
+- **Completed the final editorial pass on the release-preview source.** Commit `abbe6fa11f028473b77f3997ff7602b015d6e3e7` tightens the seven-part narrative without changing facts: removes defensive/meta copy around conversion claims, replaces subjective performance phrasing with lab-test language, reduces repetition in discovery/PDP sections, and simplifies multilingual/next-chapter wording.
+
+## Latest capture evidence
+
+- Latest committed scheduled evidence remains run 21, published by commit `4854dd5f8bb01a8522a832a23b02ff00a26e2ce8`.
+- `evidence/bootstrap/run-status.json`: capture success, hero success, audit success, no errors.
+- Run-21 mobile Lighthouse measured old/new performance 38 → 90 and LCP ~32.88s → 2.88s; these later valid numbers are retained as evidence but do not replace canonical run 14 in the published case study, avoiding cherry-picking normal Lighthouse variance.
 
 ## Immediate next work
 
-1. Re-check the portfolio Actions run after the runner/infrastructure condition changes; when a job actually starts, inspect build logs plus responsive screenshots/report and fix any page-level failure before closing responsive QA.
-2. Complete the final editorial pass while responsive QA is blocked; remove any remaining subjective/hype wording or unnecessary repetition without changing the locked evidence-led story.
+1. Re-check portfolio Actions after the latest source commit; when a job actually starts, inspect responsive screenshots/report and fix any page-level issue before closing responsive/reduced-motion QA.
+2. Run final PageSpeed on the actual release-preview case-study page once the final branch state is stable.
 3. Verify whether collection counts 54 + 55 overlap only if product-membership evidence becomes available; do not infer it from totals alone.
 4. Keep multilingual recording blocked until the Arabic `Generate ...` prompt leakage is fixed and re-verified.
-5. Run final portfolio PageSpeed before moving PR #11 out of draft.
+5. Resolve any branch/base divergence on PR #11 before moving it out of draft, but do not merge until responsive and final PageSpeed QA are complete.
 
 ## Blockers / unknowns
 
