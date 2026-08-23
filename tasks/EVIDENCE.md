@@ -111,10 +111,17 @@ Folder: `casestudy/alamaar`
 
 - The release-preview branch is `feat/alamaar-rebuild-release-preview`, based on `release/new-site`.
 - PR #11's Cloudflare bot reports the stable Branch Preview URL as `https://feat-alamaar-rebuild-release.yasserhawas-preview.pages.dev`.
-- Earlier preview-QA failures did not produce the expected report, so they are not evidence of a responsive page defect.
-- Root cause identified on 2026-08-23: the capture package's `portfolio-qa` command still invoked stale `portfolio-preview-qa.mjs`, while the hardened diagnostic implementation lived in `portfolio-qa.mjs`. Commit `0f05139ce83bd8098953beada959ec25fe2d70ac` changes the actual npm entrypoint to invoke `portfolio-qa.mjs`, passes the Cloudflare preview URL explicitly, and writes output into `evidence/portfolio-preview` so the normal evidence publisher can retain `qa.json` and screenshots.
+- Run 38 is the first retained structured preview QA report. Desktop, tablet and mobile all returned HTTP 200 with the correct H1, no page errors and no horizontal overflow. The reduced-motion check also passed: autoplay=false, loop=false, controls=true, paused=true.
+- Run 38's only failure was a stale required-text assertion for `More visual, substantially faster`; the reviewed source uses `More visual, faster in lab tests`. Commit `f2e7e2244570d90634ab62190d7564234f7a4172` aligns that test contract with the current source.
 - The hardened script uses `domcontentloaded` as the primary navigation gate, a bounded best-effort network-idle wait, structured navigation diagnostics, desktop/tablet/mobile screenshots, horizontal-overflow/page-error checks, required-story assertions and normal/reduced-motion video checks.
-- Responsive/reduced-motion QA remains open until the first run after the corrected entrypoint publishes `evidence/bootstrap/portfolio-preview/qa.json` and screenshots and those images are visually reviewed.
+- Responsive/reduced-motion QA remains open until the first post-fix run publishes a green report and its screenshots are visually reviewed.
+
+## Final portfolio Lighthouse evidence
+
+- `capture/portfolio-audit.mjs` now runs Lighthouse directly against the deployed Cloudflare case-study preview in both mobile and desktop profiles.
+- It retains raw JSON under `evidence/bootstrap/portfolio-lighthouse/mobile.json` and `desktop.json`, plus `summary.json` containing Performance, Accessibility, Best Practices, SEO, FCP, LCP, TBT, Speed Index and CLS.
+- The methodology is explicitly lab-only: GitHub Actions runner, mobile simulated throttling, desktop preset. These results must not be described as analytics or business outcomes.
+- The first retained run after this automation is required before the final portfolio PageSpeed task can be marked complete.
 
 ## Public-site QA evidence
 
@@ -123,7 +130,8 @@ Folder: `casestudy/alamaar`
 
 ## Evidence still needed
 
-- Responsive portfolio QA report/screenshots from the corrected preview QA entrypoint, followed by visual inspection.
+- Post-fix green responsive portfolio QA report/screenshots, followed by visual inspection.
+- First retained final portfolio Lighthouse summary from the deployed Cloudflare preview.
 - Language-switch recording after Arabic prompt leakage is fixed.
 - WordPress editor recording if authenticated access is provided.
 - Verify whether collection membership counts overlap before interpreting 54 + 55 against 98 total finishes.
