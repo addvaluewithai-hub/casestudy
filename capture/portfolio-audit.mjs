@@ -10,6 +10,21 @@ const url = `${baseUrl}${route}`;
 const outDir = path.resolve(process.argv[3] || 'evidence/portfolio-lighthouse');
 mkdirSync(outDir, { recursive: true });
 
+const evidenceImageNames = [
+  'old-home-desktop.png',
+  'new-home-desktop.png',
+  'old-products-desktop.png',
+  'new-products-desktop.png',
+  'old-alaska-desktop.png',
+  'new-alaska-desktop.png',
+  'old-contact-desktop.png',
+  'new-contact-desktop.png',
+  'new-home-mobile.png',
+  'new-products-mobile.png',
+  'new-alaska-mobile.png',
+  'new-contact-mobile.png',
+];
+
 const summary = {
   generatedAt: new Date().toISOString(),
   url,
@@ -61,6 +76,26 @@ for (const profile of profiles) {
   try {
     const report = JSON.parse(readFileSync(outputPath, 'utf8'));
     const audits = report.audits;
+    const requests = audits['network-requests']?.details?.items || [];
+    const requestedEvidenceImages = requests.filter((item) =>
+      evidenceImageNames.some((name) => item.url?.includes(name)),
+    );
+    const optimizedEvidenceImages = requestedEvidenceImages.filter((item) =>
+      item.url?.includes('/image/upload/f_auto/q_auto/'),
+    );
+    const unoptimizedEvidenceImages = requestedEvidenceImages
+      .filter((item) => !item.url?.includes('/image/upload/f_auto/q_auto/'))
+      .map((item) => item.url);
+    const topResources = [...requests]
+      .sort((a, b) => (b.transferSize || 0) - (a.transferSize || 0))
+      .slice(0, 8)
+      .map((item) => ({
+        url: item.url,
+        transferSize: item.transferSize ?? null,
+        resourceSize: item.resourceSize ?? null,
+        mimeType: item.mimeType ?? null,
+      }));
+
     summary.results[profile.id] = {
       finalUrl: report.finalUrl,
       fetchTime: report.fetchTime,
@@ -77,7 +112,22 @@ for (const profile of profiles) {
         speedIndexMs: audits['speed-index']?.numericValue ?? null,
         cls: audits['cumulative-layout-shift']?.numericValue ?? null,
       },
+      payload: {
+        totalByteWeight: audits['total-byte-weight']?.numericValue ?? null,
+        topResources,
+      },
+      cloudinaryEvidenceDelivery: {
+        requested: requestedEvidenceImages.length,
+        optimized: optimizedEvidenceImages.length,
+        unoptimizedUrls: unoptimizedEvidenceImages,
+      },
     };
+
+    if (requestedEvidenceImages.length > 0 && unoptimizedEvidenceImages.length > 0) {
+      failures.push(
+        `${profile.id}: deployed preview still requested unoptimized evidence images: ${unoptimizedEvidenceImages.join(', ')}`,
+      );
+    }
   } catch (error) {
     const message = `Could not parse Lighthouse report: ${String(error)}`;
     summary.results[profile.id] = { error: message };
