@@ -39,17 +39,20 @@ Secondary/follow-up story: scaling high-quality product content and application 
 - Added focused 10–15s hero capture and automated mobile Lighthouse capture to the evidence workflow; final outputs still require inspection before claims are updated.
 - Locked the headline, summary, role credit, seven-part story, Lighthouse methodology language, and AI-image disclosure in `STORYBOARD.md`.
 - Logged the Arabic prompt-leak issue as a blocker for polished multilingual recording.
-- **Portfolio implementation has started on branch `feat/alamaar-rebuild-case-study` in `addvaluewithai-hub/yasserhawas.site`.** The case-study schema now supports ordered rich media blocks: image, video, before/after, gallery, and stats while retaining the legacy image field for existing studies.
-- **`CaseStudyBody` now renders those rich media blocks** with lazy-loaded images, metadata-preloaded video, matched before/after grids, galleries, and evidence-oriented stat comparisons. This completes the core schema/rendering upgrade; Alamaar content wiring and responsive QA remain.
+- Portfolio implementation is active on branch `feat/alamaar-rebuild-case-study` in `addvaluewithai-hub/yasserhawas.site`.
+- The case-study schema supports ordered rich media blocks: image, video, before/after, gallery, and stats while retaining the legacy image field for existing studies.
+- `CaseStudyBody` renders those rich media blocks with lazy-loaded images, metadata-preloaded video, matched before/after grids, galleries, and evidence-oriented stat comparisons.
+- **The complete Alamaar website-rebuild narrative is now implemented on the portfolio branch.** It uses the locked seven-part story and curated Cloudinary evidence for matched homepage, catalog, Alaska PDP, contact, responsive captures, the catalog interaction video, and verified desktop Lighthouse stats.
+- **The misleading primary 67-product catalog-system framing has been removed from the Alamaar portfolio data object.** The primary Alamaar slug is now `alamaar-website-rebuild`; the 98-product production-system story remains a clearly separate next chapter rather than being presented as the same case study.
 
 ## Immediate next work
 
 1. Inspect the latest capture output for both mobile Lighthouse JSON and the focused `hero-montage.webm` when accessible; curate only verified outputs.
-2. Wire the locked Alamaar rebuild narrative and Cloudinary evidence into the new rich-media model on `feat/alamaar-rebuild-case-study`.
-3. Resolve the conflicting old 67-product Alamaar catalog framing so the rebuild and later catalog-production story cannot be confused.
+2. Run build/type checks and inspect the implemented Alamaar page for schema/rendering errors on `feat/alamaar-rebuild-case-study`.
+3. Perform responsive and video/reduced-motion QA on the case-study page.
 4. Verify catalog collection-count overlap before interpreting 54 + 55 against 98 finishes.
 5. Resolve/re-verify multilingual QA blocker before recording EN → AR → HI proof.
-6. Run build/type/responsive QA on the portfolio branch before opening/merging a focused PR.
+6. Confirm important narrative content remains crawlable and then run final portfolio PageSpeed before PR/merge.
 
 ## Blockers / unknowns
 
