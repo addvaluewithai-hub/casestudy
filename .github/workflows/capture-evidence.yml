@@ -14,7 +14,7 @@ permissions:
 
 env:
   CI: true
-  PORTFOLIO_PREVIEW_URL: https://feat-alamaar-rebuild-release.yasserhawas-preview.pages.dev
+  PORTFOLIO_PREVIEW_URL: https://feat-alamaar-rebuild-release-preview.yasserhawas-preview.pages.dev
 
 jobs:
   capture:
