@@ -1,6 +1,6 @@
 {
   "url": "https://feat-alamaar-rebuild-release.yasserhawas-preview.pages.dev/case-studies/alamaar-website-rebuild/",
-  "checkedAt": "2026-08-23T21:41:34.883Z",
+  "checkedAt": "2026-08-23T23:40:51.745Z",
   "viewports": {
     "desktop": {
       "navigation": {
@@ -13,7 +13,17 @@
       "pageErrors": [],
       "horizontalOverflow": false,
       "bodyWidth": 1440,
-      "scrollWidth": 1440
+      "scrollWidth": 1440,
+      "visualHealth": {
+        "documentHeight": 23716,
+        "sectionCount": 8,
+        "figureCount": 10,
+        "imageCount": 13,
+        "brokenImages": [],
+        "zeroSizedMedia": [],
+        "offscreenText": [],
+        "clippedText": []
+      }
     },
     "tablet": {
       "navigation": {
@@ -26,7 +36,17 @@
       "pageErrors": [],
       "horizontalOverflow": false,
       "bodyWidth": 834,
-      "scrollWidth": 834
+      "scrollWidth": 834,
+      "visualHealth": {
+        "documentHeight": 24551,
+        "sectionCount": 8,
+        "figureCount": 10,
+        "imageCount": 13,
+        "brokenImages": [],
+        "zeroSizedMedia": [],
+        "offscreenText": [],
+        "clippedText": []
+      }
     },
     "mobile": {
       "navigation": {
@@ -39,7 +59,17 @@
       "pageErrors": [],
       "horizontalOverflow": false,
       "bodyWidth": 390,
-      "scrollWidth": 390
+      "scrollWidth": 390,
+      "visualHealth": {
+        "documentHeight": 44356,
+        "sectionCount": 8,
+        "figureCount": 10,
+        "imageCount": 13,
+        "brokenImages": [],
+        "zeroSizedMedia": [],
+        "offscreenText": [],
+        "clippedText": []
+      }
     }
   },
   "narrative": {
@@ -75,6 +105,28 @@
     "loop": false,
     "controls": true,
     "paused": true
+  },
+  "imageDelivery": {
+    "imageCount": 13,
+    "evidenceImageCount": 13,
+    "expectedUniqueEvidenceImages": 12,
+    "missingEvidenceImages": [],
+    "unoptimizedEvidenceImages": [],
+    "evidenceSources": [
+      "https://res.cloudinary.com/as9o12al/image/upload/f_auto/q_auto/v1787442223/old-home-desktop.png",
+      "https://res.cloudinary.com/as9o12al/image/upload/f_auto/q_auto/v1787442230/new-home-desktop.png",
+      "https://res.cloudinary.com/as9o12al/image/upload/f_auto/q_auto/v1787442238/old-products-desktop.png",
+      "https://res.cloudinary.com/as9o12al/image/upload/f_auto/q_auto/v1787442244/new-products-desktop.png",
+      "https://res.cloudinary.com/as9o12al/image/upload/f_auto/q_auto/v1787442255/old-alaska-desktop.png",
+      "https://res.cloudinary.com/as9o12al/image/upload/f_auto/q_auto/v1787442261/new-alaska-desktop.png",
+      "https://res.cloudinary.com/as9o12al/image/upload/f_auto/q_auto/v1787442261/new-alaska-desktop.png",
+      "https://res.cloudinary.com/as9o12al/image/upload/f_auto/q_auto/v1787442292/new-alaska-mobile.png",
+      "https://res.cloudinary.com/as9o12al/image/upload/f_auto/q_auto/v1787442268/old-contact-desktop.png",
+      "https://res.cloudinary.com/as9o12al/image/upload/f_auto/q_auto/v1787442275/new-contact-desktop.png",
+      "https://res.cloudinary.com/as9o12al/image/upload/f_auto/q_auto/v1787442281/new-home-mobile.png",
+      "https://res.cloudinary.com/as9o12al/image/upload/f_auto/q_auto/v1787442287/new-products-mobile.png",
+      "https://res.cloudinary.com/as9o12al/image/upload/f_auto/q_auto/v1787442298/new-contact-mobile.png"
+    ]
   },
   "failures": [],
   "status": "success"
