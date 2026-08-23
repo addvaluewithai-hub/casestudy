@@ -37,6 +37,7 @@ Secondary/follow-up story: scaling high-quality product content and application 
 - First automated capture succeeded with matched desktop/mobile evidence and videos.
 - Verified matched Alaska routes and curated old/new homepage, products, Alaska, contact, mobile evidence, and catalog interaction video to Cloudinary.
 - Added focused 10–15s hero capture and automated mobile Lighthouse capture to the evidence workflow; final outputs still require inspection before claims are updated.
+- Updated the capture workflow so successful scheduled runs publish their latest evidence back into `evidence/bootstrap/`, removing the prior blind spot where scheduled hero/Lighthouse outputs existed only as Actions artifacts.
 - Locked the headline, summary, role credit, seven-part story, Lighthouse methodology language, and AI-image disclosure in `STORYBOARD.md`.
 - Logged the Arabic prompt-leak issue as a blocker for polished multilingual recording.
 - Portfolio implementation is active on branch `feat/alamaar-rebuild-case-study` in `addvaluewithai-hub/yasserhawas.site`.
@@ -44,12 +45,14 @@ Secondary/follow-up story: scaling high-quality product content and application 
 - `CaseStudyBody` renders those rich media blocks with lazy-loaded images, metadata-preloaded video, matched before/after grids, galleries, and evidence-oriented stat comparisons.
 - **The complete Alamaar website-rebuild narrative is now implemented on the portfolio branch.** It uses the locked seven-part story and curated Cloudinary evidence for matched homepage, catalog, Alaska PDP, contact, responsive captures, the catalog interaction video, and verified desktop Lighthouse stats.
 - **The misleading primary 67-product catalog-system framing has been removed from the Alamaar portfolio data object.** The primary Alamaar slug is now `alamaar-website-rebuild`; the 98-product production-system story remains a clearly separate next chapter rather than being presented as the same case study.
+- Added `prefers-reduced-motion` handling to both hero and inline case-study videos. Reduced-motion users now get a non-autoplaying, non-looping video with controls rather than forced motion.
+- Added a dedicated GitHub Actions QA workflow on the portfolio branch to run `npm run check` and enforce narrative guardrails against the old 67-product headline, unrelated testimonial names, unsupported conversion claims, and similar regressions.
 
 ## Immediate next work
 
-1. Inspect the latest capture output for both mobile Lighthouse JSON and the focused `hero-montage.webm` when accessible; curate only verified outputs.
-2. Run build/type checks and inspect the implemented Alamaar page for schema/rendering errors on `feat/alamaar-rebuild-case-study`.
-3. Perform responsive and video/reduced-motion QA on the case-study page.
+1. Inspect the next published `evidence/bootstrap/` output for mobile Lighthouse JSON and focused `hero-montage.webm`; curate only verified outputs.
+2. Inspect the portfolio QA workflow result and fix any type/build failure on `feat/alamaar-rebuild-case-study`.
+3. Perform responsive visual QA on the implemented case-study page at desktop/tablet/mobile.
 4. Verify catalog collection-count overlap before interpreting 54 + 55 against 98 finishes.
 5. Resolve/re-verify multilingual QA blocker before recording EN → AR → HI proof.
 6. Confirm important narrative content remains crawlable and then run final portfolio PageSpeed before PR/merge.
@@ -62,4 +65,4 @@ Secondary/follow-up story: scaling high-quality product content and application 
 - Need to verify whether collection counts can overlap (54 + 55 vs 98 total finishes) before interpreting the numbers.
 - Multilingual QA blocker: the current Arabic homepage crawl exposes English image-generation prompt text inside at least the Ruby Collection and Classic Wood content. Do not record polished EN/AR/HI evidence until fixed and re-verified.
 - WordPress editor proof requires authenticated editor access; optional until access exists.
-- The GitHub connector in this run could not enumerate repository workflow runs directly; do not infer that pending Lighthouse/hero outputs succeeded until raw evidence is retrieved.
+- Actions-run enumeration remains limited through the connector, so scheduled capture evidence is now published into the repository itself for deterministic inspection on subsequent runs.
