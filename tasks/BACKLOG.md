@@ -42,10 +42,10 @@ Work top-to-bottom unless a task is blocked. Every completed task should update 
 
 ## P3 — Final QA
 
-- [ ] Fact-check every number, technology, and before/after statement against evidence.
-- [ ] Confirm no unrelated testimonial is shown.
-- [ ] Confirm UI designer is credited accurately if name becomes available.
-- [ ] Verify media captions distinguish factual evidence from retrospective diagrams.
+- [x] Fact-check every number, technology, and before/after statement against evidence. Current live 98 count, retained desktop/mobile lab measurements, matched Alaska routes/captures, and Gutenberg/FSE + ACF + multilingual architecture were reconciled on 2026-08-23; the source repo's separate 99-finish staging snapshot is explicitly noted so it is not conflated with live production.
+- [x] Confirm no unrelated testimonial is shown. The custom Alamaar rebuild story and route wrapper contain no testimonial block.
+- [ ] Confirm UI designer is credited accurately if name becomes available. Current generic collaborating-designer credit is accurate; specific name remains unavailable.
+- [x] Verify media captions distinguish factual evidence from retrospective diagrams. Current rebuild media is matched capture/live evidence or explicitly labelled conceptual application imagery; no retrospective process diagram is presented as historical evidence.
 - [ ] Test case study at desktop/tablet/mobile. Automated evidence blocked by the pre-step Actions failure above.
 - [ ] Test video autoplay/mute/playsInline/reduced-motion behavior. Automated evidence blocked by the pre-step Actions failure above.
 - [ ] Run PageSpeed on final portfolio case-study page.
