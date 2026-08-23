@@ -8,16 +8,16 @@ Use this file as the source of truth for media and measurable proof. Add Cloudin
 |---|---|---|---|---|
 | site-old | old production snapshot | https://feedbackcentral.site/ | verified | Preserved old Alamaar site |
 | site-new | current production | https://alamaarhpl.com/ | verified | New 2026 redesign |
-| old-products | old product archive | https://feedbackcentral.site/product/ | automated capture verified | latest route discovery in run 21 |
-| new-products | new product archive | https://alamaarhpl.com/shop/ | automated capture verified | 98-finish discovery interface |
-| old-contact | old contact | https://feedbackcentral.site/contact-us/ | automated capture verified | latest route discovery in run 21 |
-| new-contact | new contact | https://alamaarhpl.com/contact-us/ | automated capture verified | project-enquiry flow |
-| old-alaska | old Alaska Wood PDP | https://feedbackcentral.site/product/alaska-wood/ | automated capture verified | matched Alaska before state |
-| new-alaska | new Alaska Wood PDP | https://alamaarhpl.com/product/alaska-wood-5225-sf/ | automated capture verified | matched Alaska after state |
+| old-products | old product archive | https://feedbackcentral.site/shop/ | automated capture verified | exact route recorded by run 21 manifest |
+| new-products | new product archive | https://alamaarhpl.com/shop/ | automated capture verified | 98-finish discovery interface; exact route recorded by run 21 manifest |
+| old-contact | old contact | https://feedbackcentral.site/contact/ | automated capture verified | exact route recorded by run 21 manifest |
+| new-contact | new contact | https://alamaarhpl.com/contact/ | automated capture verified | exact route recorded by run 21 manifest |
+| old-alaska | old Alaska Wood PDP | https://feedbackcentral.site/product/alaska-wood-5225-sf-2/ | automated capture verified | matched Alaska before state; exact route recorded by run 21 manifest |
+| new-alaska | new Alaska Wood PDP | https://alamaarhpl.com/shop/finishes/alaska-wood-5225-sf/ | automated capture verified | matched Alaska after state; exact route recorded by run 21 manifest |
 | site-new-ar | current Arabic route | https://alamaarhpl.com/ar/home/ | verified by crawl | RTL route; currently has prompt-leak QA issue |
 | site-new-hi | current Hindi route | https://alamaarhpl.com/hi/home/ | verified by crawl | Hindi route available |
 
-Latest automated route discovery is run 21, completed 2026-08-23T09:19:40.975Z and committed under `evidence/bootstrap/`. Its `run-status.json` reports `capture: success`, `hero: success`, `audit: success`, with no errors, and its manifest contains all eight matched old/new routes above.
+Latest automated route discovery is run 21. `evidence/bootstrap/run-status.json` reports `capture: success`, `hero: success`, `audit: success`, with no errors. The exact route strings above now match `evidence/bootstrap/manifest.json`; earlier route variants such as `/product/`, `/contact-us/` and `/product/alaska-wood/` may redirect or remain reachable, but they are not the latest automated discovery output and are therefore not treated as canonical capture evidence.
 
 ## Supplied screenshot evidence
 
@@ -111,15 +111,17 @@ Folder: `casestudy/alamaar`
 
 - The release-preview branch is `feat/alamaar-rebuild-release-preview`, based on `release/new-site`.
 - The prior cross-repository QA workflow in this workspace was still checking superseded `feat/alamaar-rebuild-case-study` and its old generated-route path; its last published `evidence/portfolio-qa/run-status.json` therefore showed skipped results and is not evidence for the current preview.
-- On 2026-08-23 the workflow was corrected to check out `feat/alamaar-rebuild-release-preview`, validate `dist/case-studies/alamaar-website-rebuild.html`, run the responsive/media Playwright checks, and publish the resulting screenshots/report back to `evidence/portfolio-qa/`. Do not mark responsive QA complete until that new evidence is published and visually inspected.
+- The portfolio branch now contains a self-publishing `Alamaar rebuild release QA` workflow that runs build/crawlable/responsive/reduced-motion checks and writes `qa-artifacts/alamaar/` back to the feature branch on push. Because no published `qa-artifacts/alamaar/run-status.json` exists yet, responsive QA remains open.
+- On 2026-08-23 the release QA was also extended with a `pull_request` trigger targeting `release/new-site`, so subsequent PR synchronizations produce an inspectable Actions run even if the branch self-publish path fails. This is diagnostic redundancy, not evidence of a pass by itself.
 
 ## Public-site QA evidence
 
 - Current Arabic homepage crawl exposes English image-generation prompt text inside collection content (including Ruby Collection / Classic Wood text). Treat this as a production QA issue and block polished multilingual evidence capture until resolved.
+- A fresh shop crawl still exposes 98 total results and collection navigation, but does not expose enough product-membership data to prove whether the displayed collection counts overlap. Do not infer 54 + 55 = 109 unique products.
 
 ## Evidence still needed
 
-- Responsive portfolio QA artifact/report from the corrected release-preview workflow, followed by visual inspection.
+- Responsive portfolio QA report/screenshots from the release-preview workflow, followed by visual inspection.
 - Language-switch recording after Arabic prompt leakage is fixed.
 - WordPress editor recording if authenticated access is provided.
 - Verify whether collection membership counts overlap before interpreting 54 + 55 against 98 total finishes.
