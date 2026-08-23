@@ -39,14 +39,16 @@ Secondary/follow-up story: scaling high-quality product content and application 
 - Curated and uploaded matched old/new homepage, product archive, Alaska PDP, and contact screenshots to Cloudinary.
 - Curated and uploaded mobile new homepage/products/Alaska/contact captures to Cloudinary.
 - Uploaded the 8.88s catalog search/filter recording to Cloudinary; it fits the intended 6–10s evidence slot.
-- Uploaded the 20.24s new-site montage bootstrap to Cloudinary as source material; it still needs a tighter 10–15s final edit.
-- Added automated mobile Lighthouse capture for both old and new homepages to the GitHub Actions pipeline. A new run is expected from the capture-code push; do not claim mobile numbers until its JSON evidence exists.
+- Uploaded the 20.24s new-site montage bootstrap to Cloudinary as source material.
+- Generated a stable Cloudinary 12-second derived trim of the bootstrap montage as a provisional hero candidate.
+- Added a new focused Playwright hero-capture script that limits the final sequence to homepage → products → Alaska PDP and targets 10–15 seconds; the GitHub Actions workflow now runs it automatically. Do not mark the hero media final until its generated artifact is inspected.
+- Added automated mobile Lighthouse capture for both old and new homepages to the GitHub Actions pipeline. Do not claim mobile numbers until its JSON evidence exists.
 - Logged the Arabic prompt-leak issue as a blocker for polished multilingual recording.
 
 ## Immediate next work
 
-1. Inspect the new Lighthouse-enabled capture output and record mobile old/new measurements when available.
-2. Trim/replace the 20.24s bootstrap montage with a deliberate 10–15s hero sequence.
+1. Inspect the latest capture output for both mobile Lighthouse JSON and the new focused `hero-montage.webm`.
+2. If the focused hero recording is visually strong and within 10–15s, curate it to Cloudinary and mark the hero capture complete; otherwise tune `capture/hero.mjs` once.
 3. Verify catalog collection-count overlap before interpreting 54 + 55 against 98 finishes.
 4. Lock final headline, summary, role credit, Lighthouse methodology note, and AI-image disclosure.
 5. Resolve/re-verify multilingual QA blocker before recording EN → AR → HI proof.
