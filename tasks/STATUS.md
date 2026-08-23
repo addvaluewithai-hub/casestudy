@@ -56,13 +56,16 @@ The later 98-product content/AI production system remains a separate follow-up s
 - Diagnosed a QA evidence blind spot: no `qa-artifacts/alamaar/run-status.json` has yet been published from the self-publishing push workflow. The workflow now also listens to `pull_request` updates targeting `release/new-site`, so PR synchronizations create an additional inspectable QA run even if branch self-publishing fails. Commit: `334d2fac68eec0cb8069d5b9cfb2aa1764232c1d`.
 - **The new PR-triggered release QA is now observable, but it is currently failing before any workflow step starts.** Run 9 (`32634593790`) failed with an empty step list and no artifacts; a manual rerun produced the same pre-step failure. This means the current blocker is GitHub Actions execution/runner infrastructure for the private portfolio repo, not a demonstrated build or responsive failure in the page itself. Do not mark responsive QA passed or failed from this run.
 - Fresh live shop verification still reports `Showing 1–16 of 98 results` and exposes collection navigation, but public HTML/source evidence remains insufficient to prove whether the supplied collection counts 54 + 55 overlap. The claim remains intentionally unresolved rather than inferred.
+- **Completed a line-by-line factual portfolio audit against the current release-preview data/story and source evidence.** The 98 live count, matched Alaska before/after, desktop and canonical run-14 mobile Lighthouse numbers, Gutenberg/FSE + ACF architecture, and shared English/Arabic/Hindi structure are all reconciled. The Alamaar source README separately records a 99-finish staging snapshot on 2026-08-20; this is now explicitly documented as a staging snapshot and is not conflated with the current live 98-result catalog.
+- Confirmed the custom Alamaar rebuild story contains no testimonial block and uses the accurate generic collaborating-UI-designer credit. Current media captions describe matched/live evidence or explicitly label conceptual application imagery; no retrospective diagram is presented as historical process evidence.
 
 ## Immediate next work
 
 1. Re-check the portfolio Actions run after the runner/infrastructure condition changes; when a job actually starts, inspect build logs plus responsive screenshots/report and fix any page-level failure before closing responsive QA.
-2. Verify whether collection counts 54 + 55 overlap only if product-membership evidence becomes available; do not infer it from totals alone.
-3. Keep multilingual recording blocked until the Arabic `Generate ...` prompt leakage is fixed and re-verified.
-4. Run final portfolio PageSpeed and complete final fact/editorial QA before moving PR #11 out of draft.
+2. Complete the final editorial pass while responsive QA is blocked; remove any remaining subjective/hype wording or unnecessary repetition without changing the locked evidence-led story.
+3. Verify whether collection counts 54 + 55 overlap only if product-membership evidence becomes available; do not infer it from totals alone.
+4. Keep multilingual recording blocked until the Arabic `Generate ...` prompt leakage is fixed and re-verified.
+5. Run final portfolio PageSpeed before moving PR #11 out of draft.
 
 ## Blockers / unknowns
 
