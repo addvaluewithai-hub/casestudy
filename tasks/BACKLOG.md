@@ -29,10 +29,10 @@ Work top-to-bottom unless a task is blocked. Every completed task should update 
 
 ## P2 — Portfolio implementation
 
-- [ ] Upgrade `yasserhawas.site` case-study schema to support video, before/after, gallery, stats, and rich media blocks.
+- [x] Upgrade `yasserhawas.site` case-study schema to support video, before/after, gallery, stats, and rich media blocks. Implemented on `feat/alamaar-rebuild-case-study`; legacy image field retained for compatibility.
 - [ ] Implement Alamaar website-rebuild case study as separate story from catalog automation.
 - [ ] Remove/replace conflicting 67-product Alamaar framing where it can mislead readers about the current 98-product project.
-- [ ] Add media lazy-loading/performance safeguards.
+- [ ] Add media lazy-loading/performance safeguards. Image lazy-loading and video metadata preload are implemented; final hero/reduced-motion behavior still needs QA.
 - [ ] Add responsive/mobile QA for the case-study page.
 - [ ] Ensure all important narrative copy is crawlable HTML and metadata, not visual-only client rendering.
 
