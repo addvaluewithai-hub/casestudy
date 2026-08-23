@@ -48,7 +48,7 @@ Mobile: new homepage, products, Alaska Wood PDP, contact page at 390px width.
 
 Videos: `new-site-montage.webm` (20.24s bootstrap montage; source only), `catalog-search-filter.webm` (8.88s interaction proof), and `hero-montage.webm` (focused homepage → products → Alaska capture).
 
-The latest published capture-health evidence is run 44: `capture: success`, `hero: success`, `audit: success`, `portfolio: success`, `portfolio_audit: success`. This confirms the hardened validators continue to report a complete paired capture rather than the false-success behavior seen in run 15.
+The latest published capture-health evidence is run 47: `capture: success`, `hero: success`, `audit: success`, `portfolio: success`, `portfolio_audit: success`. This confirms the hardened validators continue to report a complete paired capture rather than the false-success behavior seen in run 15.
 
 Focused hero capture metadata after Cloudinary import: 1440×900, VP8/WebM, 25fps, 9.88s, 1,255,730 bytes. This is the preferred hero asset over the earlier blind 12-second trim.
 
@@ -110,47 +110,49 @@ Folder: `casestudy/alamaar`
 | qa-run43-tablet | image | https://res.cloudinary.com/as9o12al/image/upload/v1787517757/qa-run43-tablet.png | retained portfolio QA screenshot, 834px | durable final visual-review copy; original remains under `evidence/bootstrap/portfolio-preview/tablet.png` |
 | qa-run43-mobile | image | https://res.cloudinary.com/as9o12al/image/upload/v1787517765/qa-run43-mobile.png | retained portfolio QA screenshot, 390px | durable final visual-review copy; original remains under `evidence/bootstrap/portfolio-preview/mobile.png` |
 
-The portfolio renderer now requests these image assets through Cloudinary automatic format and quality negotiation (`f_auto/q_auto`) while keeping the original curated source URLs above as evidence references. This delivery optimization was added in portfolio commit `19637914b7ff6320aa443a89847387bd6b22eb36`. Cloudflare Pages confirmed that commit deployed successfully at 2026-08-23T19:43:30Z.
+The portfolio renderer requests these image assets through Cloudinary automatic format and quality negotiation (`f_auto/q_auto`) while keeping the original curated source URLs above as evidence references. This delivery optimization was added in portfolio commit `19637914b7ff6320aa443a89847387bd6b22eb36`. Cloudflare Pages confirmed that commit deployed successfully at 2026-08-23T19:43:30Z.
 
 ## Portfolio QA evidence
 
 - The release-preview branch is `feat/alamaar-rebuild-release-preview`, based on `release/new-site`.
 - PR #11's Cloudflare bot reports the stable Branch Preview URL as `https://feat-alamaar-rebuild-release.yasserhawas-preview.pages.dev`.
 - The same bot confirms optimization commit `19637914b7ff6320aa443a89847387bd6b22eb36` deployed successfully; its immutable deployment URL is `https://09ce347b.yasserhawas-preview.pages.dev`.
-- Latest committed responsive report is run 44 and remains green. Desktop, tablet and mobile all returned HTTP 200 with the correct H1, all required narrative headings, no page errors and no horizontal overflow.
-- Exact run-44 layout checks: desktop body/scroll width 1440/1440, tablet 834/834, mobile 390/390.
-- Run 44 normal video checks: hero autoplay=true, muted=true, loop=true, playsInline=true, controls=false, preload=`metadata`. The check ran soon after navigation and observed `paused=true`, so playback state itself is not used as the autoplay assertion.
-- Run 44 reduced-motion checks passed: autoplay=false, loop=false, controls=true, paused=true.
+- Latest committed responsive report is run 47 and is green. Desktop, tablet and mobile all returned HTTP 200 with the correct H1, all required narrative headings, no page errors and no horizontal overflow.
+- Exact run-47 layout checks: desktop body/scroll width 1440/1440, tablet 834/834, mobile 390/390.
+- Run 47 normal video checks: hero autoplay=true, muted=true, loop=true, playsInline=true, controls=false, preload=`metadata`. The check ran soon after navigation and observed `paused=true`, so playback state itself is not used as the autoplay assertion.
+- Run 47 reduced-motion checks passed: autoplay=false, loop=false, controls=true, paused=true.
 - The hardened script uses `domcontentloaded` as the primary navigation gate, a bounded best-effort network-idle wait, structured navigation diagnostics, desktop/tablet/mobile screenshots, horizontal-overflow/page-error checks, required-story assertions and normal/reduced-motion video checks.
+- Commit `28000fff5efb5dd902ffbf3410b0a9e10a801794` further hardens the next responsive run by forcing lazy images into view, recording all deployed evidence-image DOM URLs, requiring all 12 expected evidence images and rejecting any evidence URL without `/image/upload/f_auto/q_auto/`.
 - Retained screenshots: `evidence/bootstrap/portfolio-preview/desktop.png`, `tablet.png`, `mobile.png`. Durable Cloudinary copies are `qa-run43-desktop`, `qa-run43-tablet`, and `qa-run43-mobile`. Automated checks are green; final visual inspection of the full-page captures remains required before the responsive item is closed.
 
 ## Final portfolio Lighthouse evidence
 
-The initial retained final-preview Lighthouse baseline exposed untransformed evidence PNGs and motivated the `f_auto/q_auto` delivery optimization. Run 44 is the latest committed Lighthouse report, but its timing makes it pre-optimization evidence rather than the final measurement.
-
 Methodology: Lighthouse CLI against the deployed Cloudflare branch preview on a GitHub Actions runner. Mobile uses simulated throttling; desktop uses the desktop preset. These are lab measurements and are not field analytics.
 
-### Run 44 — retained but not post-optimization
+### Run 47 — post-optimization final-preview measurement
 
-`summary.json` was generated at 2026-08-23T19:42:17Z; mobile fetched at 19:42:20Z and desktop at 19:42:33Z. Cloudflare confirmed optimization commit `19637914b7ff6320aa443a89847387bd6b22eb36` deployed at 19:43:30Z, so these measurements happened before the optimized deployment became available.
+`summary.json` was generated at 2026-08-23T21:41:41Z, well after Cloudflare confirmed optimization commit `19637914b7ff6320aa443a89847387bd6b22eb36` deployed at 19:43:30Z. This is valid post-optimization evidence.
 
 | Metric | Mobile | Desktop |
 |---|---:|---:|
-| Performance | 74 | 96 |
+| Performance | 78 | 95 |
 | Accessibility | 98 | 98 |
 | Best Practices | 100 | 100 |
 | SEO | 69 | 69 |
-| FCP | 3.06s | 0.78s |
-| LCP | 5.00s | 1.33s |
-| TBT | 149.9ms | 0ms |
-| Speed Index | 3.06s | 0.78s |
+| FCP | 2.24s | 0.90s |
+| LCP | 5.16s | 1.42s |
+| TBT | 93ms | 0ms |
+| Speed Index | 2.24s | 0.90s |
 | CLS | 0.00172 | 0.00037 |
+| Total byte weight | 2.85 MB | 3.28 MB |
 
-These values are retained as ordinary lab variance and must not be promoted as the post-optimization result.
+The earlier unoptimized preview baseline was approximately 8.9 MB. Run 47 therefore confirms a substantial payload reduction after the Cloudinary delivery change. This is a technical delivery result on the portfolio preview, not an Alamaar production-site business outcome.
 
-Case-study commit `b2e92aa237daba8a5e6f038cf5cf081fc25b0800`, pushed after the confirmed deployment, hardens the next Lighthouse run by recording total byte weight and top resources and by failing if any known Alamaar evidence image is requested without the expected `/image/upload/f_auto/q_auto/` transform. The push triggered the next capture run.
+Lighthouse requested two known Alamaar evidence images in the mobile profile and four in the desktop profile. Every requested evidence image used `/image/upload/f_auto/q_auto/`, was delivered as WebP, and `unoptimizedUrls` was empty. The largest remaining resources are the 1.26 MB focused hero WebM and the 0.73 MB catalog-interaction WebM, so the page's dominant payload is now video rather than original PNG evidence.
 
-The SEO 69 score is recorded as a preview result only and must not be confused with the Alamaar production-site SEO score or with a claim of search performance. The preview environment may have indexing behavior that differs from the final production domain; investigate only if it remains relevant after release.
+Run 47 closes the final portfolio PageSpeed task. Commit `28000fff5efb5dd902ffbf3410b0a9e10a801794` adds a separate DOM-level assertion for all 12 expected evidence images because Lighthouse may not request below-fold lazy images; that follow-up is delivery-integrity confirmation rather than a replacement for the run-47 Lighthouse measurement.
+
+The SEO 69 score is recorded as a preview result only and must not be confused with the Alamaar production-site SEO score or with a claim of search performance. The preview environment may have indexing behavior that differs from the final production domain.
 
 ## Public-site QA evidence
 
@@ -160,7 +162,7 @@ The SEO 69 score is recorded as a preview result only and must not be confused w
 ## Evidence still needed
 
 - Visual inspection of the retained desktop/tablet/mobile portfolio screenshots (also available via the three `qa-run43-*` Cloudinary copies).
-- Post-optimization final portfolio Lighthouse summary proving transformed Cloudinary delivery and recording the resulting payload/scores after deployed commit `19637914b7ff6320aa443a89847387bd6b22eb36`.
+- Follow-up deployed-DOM verification that all 12 expected evidence-image URLs are transformed after commit `28000fff5efb5dd902ffbf3410b0a9e10a801794`.
 - Language-switch recording after Arabic prompt leakage is fixed.
 - WordPress editor recording if authenticated access is provided.
 - Verify whether collection membership counts overlap before interpreting 54 + 55 against 98 total finishes.
