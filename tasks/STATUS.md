@@ -20,6 +20,7 @@ Produce an exceptional evidence-led Alamaar HPL redesign case study for Yasser's
 - Product discovery includes name/code search, collection filter, finish filter, design-family filter, result count, and pagination.
 - Many application/interior images are AI-generated; exact product/material reference must remain distinct from conceptual application imagery.
 - Desktop PageSpeed/Lighthouse evidence supplied by Yasser: old performance 45 vs new 96; old LCP 6.8s vs new 1.1s; old TBT 270ms vs new 0ms. Treat as lab evidence, not a business outcome.
+- Automated mobile Lighthouse evidence from GitHub Actions run 14: performance 37 → 91; LCP 34.29s → 2.87s; TBT 759ms → 0ms. Methodology is Lighthouse CLI mobile form factor with simulated throttling on a GitHub Actions runner; retain the lab-measurement disclaimer.
 - There is no client testimonial for this project. Never use unrelated portfolio testimonials.
 
 ## Current narrative direction
@@ -36,9 +37,6 @@ Secondary/follow-up story: scaling high-quality product content and application 
 - Created the dedicated case-study workspace, task system, Cloudinary folder, Playwright capture tooling, GitHub Actions workflow, and recurring work loop.
 - First automated capture succeeded with matched desktop/mobile evidence and videos.
 - Verified matched Alaska routes and curated old/new homepage, products, Alaska, contact, mobile evidence, and catalog interaction video to Cloudinary.
-- Added focused 10–15s hero capture and automated mobile Lighthouse capture to the evidence workflow; final outputs still require inspection before claims are updated.
-- Updated the capture workflow so successful scheduled runs publish their latest evidence back into `evidence/bootstrap/`, removing the prior blind spot where scheduled hero/Lighthouse outputs existed only as Actions artifacts.
-- Made evidence publishing resilient to partial capture failures: screenshot, hero, and Lighthouse steps now record individual outcomes, partial evidence is still committed to `evidence/bootstrap/`, and the workflow writes `run-status.json` before failing the job when a required step fails. This should expose whether hero or audit is blocking the missing outputs on the next run.
 - Locked the headline, summary, role credit, seven-part story, Lighthouse methodology language, and AI-image disclosure in `STORYBOARD.md`.
 - Logged the Arabic prompt-leak issue as a blocker for polished multilingual recording.
 - Portfolio implementation is active on branch `feat/alamaar-rebuild-case-study` in `addvaluewithai-hub/yasserhawas.site`.
@@ -50,10 +48,14 @@ Secondary/follow-up story: scaling high-quality product content and application 
 - Strengthened reduced-motion behavior so the preference is read synchronously at initial render; this prevents a brief autoplay flash before the effect subscribes to preference changes.
 - Added a dedicated GitHub Actions QA workflow on the portfolio branch to run `npm run check` and enforce narrative guardrails against the old 67-product headline, unrelated testimonial names, unsupported conversion claims, and similar regressions.
 - Opened draft portfolio PR #10 (`Alamaar website rebuild case study`) so implementation, QA findings, and final review have a single merge surface. The branch is currently mergeable but remains intentionally draft until evidence and responsive QA are complete.
+- Capture evidence publishing is now deterministic and resilient to partial failures through `evidence/bootstrap/run-status.json` and committed outputs.
+- **Scheduled evidence run 14 succeeded end-to-end:** capture, focused hero, and mobile Lighthouse all report `success`.
+- **Focused hero media is now curated:** `hero-montage-focused.webm` is hosted on Cloudinary at 1440×900, 25fps, 9.88s and replaces the earlier blind 12-second trim as the preferred hero source.
+- **Mobile performance proof is now retained and verified:** raw Lighthouse JSON plus summary are committed under `evidence/bootstrap/`; mobile performance measured 37 → 91 and LCP 34.29s → 2.87s under the recorded lab methodology.
 
 ## Immediate next work
 
-1. Inspect the next published `evidence/bootstrap/run-status.json`, mobile Lighthouse JSON, and focused `hero-montage.webm`; curate only verified outputs.
+1. Replace the provisional hero URL in the portfolio case-study data with the focused Cloudinary hero and add the verified mobile Lighthouse proof concisely.
 2. Inspect the portfolio QA workflow result and fix any type/build failure on `feat/alamaar-rebuild-case-study`.
 3. Perform responsive visual QA on the implemented case-study page at desktop/tablet/mobile.
 4. Verify catalog collection-count overlap before interpreting 54 + 55 against 98 finishes.
@@ -68,4 +70,3 @@ Secondary/follow-up story: scaling high-quality product content and application 
 - Need to verify whether collection counts can overlap (54 + 55 vs 98 total finishes) before interpreting the numbers.
 - Multilingual QA blocker: the current Arabic homepage crawl exposes English image-generation prompt text inside at least the Ruby Collection and Classic Wood content. Do not record polished EN/AR/HI evidence until fixed and re-verified.
 - WordPress editor proof requires authenticated editor access; optional until access exists.
-- Actions-run enumeration remains limited through the connector, so scheduled capture evidence is published into the repository itself for deterministic inspection on subsequent runs.
