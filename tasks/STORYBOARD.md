@@ -52,11 +52,11 @@ Keep the generation workflow and the 98-product scaling problem for the follow-u
 
 **Copy direction:** The old page centered contact/location information. The new page lets visitors provide contact details, project type, an optional product/code and project requirements before continuing the request in WhatsApp. Do not claim conversion uplift.
 
-## 5. More visual, substantially faster
+## 5. More visual, faster in lab tests
 
-**Purpose:** objective engineering proof.
+**Purpose:** objective engineering proof without presenting lab results as field analytics.
 
-**Media:** designed stat comparison first; raw PageSpeed evidence secondary/expandable.
+**Media:** designed stat comparison first; raw PageSpeed/Lighthouse evidence retained in the evidence repository.
 
 **Desktop evidence supplied by Yasser:**
 - Performance: 45 → 96
@@ -66,9 +66,12 @@ Keep the generation workflow and the 98-product scaling problem for the follow-u
 - Speed Index: 5.8s → 1.4s
 - CLS: 0.061 → 0.001
 
-**Methodology note:** `Google PageSpeed Insights / Lighthouse desktop lab measurements captured on comparable old and new site states. Lab scores can vary between runs and should not be read as analytics, conversion, or other business outcomes.`
+**Verified mobile evidence retained from run 14:**
+- Performance: 37 → 91
+- LCP: 34.29s → 2.87s
+- TBT: 759ms → 0ms
 
-Add mobile evidence only after raw automated Lighthouse JSON is retained and verified.
+**Methodology note:** `Google PageSpeed Insights / Lighthouse desktop lab measurements and a retained Lighthouse CLI mobile run. Lab scores can vary between runs and should not be read as analytics, conversion, or other business outcomes.`
 
 ## 6. Built to remain editable and multilingual
 
