@@ -42,6 +42,9 @@ jobs:
       - name: Capture screenshots and recordings
         run: npm run capture
 
+      - name: Capture focused hero montage
+        run: npm run hero
+
       - name: Capture mobile Lighthouse evidence
         run: npm run audit
 
