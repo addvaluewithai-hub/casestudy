@@ -10,11 +10,11 @@ Work top-to-bottom unless a task is blocked. Every completed task should update 
 - [x] Capture old/new Alaska Wood product detail at matched desktop viewport.
 - [x] Capture old/new contact experience at matched desktop viewport.
 - [x] Capture new homepage/products/PDP/contact at mobile viewport.
-- [ ] Record polished 10–15s new-site hero montage. Focused homepage → products → Alaska capture is now in the workflow; inspect before marking complete.
+- [x] Record polished focused new-site hero montage. Run 14 produced a 9.88s 1440×900 homepage → products → Alaska sequence, curated to Cloudinary as `hero-montage-focused`.
 - [x] Record 6–10s catalog search/filter interaction (name/code + collection + design family/finish). Bootstrap recording is 8.88s.
 - [ ] Record 6–10s EN → AR → HI same-page language sequence if routes/language control are stable. Blocked by Arabic prompt leakage.
 - [ ] Record 6–10s WordPress editor → frontend proof if authenticated editor access becomes available.
-- [ ] Capture/verify mobile PageSpeed old vs new. Lighthouse automation added; awaiting raw run evidence.
+- [x] Capture/verify mobile PageSpeed old vs new. Run 14 raw Lighthouse evidence retained; performance 37 → 91, LCP 34.29s → 2.87s, TBT 759ms → 0ms under automated mobile lab conditions.
 - [x] Curate selected captures to Cloudinary `casestudy/alamaar` and record URLs in `EVIDENCE.md`.
 
 ## P1 — Story and claims
@@ -33,6 +33,7 @@ Work top-to-bottom unless a task is blocked. Every completed task should update 
 - [x] Implement Alamaar website-rebuild case study as separate story from catalog automation. The branch now contains the full seven-part rebuild narrative wired to curated Cloudinary evidence.
 - [x] Remove/replace conflicting 67-product Alamaar framing where it can mislead readers about the current 98-product project. The primary Alamaar data object now represents the 2026 website rebuild and no longer presents the old 67-product catalog-system headline/metrics.
 - [x] Add media lazy-loading/performance safeguards. Content images use lazy loading + async decoding, videos use metadata preload, and autoplaying case-study/hero videos now respect `prefers-reduced-motion` by disabling autoplay/loop and exposing controls.
+- [ ] Replace provisional hero URL in portfolio data with the focused Cloudinary hero and add verified mobile Lighthouse proof without bloating the performance section.
 - [ ] Add responsive/mobile QA for the case-study page.
 - [ ] Ensure all important narrative copy is crawlable HTML and metadata, not visual-only client rendering.
 
