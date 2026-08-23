@@ -82,7 +82,7 @@ for (const [name, viewport] of Object.entries(viewports)) {
         'Restructuring product discovery',
         'Giving each finish more context',
         'From contact information to project enquiry',
-        'More visual, substantially faster',
+        'More visual, faster in lab tests',
         'Built to remain editable and multilingual',
         'The next problem is doing it 98 times',
         'Application scenes are conceptual visualizations',
