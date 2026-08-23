@@ -1,0 +1,83 @@
+{
+  "url": "https://feat-alamaar-rebuild-release.yasserhawas-preview.pages.dev/case-studies/alamaar-website-rebuild/",
+  "checkedAt": "2026-08-23T16:48:18.849Z",
+  "viewports": {
+    "desktop": {
+      "navigation": {
+        "ok": true,
+        "status": 200,
+        "finalUrl": "https://feat-alamaar-rebuild-release.yasserhawas-preview.pages.dev/case-studies/alamaar-website-rebuild",
+        "error": null
+      },
+      "h1": "Rebuilding Alamaar HPL's digital product experience.",
+      "pageErrors": [],
+      "horizontalOverflow": false,
+      "bodyWidth": 1440,
+      "scrollWidth": 1440
+    },
+    "tablet": {
+      "navigation": {
+        "ok": true,
+        "status": 200,
+        "finalUrl": "https://feat-alamaar-rebuild-release.yasserhawas-preview.pages.dev/case-studies/alamaar-website-rebuild",
+        "error": null
+      },
+      "h1": "Rebuilding Alamaar HPL's digital product experience.",
+      "pageErrors": [],
+      "horizontalOverflow": false,
+      "bodyWidth": 834,
+      "scrollWidth": 834
+    },
+    "mobile": {
+      "navigation": {
+        "ok": true,
+        "status": 200,
+        "finalUrl": "https://feat-alamaar-rebuild-release.yasserhawas-preview.pages.dev/case-studies/alamaar-website-rebuild",
+        "error": null
+      },
+      "h1": "Rebuilding Alamaar HPL's digital product experience.",
+      "pageErrors": [],
+      "horizontalOverflow": false,
+      "bodyWidth": 390,
+      "scrollWidth": 390
+    }
+  },
+  "narrative": {
+    "Rebuilding Alamaar HPL's digital product experience.": true,
+    "Restructuring product discovery": true,
+    "Giving each finish more context": true,
+    "From contact information to project enquiry": true,
+    "More visual, substantially faster": false,
+    "Built to remain editable and multilingual": true,
+    "The next problem is doing it 98 times": true,
+    "Application scenes are conceptual visualizations": true
+  },
+  "video": {
+    "count": 2,
+    "hero": {
+      "autoplay": true,
+      "muted": true,
+      "loop": true,
+      "playsInline": true,
+      "controls": false,
+      "preload": "metadata",
+      "paused": true
+    }
+  },
+  "reducedMotion": {
+    "navigation": {
+      "ok": true,
+      "status": 200,
+      "finalUrl": "https://feat-alamaar-rebuild-release.yasserhawas-preview.pages.dev/case-studies/alamaar-website-rebuild",
+      "error": null
+    },
+    "autoplay": false,
+    "loop": false,
+    "controls": true,
+    "paused": true
+  },
+  "failures": [
+    "Missing rendered narrative: More visual, substantially faster"
+  ],
+  "status": "failure"
+}
