@@ -32,7 +32,7 @@ Work top-to-bottom unless a task is blocked. Every completed task should update 
 - [x] Upgrade `yasserhawas.site` case-study schema to support video, before/after, gallery, stats, and rich media blocks. Implemented on `feat/alamaar-rebuild-case-study`; legacy image field retained for compatibility.
 - [x] Implement Alamaar website-rebuild case study as separate story from catalog automation. The branch now contains the full seven-part rebuild narrative wired to curated Cloudinary evidence.
 - [x] Remove/replace conflicting 67-product Alamaar framing where it can mislead readers about the current 98-product project. The primary Alamaar data object now represents the 2026 website rebuild and no longer presents the old 67-product catalog-system headline/metrics.
-- [ ] Add media lazy-loading/performance safeguards. Image lazy-loading and video metadata preload are implemented; final hero/reduced-motion behavior still needs QA.
+- [x] Add media lazy-loading/performance safeguards. Content images use lazy loading + async decoding, videos use metadata preload, and autoplaying case-study/hero videos now respect `prefers-reduced-motion` by disabling autoplay/loop and exposing controls.
 - [ ] Add responsive/mobile QA for the case-study page.
 - [ ] Ensure all important narrative copy is crawlable HTML and metadata, not visual-only client rendering.
 
