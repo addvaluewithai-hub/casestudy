@@ -10,22 +10,22 @@ Work top-to-bottom unless a task is blocked. Every completed task should update 
 - [x] Capture old/new Alaska Wood product detail at matched desktop viewport.
 - [x] Capture old/new contact experience at matched desktop viewport.
 - [x] Capture new homepage/products/PDP/contact at mobile viewport.
-- [ ] Record polished 10–15s new-site hero montage. Bootstrap 20.24s source exists; trim/curate before marking complete.
+- [ ] Record polished 10–15s new-site hero montage. Focused homepage → products → Alaska capture is now in the workflow; inspect before marking complete.
 - [x] Record 6–10s catalog search/filter interaction (name/code + collection + design family/finish). Bootstrap recording is 8.88s.
 - [ ] Record 6–10s EN → AR → HI same-page language sequence if routes/language control are stable. Blocked by Arabic prompt leakage.
 - [ ] Record 6–10s WordPress editor → frontend proof if authenticated editor access becomes available.
-- [ ] Capture/verify mobile PageSpeed old vs new. Lighthouse automation added; awaiting run evidence.
+- [ ] Capture/verify mobile PageSpeed old vs new. Lighthouse automation added; awaiting raw run evidence.
 - [x] Curate selected captures to Cloudinary `casestudy/alamaar` and record URLs in `EVIDENCE.md`.
 
 ## P1 — Story and claims
 
 - [x] Verify exact old/new Alaska Wood URLs and matched product code.
 - [ ] Verify catalog filter behavior and whether filter counts overlap.
-- [ ] Decide final headline and one-sentence project summary.
-- [ ] Lock six-section story: Context → Restructure → Product discovery/PDP → Enquiry → Performance → Engineering/multilingual → 98-product next chapter.
-- [ ] Write concise role credit: UX strategy / information architecture / design direction / development; UI design by collaborating designer.
-- [ ] Draft Lighthouse methodology note and avoid treating lab scores as business outcomes.
-- [ ] Draft AI-image disclosure language: exact material reference vs conceptual application imagery.
+- [x] Decide final headline and one-sentence project summary.
+- [x] Lock concise story: Context → Product discovery → PDP → Enquiry → Performance → Engineering/multilingual → 98-product next chapter.
+- [x] Write concise role credit: UX strategy / information architecture / design direction / development; UI design by collaborating designer.
+- [x] Draft Lighthouse methodology note and avoid treating lab scores as business outcomes.
+- [x] Draft AI-image disclosure language: exact material reference vs conceptual application imagery.
 
 ## P2 — Portfolio implementation
 
