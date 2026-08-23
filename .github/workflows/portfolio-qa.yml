@@ -1,0 +1,118 @@
+name: QA Alamaar portfolio case study
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'capture/portfolio-qa.mjs'
+      - '.github/workflows/portfolio-qa.yml'
+  schedule:
+    - cron: '27 * * * *'
+
+permissions:
+  contents: write
+
+env:
+  CI: true
+
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout case-study workspace
+        uses: actions/checkout@v4
+
+      - name: Checkout portfolio branch
+        uses: actions/checkout@v4
+        with:
+          repository: addvaluewithai-hub/yasserhawas.site
+          ref: feat/alamaar-rebuild-case-study
+          path: portfolio
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: |
+            capture/package.json
+            portfolio/package-lock.json
+
+      - name: Install capture dependencies
+        working-directory: capture
+        run: npm install
+
+      - name: Install Chromium
+        working-directory: capture
+        run: npx playwright install --with-deps chromium
+
+      - name: Install portfolio dependencies
+        working-directory: portfolio
+        run: npm ci
+
+      - name: Typecheck and build portfolio
+        id: build
+        continue-on-error: true
+        working-directory: portfolio
+        run: npm run check
+
+      - name: Verify generated crawlable route
+        id: crawlable
+        continue-on-error: true
+        run: |
+          test -f portfolio/dist/case-studies/alamaar-website-rebuild/index.html
+          grep -q "Rebuilding Alamaar HPL's digital product experience" portfolio/dist/case-studies/alamaar-website-rebuild/index.html
+          grep -q 'canonical.*case-studies/alamaar-website-rebuild' portfolio/dist/case-studies/alamaar-website-rebuild/index.html
+          grep -q 'data-static-case-study="alamaar-website-rebuild"' portfolio/dist/case-studies/alamaar-website-rebuild/index.html
+
+      - name: Start portfolio preview
+        if: steps.build.outcome == 'success'
+        working-directory: portfolio
+        run: |
+          npm run preview -- --host 127.0.0.1 --port 4173 > /tmp/alamaar-portfolio-preview.log 2>&1 &
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/case-studies/alamaar-website-rebuild/ >/dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/alamaar-portfolio-preview.log
+          exit 1
+
+      - name: Responsive and media QA
+        id: visual
+        if: steps.build.outcome == 'success'
+        continue-on-error: true
+        working-directory: capture
+        run: node portfolio-qa.mjs http://127.0.0.1:4173 evidence/portfolio-qa
+
+      - name: Publish QA status
+        if: always()
+        run: |
+          mkdir -p evidence/portfolio-qa
+          cat > evidence/portfolio-qa/run-status.json <<JSON
+          {
+            "build": "${{ steps.build.outcome }}",
+            "crawlable": "${{ steps.crawlable.outcome }}",
+            "visual": "${{ steps.visual.outcome }}",
+            "run_number": "${{ github.run_number }}",
+            "portfolio_ref": "feat/alamaar-rebuild-case-study"
+          }
+          JSON
+          if [ -d capture/evidence/portfolio-qa ]; then
+            cp -R capture/evidence/portfolio-qa/. evidence/portfolio-qa/
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "4189822+github-actions[bot]@users.noreply.github.com"
+          git add evidence/portfolio-qa
+          if git diff --cached --quiet; then
+            echo "No QA evidence changes to publish"
+          else
+            git commit -m "Store latest portfolio QA evidence"
+            git push
+          fi
+
+      - name: Fail when QA failed
+        if: always() && (steps.build.outcome == 'failure' || steps.crawlable.outcome == 'failure' || steps.visual.outcome == 'failure')
+        run: exit 1
