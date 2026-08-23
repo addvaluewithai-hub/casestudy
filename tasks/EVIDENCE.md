@@ -17,7 +17,7 @@ Use this file as the source of truth for media and measurable proof. Add Cloudin
 | site-new-ar | current Arabic route | https://alamaarhpl.com/ar/home/ | verified by crawl | RTL route; currently has prompt-leak QA issue |
 | site-new-hi | current Hindi route | https://alamaarhpl.com/hi/home/ | verified by crawl | Hindi route available |
 
-Latest automated route discovery is run 21. `evidence/bootstrap/run-status.json` reports `capture: success`, `hero: success`, `audit: success`, with no errors. The exact route strings above now match `evidence/bootstrap/manifest.json`; earlier route variants such as `/product/`, `/contact-us/` and `/product/alaska-wood/` may redirect or remain reachable, but they are not the latest automated discovery output and are therefore not treated as canonical capture evidence.
+Latest automated route discovery remains consistent with the canonical strings above. Earlier route variants such as `/product/`, `/contact-us/` and `/product/alaska-wood/` may redirect or remain reachable, but they are not treated as canonical capture evidence.
 
 ## Supplied screenshot evidence
 
@@ -48,7 +48,7 @@ Mobile: new homepage, products, Alaska Wood PDP, contact page at 390px width.
 
 Videos: `new-site-montage.webm` (20.24s bootstrap montage; source only), `catalog-search-filter.webm` (8.88s interaction proof), and `hero-montage.webm` (focused homepage → products → Alaska capture).
 
-The latest published capture-health evidence is run 21: `capture: success`, `hero: success`, `audit: success`, with an empty errors array. This confirms the hardened validators continue to report a complete paired capture rather than the false-success behavior seen in run 15.
+The latest published capture-health evidence is run 43: `capture: success`, `hero: success`, `audit: success`, `portfolio: success`, `portfolio_audit: success`. This confirms the hardened validators continue to report a complete paired capture rather than the false-success behavior seen in run 15.
 
 Focused hero capture metadata after Cloudinary import: 1440×900, VP8/WebM, 25fps, 9.88s, 1,255,730 bytes. This is the preferred hero asset over the earlier blind 12-second trim.
 
@@ -107,21 +107,44 @@ Folder: `casestudy/alamaar`
 | hero-montage-focused | video | https://res.cloudinary.com/as9o12al/video/upload/v1787463716/hero-montage-focused.webm | focused automated capture, run 14 | preferred hero; 9.88s homepage → products → Alaska sequence |
 | catalog-search-filter | video | https://res.cloudinary.com/as9o12al/video/upload/v1787442311/catalog-search-filter.webm | automated 1440x900 capture | interaction proof; 8.88s |
 
+The portfolio renderer now requests these image assets through Cloudinary automatic format and quality negotiation (`f_auto/q_auto`) while keeping the original curated source URLs above as evidence references. This delivery optimization was added in portfolio commit `19637914b7ff6320aa443a89847387bd6b22eb36` after run 43 identified original PNG payload as the dominant page-weight cost.
+
 ## Portfolio QA evidence
 
 - The release-preview branch is `feat/alamaar-rebuild-release-preview`, based on `release/new-site`.
 - PR #11's Cloudflare bot reports the stable Branch Preview URL as `https://feat-alamaar-rebuild-release.yasserhawas-preview.pages.dev`.
-- Run 38 is the first retained structured preview QA report. Desktop, tablet and mobile all returned HTTP 200 with the correct H1, no page errors and no horizontal overflow. The reduced-motion check also passed: autoplay=false, loop=false, controls=true, paused=true.
-- Run 38's only failure was a stale required-text assertion for `More visual, substantially faster`; the reviewed source uses `More visual, faster in lab tests`. Commit `f2e7e2244570d90634ab62190d7564234f7a4172` aligns that test contract with the current source.
+- Run 43 is a fully green structured preview QA report. Desktop, tablet and mobile all returned HTTP 200 with the correct H1, all required narrative headings, no page errors and no horizontal overflow.
+- Exact run-43 layout checks: desktop body/scroll width 1440/1440, tablet 834/834, mobile 390/390.
+- Run 43 normal video checks: hero autoplay=true, muted=true, loop=true, playsInline=true, controls=false, preload=`metadata`. The check ran soon after navigation and observed `paused=true`, so playback state itself is not used as the autoplay assertion.
+- Run 43 reduced-motion checks passed: autoplay=false, loop=false, controls=true, paused=true.
 - The hardened script uses `domcontentloaded` as the primary navigation gate, a bounded best-effort network-idle wait, structured navigation diagnostics, desktop/tablet/mobile screenshots, horizontal-overflow/page-error checks, required-story assertions and normal/reduced-motion video checks.
-- Responsive/reduced-motion QA remains open until the first post-fix run publishes a green report and its screenshots are visually reviewed.
+- Retained screenshots: `evidence/bootstrap/portfolio-preview/desktop.png`, `tablet.png`, `mobile.png`. Automated checks are green; final visual inspection of these full-page captures remains required before the responsive item is closed.
 
 ## Final portfolio Lighthouse evidence
 
-- `capture/portfolio-audit.mjs` now runs Lighthouse directly against the deployed Cloudflare case-study preview in both mobile and desktop profiles.
-- It retains raw JSON under `evidence/bootstrap/portfolio-lighthouse/mobile.json` and `desktop.json`, plus `summary.json` containing Performance, Accessibility, Best Practices, SEO, FCP, LCP, TBT, Speed Index and CLS.
-- The methodology is explicitly lab-only: GitHub Actions runner, mobile simulated throttling, desktop preset. These results must not be described as analytics or business outcomes.
-- The first retained run after this automation is required before the final portfolio PageSpeed task can be marked complete.
+Run 43 produced the first retained Lighthouse measurement against the deployed Cloudflare case-study preview.
+
+Methodology: Lighthouse CLI against the deployed Cloudflare branch preview on a GitHub Actions runner. Mobile uses simulated throttling; desktop uses the desktop preset. These are lab measurements and are not field analytics.
+
+| Metric | Mobile | Desktop |
+|---|---:|---:|
+| Performance | 80 | 95 |
+| Accessibility | 98 | 98 |
+| Best Practices | 100 | 100 |
+| SEO | 69 | 69 |
+| FCP | 2.23s | 0.90s |
+| LCP | 4.78s | 1.32s |
+| TBT | 54.5ms | 0ms |
+| Speed Index | 2.23s | 0.90s |
+| CLS | 0.0017 | 0.00037 |
+
+Raw reports are retained under `evidence/bootstrap/portfolio-lighthouse/mobile.json` and `desktop.json`, with the compact summary in `summary.json`.
+
+The desktop raw report also recorded a total network payload around 8,945 KiB. The largest individual resources were untransformed evidence PNGs: `new-home-desktop.png` ~2.96 MB, `new-products-desktop.png` ~1.69 MB, `old-products-desktop.png` ~1.05 MB and `old-home-desktop.png` ~1.00 MB. This directly motivated the `f_auto/q_auto` delivery optimization in portfolio commit `19637914b7ff6320aa443a89847387bd6b22eb36`.
+
+Because the portfolio source changed after this baseline, run 43 is not yet treated as the final post-optimization PageSpeed result. Re-measure after the optimized Cloudflare deployment before closing the PageSpeed QA item.
+
+The SEO 69 score is recorded as a preview result only and must not be confused with the Alamaar production-site SEO score or with a claim of search performance. The preview environment may have indexing behavior that differs from the final production domain; investigate only if it remains relevant after release.
 
 ## Public-site QA evidence
 
@@ -130,8 +153,8 @@ Folder: `casestudy/alamaar`
 
 ## Evidence still needed
 
-- Post-fix green responsive portfolio QA report/screenshots, followed by visual inspection.
-- First retained final portfolio Lighthouse summary from the deployed Cloudflare preview.
+- Visual inspection of the retained run-43 desktop/tablet/mobile portfolio screenshots.
+- Post-optimization final portfolio Lighthouse summary after Cloudflare deploys portfolio commit `19637914b7ff6320aa443a89847387bd6b22eb36`.
 - Language-switch recording after Arabic prompt leakage is fixed.
 - WordPress editor recording if authenticated access is provided.
 - Verify whether collection membership counts overlap before interpreting 54 + 55 against 98 total finishes.
