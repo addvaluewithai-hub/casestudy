@@ -46,9 +46,31 @@ Desktop: old/new homepage, product archive, Alaska Wood PDP, contact page at 144
 
 Mobile: new homepage, products, Alaska Wood PDP, contact page at 390px width.
 
-Videos: `new-site-montage.webm` (20.24s bootstrap montage; useful source but longer than the desired final 10–15s hero) and `catalog-search-filter.webm` (8.88s; target-length interaction proof).
+Videos: `new-site-montage.webm` (20.24s bootstrap montage; source only), `catalog-search-filter.webm` (8.88s interaction proof), and `hero-montage.webm` (focused homepage → products → Alaska capture).
 
-A focused hero capture script (`capture/hero.mjs`) was added on 2026-08-23. It deliberately limits the sequence to homepage → products → Alaska PDP and targets 10–15 seconds, avoiding the long four-page bootstrap recording. The GitHub Actions workflow now runs this capture; approve it only after the generated artifact is inspected.
+The scheduled evidence run now publishes deterministic status. Run 14 reports `capture: success`, `hero: success`, and `audit: success` in `evidence/bootstrap/run-status.json`.
+
+Focused hero capture metadata after Cloudinary import: 1440×900, VP8/WebM, 25fps, 9.88s, 1,255,730 bytes. This is the preferred hero asset over the earlier blind 12-second trim.
+
+## Automated mobile Lighthouse evidence
+
+Raw evidence is retained under `evidence/bootstrap/lighthouse/` with a compact summary in `evidence/bootstrap/lighthouse-summary.json`.
+
+Methodology: Lighthouse CLI mobile form factor, simulated throttling, GitHub Actions runner. Lab measurements vary by run. Captured 2026-08-23.
+
+| Metric | Old mobile | New mobile |
+|---|---:|---:|
+| Performance | 37 | 91 |
+| Accessibility | 79 | 100 |
+| Best Practices | 65 | 100 |
+| SEO | 54 | 100 |
+| FCP | 13.86s | 2.79s |
+| LCP | 34.29s | 2.87s |
+| TBT | 759ms | 0ms |
+| Speed Index | 14.52s | 2.79s |
+| CLS | 0.0002 | 0 |
+
+These are automated lab measurements, not analytics, conversion, or business outcomes. The exceptionally poor old-site mobile timing should be presented with the methodology note rather than generalized into a universal real-user claim.
 
 ## Technical repository evidence
 
@@ -78,8 +100,9 @@ Folder: `casestudy/alamaar`
 | new-products-mobile | image | https://res.cloudinary.com/as9o12al/image/upload/v1787442287/new-products-mobile.png | automated capture, 390px | responsive catalog proof |
 | new-alaska-mobile | image | https://res.cloudinary.com/as9o12al/image/upload/v1787442292/new-alaska-mobile.png | automated capture, 390px | responsive PDP proof |
 | new-contact-mobile | image | https://res.cloudinary.com/as9o12al/image/upload/v1787442298/new-contact-mobile.png | automated capture, 390px | responsive enquiry proof |
-| new-site-montage-bootstrap | video | https://res.cloudinary.com/as9o12al/video/upload/v1787442304/new-site-montage.webm | automated 1440x900 capture | source for final hero edit; 20.24s, not final length |
-| new-site-montage-12s-trim | video | https://res.cloudinary.com/as9o12al/video/upload/du_12/v1787442304/new-site-montage.webm | Cloudinary derived trim of bootstrap source | provisional 12s candidate only; replace with focused capture if better |
+| new-site-montage-bootstrap | video | https://res.cloudinary.com/as9o12al/video/upload/v1787442304/new-site-montage.webm | automated 1440x900 capture | source only; 20.24s |
+| new-site-montage-12s-trim | video | https://res.cloudinary.com/as9o12al/video/upload/du_12/v1787442304/new-site-montage.webm | Cloudinary derived trim of bootstrap source | superseded fallback |
+| hero-montage-focused | video | https://res.cloudinary.com/as9o12al/video/upload/v1787463716/hero-montage-focused.webm | focused automated capture, run 14 | preferred hero; 9.88s homepage → products → Alaska sequence |
 | catalog-search-filter | video | https://res.cloudinary.com/as9o12al/video/upload/v1787442311/catalog-search-filter.webm | automated 1440x900 capture | interaction proof; 8.88s |
 
 ## Public-site QA evidence
@@ -88,8 +111,6 @@ Folder: `casestudy/alamaar`
 
 ## Evidence still needed
 
-- Mobile PageSpeed old/new.
-- Inspect and approve the new focused 10–15s hero montage; a provisional 12s Cloudinary trim exists but is not automatically the final choice.
 - Language-switch recording after Arabic prompt leakage is fixed.
 - WordPress editor recording if authenticated access is provided.
 - Verify whether collection membership counts overlap before interpreting 54 + 55 against 98 total finishes.
