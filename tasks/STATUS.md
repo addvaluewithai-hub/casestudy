@@ -20,7 +20,7 @@ Produce an exceptional evidence-led Alamaar HPL redesign case study for Yasser's
 - Product discovery includes name/code search, collection filter, finish filter, design-family filter, result count, and pagination.
 - Many application/interior images are AI-generated; exact product/material reference must remain distinct from conceptual application imagery.
 - Desktop PageSpeed/Lighthouse evidence supplied by Yasser: old performance 45 vs new 96; old LCP 6.8s vs new 1.1s; old TBT 270ms vs new 0ms. Treat as lab evidence, not a business outcome.
-- Automated mobile Lighthouse evidence from GitHub Actions run 14: performance 37 → 91; LCP 34.29s → 2.87s; TBT 759ms → 0ms. Methodology is Lighthouse CLI mobile form factor with simulated throttling on a GitHub Actions runner; retain the lab-measurement disclaimer.
+- Verified paired mobile Lighthouse evidence is from run 14: performance 37 → 91; LCP 34.29s → 2.87s; TBT 759ms → 0ms. Methodology is Lighthouse CLI mobile form factor with simulated throttling on a GitHub Actions runner; retain the lab-measurement disclaimer.
 - There is no client testimonial for this project. Never use unrelated portfolio testimonials.
 
 ## Current narrative direction
@@ -35,34 +35,34 @@ Secondary/follow-up story: scaling high-quality product content and application 
 
 - Reviewed old/new supplied screenshots and source repositories.
 - Created the dedicated case-study workspace, task system, Cloudinary folder, Playwright capture tooling, GitHub Actions workflow, and recurring work loop.
-- First automated capture succeeded with matched desktop/mobile evidence and videos.
 - Verified matched Alaska routes and curated old/new homepage, products, Alaska, contact, mobile evidence, and catalog interaction video to Cloudinary.
 - Locked the headline, summary, role credit, seven-part story, Lighthouse methodology language, and AI-image disclosure in `STORYBOARD.md`.
-- Logged the Arabic prompt-leak issue as a blocker for polished multilingual recording.
 - Portfolio implementation is active on branch `feat/alamaar-rebuild-case-study` in `addvaluewithai-hub/yasserhawas.site`.
-- The case-study schema supports ordered rich media blocks: image, video, before/after, gallery, and stats while retaining the legacy image field for existing studies.
-- `CaseStudyBody` renders those rich media blocks with lazy-loaded images, metadata-preloaded video, matched before/after grids, galleries, and evidence-oriented stat comparisons.
-- **The complete Alamaar website-rebuild narrative is now implemented on the portfolio branch.** It uses the locked seven-part story and curated Cloudinary evidence for matched homepage, catalog, Alaska PDP, contact, responsive captures, the catalog interaction video, and verified Lighthouse stats.
-- **The misleading primary 67-product catalog-system framing has been removed from the Alamaar portfolio data object.** The primary Alamaar slug is now `alamaar-website-rebuild`; the 98-product production-system story remains a clearly separate next chapter rather than being presented as the same case study.
-- Added `prefers-reduced-motion` handling to both hero and inline case-study videos. Reduced-motion users get a non-autoplaying, non-looping video with controls rather than forced motion.
-- Strengthened reduced-motion behavior so the preference is read synchronously at initial render; this prevents a brief autoplay flash before the effect subscribes to preference changes.
-- Added a dedicated GitHub Actions QA workflow on the portfolio branch to run `npm run check` and enforce narrative guardrails against the old 67-product headline, unrelated testimonial names, unsupported conversion claims, and similar regressions.
-- Opened draft portfolio PR #10 (`Alamaar website rebuild case study`) so implementation, QA findings, and final review have a single merge surface. The branch is currently mergeable but remains intentionally draft until evidence and responsive QA are complete.
-- Capture evidence publishing is deterministic and resilient to partial failures through `evidence/bootstrap/run-status.json` and committed outputs.
-- **Scheduled evidence run 15 succeeded end-to-end:** capture, focused hero, and mobile Lighthouse all report `success`.
-- **Focused hero media is curated:** `hero-montage-focused.webm` is hosted on Cloudinary at 1440×900, 25fps, 9.88s and replaces the earlier blind 12-second trim as the preferred hero source.
-- **Mobile performance proof is retained and verified:** raw Lighthouse JSON plus summary are committed under `evidence/bootstrap/`; mobile performance measured 37 → 91 and LCP 34.29s → 2.87s under the recorded lab methodology.
-- **Portfolio branch uses the focused hero asset and includes a concise second stats block for the verified mobile Lighthouse evidence.**
-- **Crawlability gap identified and addressed in the portfolio branch:** the SPA's shared `index.html` previously contained only homepage metadata and no Alamaar narrative in the raw HTML. A build-time generator now creates `/case-studies/alamaar-website-rebuild/index.html` with route-specific title, description, canonical/OG/Twitter metadata and a crawlable progressive fallback containing the important case-study narrative. Verification is pending automated build QA.
-- **Added cross-repository portfolio QA to this workspace.** `.github/workflows/portfolio-qa.yml` checks out the case-study branch, runs `npm run check`, verifies the generated static route, starts the production preview, captures full-page desktop/tablet/mobile screenshots, checks horizontal overflow and rendered narrative, and validates normal/reduced-motion video behavior. Results are published into `evidence/portfolio-qa/` for deterministic review.
-- Updated PR #10 description so completed hero/mobile evidence and the new crawlability work are reflected accurately.
+- The case-study schema supports ordered image, video, before/after, gallery, and stats media blocks while retaining the legacy image field.
+- The complete Alamaar website-rebuild narrative is implemented on the portfolio branch using curated evidence and verified Lighthouse stats.
+- The misleading primary 67-product catalog-system framing has been removed; the primary Alamaar slug is now `alamaar-website-rebuild` and the 98-product production-system story is a separate next chapter.
+- Case-study videos respect `prefers-reduced-motion`; reduced-motion users do not receive forced autoplay/loop and get controls.
+- Draft portfolio PR #10 is open and mergeable, but remains draft until QA is complete.
+- Focused hero media is curated on Cloudinary at 1440×900, 25fps, 9.88s.
+- Verified paired mobile Lighthouse run 14 is preserved under `evidence/verified/mobile-lighthouse-run14/summary.json`, with source commit `3dec250846d447b491f6d376b637bccee955a3ba` retaining the original raw run artifacts.
+- The portfolio branch now generates a dedicated `/case-studies/alamaar-website-rebuild/index.html` during build with route-specific title, description, canonical/OG/Twitter metadata and progressive crawlable narrative fallback content.
+- Added cross-repository portfolio QA in `.github/workflows/portfolio-qa.yml` to run type/build checks, verify the generated route, start a production preview, capture desktop/tablet/mobile screenshots, detect horizontal overflow and page errors, verify rendered narrative, and test normal/reduced-motion video behavior.
+- Updated PR #10 description so completed hero/mobile evidence and crawlability work are reflected accurately.
+- **Evidence integrity issue found and fixed:** scheduled run 15 was marked `success` by step exit codes even though the old site timed out during route discovery and its Lighthouse run failed with `NO_FCP`. The scripts previously recorded errors but exited 0. `capture/validate-capture.mjs` now rejects missing routes/screenshots/videos, and `audit.mjs` now retries once, retains diagnostics, and exits non-zero if either Lighthouse target fails. Future `run-status.json` values will therefore reflect incomplete evidence correctly.
+
+## Latest capture health
+
+- Run 15's committed `run-status.json` says success, but that status is **not trustworthy** because it predates the new validators.
+- Run 15 Lighthouse summary contains an old-site `NO_FCP` error; its new-site mobile result was 99 with LCP 1.86s, but it is not a valid paired before/after run and must not replace verified run 14 in the case study.
+- Run 15 route capture also timed out against the preserved old site and produced null old product/contact/Alaska discovery fields.
+- The capture and audit scripts have now been hardened so the next run will report these conditions as failures rather than false success.
 
 ## Immediate next work
 
-1. Inspect `evidence/portfolio-qa/run-status.json`, `qa.json`, and desktop/tablet/mobile screenshots from the new cross-repo QA workflow; fix any build, overflow, rendering, or media-behavior failures.
-2. Once automated evidence passes, mark crawlability/responsive/video QA tasks complete only if screenshots and JSON support it.
+1. Inspect the next capture run after the validators were added and confirm `run-status.json` matches actual artifact completeness.
+2. Inspect `evidence/portfolio-qa/run-status.json`, `qa.json`, and desktop/tablet/mobile screenshots from the new cross-repo QA workflow; fix any build, overflow, rendering, crawlability, or media-behavior failures.
 3. Verify catalog collection-count overlap before interpreting 54 + 55 against 98 finishes.
-4. Resolve/re-verify multilingual QA blocker before recording EN → AR → HI proof.
+4. Keep multilingual recording blocked: a fresh 2026-08-23 crawl still exposes English `Generate ...` prompt text in Arabic collection content.
 5. Run final portfolio PageSpeed and complete the final fact/editorial pass before moving PR #10 out of draft.
 
 ## Blockers / unknowns
@@ -71,5 +71,5 @@ Secondary/follow-up story: scaling high-quality product content and application 
 - Primary customer segment and buying process are unknown. Avoid claims that depend on these facts.
 - UI designer name/credit is not yet known. Use generic `UI Designer` until supplied.
 - Need to verify whether collection counts can overlap (54 + 55 vs 98 total finishes) before interpreting the numbers.
-- Multilingual QA blocker: the current Arabic homepage crawl previously exposed English image-generation prompt text inside at least the Ruby Collection and Classic Wood content. Do not record polished EN/AR/HI evidence until fixed and re-verified.
+- Multilingual QA blocker: the Arabic homepage still exposes English image-generation prompt text within collection content. Do not record polished EN/AR/HI evidence until fixed and re-verified.
 - WordPress editor proof requires authenticated editor access; optional until access exists.
