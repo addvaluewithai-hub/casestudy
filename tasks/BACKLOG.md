@@ -34,8 +34,10 @@ Work top-to-bottom unless a task is blocked. Every completed task should update 
 - [x] Remove/replace conflicting 67-product Alamaar framing where it can mislead readers about the current 98-product project. The primary Alamaar data object now represents the 2026 website rebuild and no longer presents the old 67-product catalog-system headline/metrics.
 - [x] Add media lazy-loading/performance safeguards. Content images use lazy loading + async decoding, videos use metadata preload, and autoplaying case-study/hero videos now respect `prefers-reduced-motion` by disabling autoplay/loop and exposing controls.
 - [x] Replace provisional hero URL in portfolio data with the focused Cloudinary hero and add verified mobile Lighthouse proof without changing the evidence guardrails.
-- [ ] Add responsive/mobile QA for the case-study page.
-- [ ] Ensure all important narrative copy is crawlable HTML and metadata, not visual-only client rendering.
+- [x] Add build-time dedicated Alamaar case-study HTML generation with route-specific metadata and crawlable progressive fallback content. Implementation is complete; automated build verification is still pending before the crawlability QA item is closed.
+- [x] Add cross-repo automated portfolio QA workflow for type/build, generated-route verification, desktop/tablet/mobile screenshots, overflow checks, narrative rendering and video/reduced-motion behavior.
+- [ ] Add responsive/mobile QA for the case-study page. Automation added; close only after `evidence/portfolio-qa/` is reviewed.
+- [ ] Ensure all important narrative copy is crawlable HTML and metadata, not visual-only client rendering. Implementation added; close after generated output is verified.
 
 ## P3 — Final QA
 
