@@ -48,17 +48,18 @@ The later 98-product content/AI production system remains a separate follow-up s
 - Case-study video respects `prefers-reduced-motion`.
 - Verified run-14 mobile Lighthouse evidence is preserved separately as the canonical paired mobile comparison.
 - Capture scripts were hardened after run 15 exposed false-success behavior: required capture validation now fails missing routes/media, and Lighthouse retries then exits non-zero when either target fails.
-- **Capture validation is now confirmed in practice:** scheduled run 20 reports `capture: success`, `hero: success`, `audit: success`; the manifest contains all matched routes and no notes/errors. Run 20 also produced another valid paired mobile lab run (38 → 90 performance, 33.48s → 2.89s LCP, 709ms → 0ms TBT), reinforcing that the pipeline now reports complete runs correctly. Run 14 remains the published canonical comparison to avoid silently changing case-study numbers between lab runs.
-- Added a dedicated `Alamaar rebuild release QA` GitHub Actions workflow directly to `feat/alamaar-rebuild-release-preview`. It runs `npm ci`, `npm run check`, and narrative guardrails against the old Elementor/67-product wording and unsupported outcome claims. Commit: `cef6a14c1f6f51f4bc659b84e5b7235cc629b72f`.
+- Capture validation is confirmed in practice: scheduled run 20 reports `capture: success`, `hero: success`, `audit: success`; the manifest contains all matched routes and no notes/errors. Run 20 also produced another valid paired mobile lab run (38 → 90 performance, 33.48s → 2.89s LCP, 709ms → 0ms TBT). Run 14 remains the published canonical comparison to avoid silently changing case-study numbers between lab runs.
+- Added dedicated `Alamaar rebuild release QA` on `feat/alamaar-rebuild-release-preview` for `npm run check`, narrative guardrails and crawlable-route validation.
+- **Fixed a release-preview rendering mismatch discovered in Cloudflare:** the listing card was reading the new `alamaarWebsiteRebuildCaseStudy.ts` data while `/case-studies/alamaar-website-rebuild` still rendered an older hard-coded `AlamaarWebsiteRebuildStory.tsx`. The custom beige story now renders `study.headline`, `study.summary`, metrics and `study.sections` from the shared new data source, so card and route cannot diverge in normal operation. Guardrails now reject the superseded Elementor hero copy and require the custom story to render the shared sections.
+- **Added automated responsive QA to the release branch.** `scripts/alamaar-responsive-qa.mjs` launches the production build at 1440×1000, 834×1112 and 390×844, captures full-page screenshots, checks for horizontal overflow, runtime/console errors, the new headline/98-finish narrative, absence of the superseded Elementor copy, video flags, and reduced-motion behavior. The QA workflow uploads `alamaar-responsive-qa` screenshots plus `report.json` for review. Latest QA-workflow commit: `1655e2190e56519d6e20203a4a9ce0947a5b7999`.
 
 ## Immediate next work
 
-1. Inspect the new release-branch QA run and fix any build/type failure.
-2. Perform responsive desktop/tablet/mobile visual QA on the Cloudflare build while preserving the established WP AI Kits design language.
-3. Confirm important narrative content and metadata are crawlable on the `release/new-site` architecture; port the earlier static-route solution only if needed.
-4. Verify whether collection counts 54 + 55 overlap before interpreting them against 98 finishes.
-5. Keep multilingual recording blocked until the Arabic `Generate ...` prompt leakage is fixed and re-verified.
-6. Run final portfolio PageSpeed and complete final fact/editorial QA before moving PR #11 out of draft.
+1. Inspect the `alamaar-responsive-qa` artifact from the new release-branch QA run and fix any desktop/tablet/mobile, overflow, runtime or reduced-motion issue before closing responsive QA.
+2. Verify the latest Cloudflare branch build renders the new shared story after the hard-coded-route fix.
+3. Verify whether collection counts 54 + 55 overlap before interpreting them against 98 finishes.
+4. Keep multilingual recording blocked until the Arabic `Generate ...` prompt leakage is fixed and re-verified.
+5. Run final portfolio PageSpeed and complete final fact/editorial QA before moving PR #11 out of draft.
 
 ## Blockers / unknowns
 
