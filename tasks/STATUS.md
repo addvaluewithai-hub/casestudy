@@ -48,19 +48,22 @@ Secondary/follow-up story: scaling high-quality product content and application 
 - Strengthened reduced-motion behavior so the preference is read synchronously at initial render; this prevents a brief autoplay flash before the effect subscribes to preference changes.
 - Added a dedicated GitHub Actions QA workflow on the portfolio branch to run `npm run check` and enforce narrative guardrails against the old 67-product headline, unrelated testimonial names, unsupported conversion claims, and similar regressions.
 - Opened draft portfolio PR #10 (`Alamaar website rebuild case study`) so implementation, QA findings, and final review have a single merge surface. The branch is currently mergeable but remains intentionally draft until evidence and responsive QA are complete.
-- Capture evidence publishing is now deterministic and resilient to partial failures through `evidence/bootstrap/run-status.json` and committed outputs.
-- **Scheduled evidence run 14 succeeded end-to-end:** capture, focused hero, and mobile Lighthouse all report `success`.
-- **Focused hero media is now curated:** `hero-montage-focused.webm` is hosted on Cloudinary at 1440×900, 25fps, 9.88s and replaces the earlier blind 12-second trim as the preferred hero source.
-- **Mobile performance proof is now retained and verified:** raw Lighthouse JSON plus summary are committed under `evidence/bootstrap/`; mobile performance measured 37 → 91 and LCP 34.29s → 2.87s under the recorded lab methodology.
-- **Portfolio branch now uses the focused hero asset and includes a concise second stats block for the verified mobile Lighthouse evidence.** The old provisional hero URL is no longer used in the Alamaar data object.
+- Capture evidence publishing is deterministic and resilient to partial failures through `evidence/bootstrap/run-status.json` and committed outputs.
+- **Scheduled evidence run 15 succeeded end-to-end:** capture, focused hero, and mobile Lighthouse all report `success`.
+- **Focused hero media is curated:** `hero-montage-focused.webm` is hosted on Cloudinary at 1440×900, 25fps, 9.88s and replaces the earlier blind 12-second trim as the preferred hero source.
+- **Mobile performance proof is retained and verified:** raw Lighthouse JSON plus summary are committed under `evidence/bootstrap/`; mobile performance measured 37 → 91 and LCP 34.29s → 2.87s under the recorded lab methodology.
+- **Portfolio branch uses the focused hero asset and includes a concise second stats block for the verified mobile Lighthouse evidence.**
+- **Crawlability gap identified and addressed in the portfolio branch:** the SPA's shared `index.html` previously contained only homepage metadata and no Alamaar narrative in the raw HTML. A build-time generator now creates `/case-studies/alamaar-website-rebuild/index.html` with route-specific title, description, canonical/OG/Twitter metadata and a crawlable progressive fallback containing the important case-study narrative. Verification is pending automated build QA.
+- **Added cross-repository portfolio QA to this workspace.** `.github/workflows/portfolio-qa.yml` checks out the case-study branch, runs `npm run check`, verifies the generated static route, starts the production preview, captures full-page desktop/tablet/mobile screenshots, checks horizontal overflow and rendered narrative, and validates normal/reduced-motion video behavior. Results are published into `evidence/portfolio-qa/` for deterministic review.
+- Updated PR #10 description so completed hero/mobile evidence and the new crawlability work are reflected accurately.
 
 ## Immediate next work
 
-1. Inspect the portfolio QA workflow result and fix any type/build failure on `feat/alamaar-rebuild-case-study`.
-2. Perform responsive visual QA on the implemented case-study page at desktop/tablet/mobile.
+1. Inspect `evidence/portfolio-qa/run-status.json`, `qa.json`, and desktop/tablet/mobile screenshots from the new cross-repo QA workflow; fix any build, overflow, rendering, or media-behavior failures.
+2. Once automated evidence passes, mark crawlability/responsive/video QA tasks complete only if screenshots and JSON support it.
 3. Verify catalog collection-count overlap before interpreting 54 + 55 against 98 finishes.
 4. Resolve/re-verify multilingual QA blocker before recording EN → AR → HI proof.
-5. Confirm important narrative content remains crawlable and then run final portfolio PageSpeed before PR/merge.
+5. Run final portfolio PageSpeed and complete the final fact/editorial pass before moving PR #10 out of draft.
 
 ## Blockers / unknowns
 
@@ -68,5 +71,5 @@ Secondary/follow-up story: scaling high-quality product content and application 
 - Primary customer segment and buying process are unknown. Avoid claims that depend on these facts.
 - UI designer name/credit is not yet known. Use generic `UI Designer` until supplied.
 - Need to verify whether collection counts can overlap (54 + 55 vs 98 total finishes) before interpreting the numbers.
-- Multilingual QA blocker: the current Arabic homepage crawl exposes English image-generation prompt text inside at least the Ruby Collection and Classic Wood content. Do not record polished EN/AR/HI evidence until fixed and re-verified.
+- Multilingual QA blocker: the current Arabic homepage crawl previously exposed English image-generation prompt text inside at least the Ruby Collection and Classic Wood content. Do not record polished EN/AR/HI evidence until fixed and re-verified.
 - WordPress editor proof requires authenticated editor access; optional until access exists.
