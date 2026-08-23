@@ -14,7 +14,7 @@ permissions:
 
 env:
   CI: true
-  PORTFOLIO_PREVIEW_URL: https://feat-alamaar-rebuild-release-preview.yasserhawas-preview.pages.dev
+  PORTFOLIO_PREVIEW_URL: https://feat-alamaar-rebuild-release.yasserhawas-preview.pages.dev
 
 jobs:
   capture:
@@ -106,5 +106,5 @@ jobs:
       - name: Fail job when a required capture failed
         if: always() && (steps.capture.outcome == 'failure' || steps.hero.outcome == 'failure' || steps.audit.outcome == 'failure' || steps.portfolio.outcome == 'failure')
         run: |
-          echo "One or more evidence/QA steps failed. See evidence/run-status.json and portfolio-preview/report.json."
+          echo "One or more evidence/QA steps failed. See evidence/run-status.json and portfolio-preview/qa.json."
           exit 1
