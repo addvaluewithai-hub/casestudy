@@ -47,6 +47,7 @@ Secondary/follow-up story: scaling high-quality product content and application 
 - **The misleading primary 67-product catalog-system framing has been removed from the Alamaar portfolio data object.** The primary Alamaar slug is now `alamaar-website-rebuild`; the 98-product production-system story remains a clearly separate next chapter rather than being presented as the same case study.
 - Added `prefers-reduced-motion` handling to both hero and inline case-study videos. Reduced-motion users now get a non-autoplaying, non-looping video with controls rather than forced motion.
 - Added a dedicated GitHub Actions QA workflow on the portfolio branch to run `npm run check` and enforce narrative guardrails against the old 67-product headline, unrelated testimonial names, unsupported conversion claims, and similar regressions.
+- Opened draft portfolio PR #10 (`Alamaar website rebuild case study`) so implementation, QA findings, and final review have a single merge surface. The branch is currently mergeable but remains intentionally draft until evidence and responsive QA are complete.
 
 ## Immediate next work
 
