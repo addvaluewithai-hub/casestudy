@@ -19,7 +19,7 @@ env:
 jobs:
   capture:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 40
     defaults:
       run:
         working-directory: capture
@@ -60,6 +60,11 @@ jobs:
         continue-on-error: true
         run: npm run portfolio-qa
 
+      - name: Audit final portfolio branch preview
+        id: portfolio_audit
+        continue-on-error: true
+        run: npm run portfolio-audit
+
       - name: Write run status
         if: always()
         run: |
@@ -70,6 +75,7 @@ jobs:
             "hero": "${{ steps.hero.outcome }}",
             "audit": "${{ steps.audit.outcome }}",
             "portfolio": "${{ steps.portfolio.outcome }}",
+            "portfolio_audit": "${{ steps.portfolio_audit.outcome }}",
             "run_number": "${{ github.run_number }}",
             "event": "${{ github.event_name }}"
           }
@@ -104,7 +110,7 @@ jobs:
           fi
 
       - name: Fail job when a required capture failed
-        if: always() && (steps.capture.outcome == 'failure' || steps.hero.outcome == 'failure' || steps.audit.outcome == 'failure' || steps.portfolio.outcome == 'failure')
+        if: always() && (steps.capture.outcome == 'failure' || steps.hero.outcome == 'failure' || steps.audit.outcome == 'failure' || steps.portfolio.outcome == 'failure' || steps.portfolio_audit.outcome == 'failure')
         run: |
-          echo "One or more evidence/QA steps failed. See evidence/run-status.json and portfolio-preview/qa.json."
+          echo "One or more evidence/QA steps failed. See evidence/run-status.json, portfolio-preview/qa.json and portfolio-lighthouse/summary.json."
           exit 1
