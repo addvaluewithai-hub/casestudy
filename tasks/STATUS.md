@@ -42,7 +42,7 @@ Secondary/follow-up story: scaling high-quality product content and application 
 - Portfolio implementation is active on branch `feat/alamaar-rebuild-case-study` in `addvaluewithai-hub/yasserhawas.site`.
 - The case-study schema supports ordered rich media blocks: image, video, before/after, gallery, and stats while retaining the legacy image field for existing studies.
 - `CaseStudyBody` renders those rich media blocks with lazy-loaded images, metadata-preloaded video, matched before/after grids, galleries, and evidence-oriented stat comparisons.
-- **The complete Alamaar website-rebuild narrative is now implemented on the portfolio branch.** It uses the locked seven-part story and curated Cloudinary evidence for matched homepage, catalog, Alaska PDP, contact, responsive captures, the catalog interaction video, and verified desktop Lighthouse stats.
+- **The complete Alamaar website-rebuild narrative is now implemented on the portfolio branch.** It uses the locked seven-part story and curated Cloudinary evidence for matched homepage, catalog, Alaska PDP, contact, responsive captures, the catalog interaction video, and verified Lighthouse stats.
 - **The misleading primary 67-product catalog-system framing has been removed from the Alamaar portfolio data object.** The primary Alamaar slug is now `alamaar-website-rebuild`; the 98-product production-system story remains a clearly separate next chapter rather than being presented as the same case study.
 - Added `prefers-reduced-motion` handling to both hero and inline case-study videos. Reduced-motion users get a non-autoplaying, non-looping video with controls rather than forced motion.
 - Strengthened reduced-motion behavior so the preference is read synchronously at initial render; this prevents a brief autoplay flash before the effect subscribes to preference changes.
@@ -52,15 +52,15 @@ Secondary/follow-up story: scaling high-quality product content and application 
 - **Scheduled evidence run 14 succeeded end-to-end:** capture, focused hero, and mobile Lighthouse all report `success`.
 - **Focused hero media is now curated:** `hero-montage-focused.webm` is hosted on Cloudinary at 1440×900, 25fps, 9.88s and replaces the earlier blind 12-second trim as the preferred hero source.
 - **Mobile performance proof is now retained and verified:** raw Lighthouse JSON plus summary are committed under `evidence/bootstrap/`; mobile performance measured 37 → 91 and LCP 34.29s → 2.87s under the recorded lab methodology.
+- **Portfolio branch now uses the focused hero asset and includes a concise second stats block for the verified mobile Lighthouse evidence.** The old provisional hero URL is no longer used in the Alamaar data object.
 
 ## Immediate next work
 
-1. Replace the provisional hero URL in the portfolio case-study data with the focused Cloudinary hero and add the verified mobile Lighthouse proof concisely.
-2. Inspect the portfolio QA workflow result and fix any type/build failure on `feat/alamaar-rebuild-case-study`.
-3. Perform responsive visual QA on the implemented case-study page at desktop/tablet/mobile.
-4. Verify catalog collection-count overlap before interpreting 54 + 55 against 98 finishes.
-5. Resolve/re-verify multilingual QA blocker before recording EN → AR → HI proof.
-6. Confirm important narrative content remains crawlable and then run final portfolio PageSpeed before PR/merge.
+1. Inspect the portfolio QA workflow result and fix any type/build failure on `feat/alamaar-rebuild-case-study`.
+2. Perform responsive visual QA on the implemented case-study page at desktop/tablet/mobile.
+3. Verify catalog collection-count overlap before interpreting 54 + 55 against 98 finishes.
+4. Resolve/re-verify multilingual QA blocker before recording EN → AR → HI proof.
+5. Confirm important narrative content remains crawlable and then run final portfolio PageSpeed before PR/merge.
 
 ## Blockers / unknowns
 
