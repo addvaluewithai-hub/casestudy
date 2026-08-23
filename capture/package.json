@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "capture": "node capture.mjs",
+    "capture": "node capture.mjs && node validate-capture.mjs",
     "hero": "node hero.mjs",
     "audit": "node audit.mjs"
   },
