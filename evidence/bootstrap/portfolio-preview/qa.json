@@ -1,6 +1,6 @@
 {
   "url": "https://feat-alamaar-rebuild-release.yasserhawas-preview.pages.dev/case-studies/alamaar-website-rebuild/",
-  "checkedAt": "2026-08-23T17:40:49.582Z",
+  "checkedAt": "2026-08-23T18:53:49.826Z",
   "viewports": {
     "desktop": {
       "navigation": {
@@ -47,7 +47,7 @@
     "Restructuring product discovery": true,
     "Giving each finish more context": true,
     "From contact information to project enquiry": true,
-    "More visual, substantially faster": false,
+    "More visual, faster in lab tests": true,
     "Built to remain editable and multilingual": true,
     "The next problem is doing it 98 times": true,
     "Application scenes are conceptual visualizations": true
@@ -76,8 +76,6 @@
     "controls": true,
     "paused": true
   },
-  "failures": [
-    "Missing rendered narrative: More visual, substantially faster"
-  ],
-  "status": "failure"
+  "failures": [],
+  "status": "success"
 }
