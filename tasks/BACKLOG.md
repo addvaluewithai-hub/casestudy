@@ -20,7 +20,7 @@ Work top-to-bottom unless a task is blocked. Every completed task should update 
 ## P1 — Story and claims
 
 - [x] Verify exact old/new Alaska Wood URLs and matched product code.
-- [ ] Verify catalog filter behavior and whether filter counts overlap.
+- [ ] Verify catalog filter behavior and whether filter counts overlap. Current public/source evidence does not expose enough collection membership detail to prove overlap; keep unresolved rather than infer 54 + 55 against 98.
 - [x] Decide final headline and one-sentence project summary.
 - [x] Lock concise story: Context → Product discovery → PDP → Enquiry → Performance → Engineering/multilingual → 98-product next chapter.
 - [x] Write concise role credit: UX strategy / information architecture / design direction / development; UI design by collaborating designer.
@@ -37,7 +37,7 @@ Work top-to-bottom unless a task is blocked. Every completed task should update 
 - [x] Add build-time dedicated Alamaar case-study HTML generation with route-specific metadata and crawlable progressive fallback content.
 - [x] Fix the custom-route content split: `AlamaarWebsiteRebuildStory.tsx` now renders the shared new case-study data rather than maintaining the old Elementor narrative separately.
 - [x] Add release-branch QA guardrails that reject the superseded Elementor/67-product wording and require the custom story to render shared headline/sections.
-- [ ] Add responsive/mobile QA for the case-study page. Automated production-build QA now captures desktop 1440×1000, tablet 834×1112 and mobile 390×844, checks overflow/runtime/narrative/video behavior, and uploads an `alamaar-responsive-qa` artifact. Close only after that artifact is reviewed.
+- [ ] Add responsive/mobile QA for the case-study page. Automated production-build QA is implemented, but portfolio Actions run 9 fails before any step starts and publishes no artifact; this task is blocked on a runnable Actions job, not yet on a known page defect.
 - [x] Ensure important narrative copy is crawlable HTML and route-specific metadata; build-time output and QA assertions are implemented.
 
 ## P3 — Final QA
@@ -46,7 +46,7 @@ Work top-to-bottom unless a task is blocked. Every completed task should update 
 - [ ] Confirm no unrelated testimonial is shown.
 - [ ] Confirm UI designer is credited accurately if name becomes available.
 - [ ] Verify media captions distinguish factual evidence from retrospective diagrams.
-- [ ] Test case study at desktop/tablet/mobile. Automated artifact pending review.
-- [ ] Test video autoplay/mute/playsInline/reduced-motion behavior. Automated assertions pending run review.
+- [ ] Test case study at desktop/tablet/mobile. Automated evidence blocked by the pre-step Actions failure above.
+- [ ] Test video autoplay/mute/playsInline/reduced-motion behavior. Automated evidence blocked by the pre-step Actions failure above.
 - [ ] Run PageSpeed on final portfolio case-study page.
 - [ ] Final editorial pass: remove hype, redundancy, unexplained jargon, and claims not backed by proof.
