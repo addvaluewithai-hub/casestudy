@@ -24,6 +24,11 @@
 - "Perfect accessibility" / "perfect SEO" — do not infer from Lighthouse 100 scores.
 - "AI accurately reproduces the material in real spaces" — too strong. Application scenes are conceptual unless a specific validation process proves otherwise.
 - Do not generalize the old mobile LCP of 34.29s into a real-user loading-time claim. It is one retained automated lab run, not field telemetry.
+- The Alamaar source repository README records a 2026-08-20 staging snapshot with 99 published finishes, while the current live shop evidence exposes 98 results. The rebuild case study intentionally uses the current live 98-finish count; do not rewrite this as a claim that every staging snapshot also contained 98.
+
+## Final portfolio claim audit — 2026-08-23
+
+The current `feat/alamaar-rebuild-release-preview` story was checked against the evidence ledger and source repository. Its published numbers are supported: 98 is the current live-shop count; desktop 45 → 96 / 6.8s → 1.1s / 270ms → 0ms comes from the retained supplied desktop lab evidence; mobile 37 → 91 / 34.29s → 2.87s / 759ms → 0ms comes from retained run-14 Lighthouse evidence. The source repository independently supports custom Gutenberg/FSE, ACF-generated structured controls, and one shared English/Arabic/Hindi structure with Arabic RTL. The custom Alamaar story component contains no testimonial block and renders the generic collaborating-designer credit rather than claiming solo UI execution.
 
 ## Preferred role wording
 
