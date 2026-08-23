@@ -57,8 +57,8 @@ jobs:
           if-no-files-found: warn
           retention-days: 14
 
-      - name: Publish bootstrap evidence to repository
-        if: success() && github.event_name == 'push'
+      - name: Publish latest evidence to repository
+        if: success() && github.event_name != 'workflow_dispatch'
         run: |
           cd "$GITHUB_WORKSPACE"
           rm -rf evidence/bootstrap
@@ -70,6 +70,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "No capture changes to publish"
           else
-            git commit -m "Store bootstrap Alamaar capture evidence"
+            git commit -m "Store latest Alamaar capture evidence"
             git push
           fi
