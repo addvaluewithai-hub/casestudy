@@ -1,60 +1,64 @@
-# Initial Storyboard
+# Locked Storyboard and Copy Contract
 
-This is a working storyboard, not final copy. Keep it concise and evidence-first.
+Keep the case study concise, evidence-first, and visually led. This file locks the narrative direction unless new evidence materially changes it.
 
-## 1. Hero — the finished experience
+## Hero
 
-**Purpose:** establish quality before explaining process.
+**Headline:** `Rebuilding Alamaar HPL's digital product experience.`
 
-**Media:** 10–15s muted montage: homepage → products → Alaska PDP → contact / language switch.
+**Summary:** `I restructured the UX and information architecture, directed the UI design, and developed a custom multilingual WordPress rebuild that introduced structured product discovery, richer finish evaluation, and project enquiries across a 98-finish catalog.`
 
-**Copy job:** state project, role, and concrete transformation without unsupported client motivation.
+**Role:** `UX strategy · information architecture · design direction · WordPress development · performance engineering`
 
-Working headline territory: `Rebuilding Alamaar HPL's digital product experience.`
+**Collaboration:** `UI design by a collaborating designer, directed and reviewed by Yasser.`
 
-## 2. Context — the product website had outgrown its presentation
+**Media:** 10–15s muted montage: homepage → products → Alaska PDP. Contact/language footage is supporting evidence, not required in the hero.
 
-**Purpose:** show why a redesign was meaningful without insulting the old site.
+## 1. Context — the product website had outgrown its presentation
 
-**Media:** matched old/new homepage crop.
+**Purpose:** show why a redesign was meaningful without insulting the old site or inventing the client's brief.
 
-**Copy job:** contrast company/catalog presentation, hierarchy, and ability to communicate the material offering. No invented business brief.
+**Media:** matched old/new homepage comparison.
 
-## 3. Restructuring product discovery
+**Copy direction:** The previous website already contained company, catalog, product and contact content. The redesign reorganized and re-presented that material as a more deliberate product experience. Avoid claims about why the client commissioned the work because the original motivation is unknown.
 
-**Purpose:** demonstrate UX/IA ownership.
+## 2. Restructuring product discovery
 
-**Media:** old product archive vs new products page; close-up of search and filters; optional short filtering video.
+**Purpose:** demonstrate UX/IA ownership with verifiable interface capability.
 
-**Proof:** 98 finishes; search by name/code; filters for collection, finish, design family; result count + pagination.
+**Media:** old product archive vs new products page; close-up of search/filters; 8.88s filtering video.
 
-**Copy job:** explain support for both known-item retrieval (product code) and browsing by material taxonomy, without claiming measured task success.
+**Proof:** 98 finishes; search by name/code; collection, finish and design-family filters; result count; pagination.
 
-## 4. Giving each finish more context
+**Copy direction:** The new catalog supports both known-item retrieval by product name/code and exploratory browsing by material taxonomy. Do not claim measured task success or user-research outcomes.
+
+## 3. Giving each finish more context
 
 **Purpose:** strongest matched before/after proof.
 
-**Media:** Alaska Wood old PDP vs new Alaska Wood PDP; supporting Orchid PDP.
+**Media:** Alaska Wood old PDP vs new Alaska Wood PDP; Orchid as supporting proof that the PDP system generalizes.
 
-**Copy job:** show expanded evaluation flow: hero identity → exact attributes → application context → core specs → benefits → related finishes → sample/enquiry CTA.
+**Copy direction:** Contrast the old page's material/description/gallery structure with the new sequence: product identity and CTAs → attributes → application context → core specifications → benefits → related finishes.
 
-**AI note:** exact product/material reference remains separate from conceptual application imagery. Keep the deeper generation/scale problem for case study #2.
+**AI disclosure:** `Application scenes are conceptual visualizations. The original product swatch/material reference remains the source of truth for the finish itself.`
 
-## 5. From contact page to project enquiry
+Keep the generation workflow and the 98-product scaling problem for the follow-up case study.
 
-**Purpose:** show redesign affected the sales/enquiry journey, not only visual styling.
+## 4. From contact information to project enquiry
 
-**Media:** old contact vs new contact.
+**Purpose:** show that the redesign changed the enquiry flow, not only visual styling.
 
-**Copy job:** old page focused on contact/location information; new experience lets visitors provide project type, product/code, contact details, and project requirements before continuing on WhatsApp. Do not claim conversion uplift without analytics.
+**Media:** matched old/new contact pages.
 
-## 6. More visual, substantially faster
+**Copy direction:** The old page centered contact/location information. The new page lets visitors provide contact details, project type, an optional product/code and project requirements before continuing the request in WhatsApp. Do not claim conversion uplift.
+
+## 5. More visual, substantially faster
 
 **Purpose:** objective engineering proof.
 
-**Media:** designed stat comparison; raw PageSpeed evidence expandable/secondary.
+**Media:** designed stat comparison first; raw PageSpeed evidence secondary/expandable.
 
-**Desktop supplied evidence:**
+**Desktop evidence supplied by Yasser:**
 - Performance: 45 → 96
 - LCP: 6.8s → 1.1s
 - TBT: 270ms → 0ms
@@ -62,20 +66,30 @@ Working headline territory: `Rebuilding Alamaar HPL's digital product experience
 - Speed Index: 5.8s → 1.4s
 - CLS: 0.061 → 0.001
 
-**Copy job:** present as PageSpeed/Lighthouse lab results. Add mobile evidence when captured.
+**Methodology note:** `Google PageSpeed Insights / Lighthouse desktop lab measurements captured on comparable old and new site states. Lab scores can vary between runs and should not be read as analytics, conversion, or other business outcomes.`
 
-## 7. Built to remain editable and multilingual
+Add mobile evidence only after raw automated Lighthouse JSON is retained and verified.
 
-**Purpose:** close with engineering credibility without turning the case study into architecture documentation.
+## 6. Built to remain editable and multilingual
 
-**Media:** 6–10s Gutenberg/ACF editor clip if access is available; 6–10s EN → AR → HI switch.
+**Purpose:** close with engineering credibility without turning the page into architecture documentation.
 
-**Copy job:** native Gutenberg/FSE + ACF; no page builder; shared multilingual structure; Arabic RTL. Avoid compiler/WPAK detail unless a technical reader expands a note.
+**Media:** WordPress editor → frontend proof if authenticated access becomes available; EN → AR → HI proof only after localization QA is clean.
 
-## 8. Next chapter — doing it 98 times
+**Copy direction:** Custom native Gutenberg/FSE + ACF, no page builder, shared multilingual structure for English/Arabic/Hindi, Arabic RTL. Keep WPAK/compiler/deployment details as optional technical notes rather than the main narrative.
+
+## 7. Next chapter — doing it 98 times
 
 **Purpose:** bridge to the second case study.
 
-**Media:** grid/contact sheet of multiple products or a small catalog-production teaser.
+**Media:** product grid/contact sheet or small catalog-production teaser.
 
-**Copy job:** the redesign established a richer quality bar; scaling accurate product content and application imagery across 98 finishes became a separate production-system challenge. Do not imply the follow-up project is complete before it is.
+**Copy direction:** The redesign established a richer content and imagery standard. Applying that standard consistently across 98 finishes became a separate production-system problem involving structured product data, multilingual content, visual assets and QA. Do not imply that follow-up work is complete until its own evidence proves it.
+
+## Editorial guardrails
+
+- No client testimonial exists for this project.
+- Do not invent the original client motivation, primary audience, buying process, analytics results or historical UX artifacts.
+- Credit UX/IA/design direction and development accurately; do not claim final UI execution as Yasser's solo work.
+- Lighthouse 100 scores are not equivalent to perfect accessibility or SEO.
+- AI application imagery is conceptual unless independently verified otherwise.
