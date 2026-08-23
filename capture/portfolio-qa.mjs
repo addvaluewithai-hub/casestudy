@@ -7,6 +7,21 @@ const outputDir = path.resolve(process.argv[3] || 'evidence/portfolio-qa');
 const route = '/case-studies/alamaar-website-rebuild/';
 const url = `${baseUrl.replace(/\/$/, '')}${route}`;
 
+const evidenceImageNames = [
+  'old-home-desktop.png',
+  'new-home-desktop.png',
+  'old-products-desktop.png',
+  'new-products-desktop.png',
+  'old-alaska-desktop.png',
+  'new-alaska-desktop.png',
+  'old-contact-desktop.png',
+  'new-contact-desktop.png',
+  'new-home-mobile.png',
+  'new-products-mobile.png',
+  'new-alaska-mobile.png',
+  'new-contact-mobile.png',
+];
+
 fs.mkdirSync(outputDir, { recursive: true });
 
 const browser = await chromium.launch({ headless: true });
@@ -17,6 +32,7 @@ const results = {
   narrative: {},
   video: {},
   reducedMotion: {},
+  imageDelivery: {},
 };
 
 const viewports = {
@@ -45,6 +61,16 @@ async function navigate(page) {
   }
 }
 
+async function loadLazyImages(page) {
+  const images = page.locator('img');
+  const count = await images.count();
+  for (let index = 0; index < count; index += 1) {
+    await images.nth(index).scrollIntoViewIfNeeded().catch(() => {});
+  }
+  await page.waitForTimeout(750);
+  await page.evaluate(() => window.scrollTo(0, 0));
+}
+
 for (const [name, viewport] of Object.entries(viewports)) {
   const context = await browser.newContext({ viewport });
   const page = await context.newPage();
@@ -62,6 +88,8 @@ for (const [name, viewport] of Object.entries(viewports)) {
   };
 
   if (navigation.ok) {
+    await loadLazyImages(page);
+
     await page.screenshot({
       path: path.join(outputDir, `${name}.png`),
       fullPage: true,
@@ -88,6 +116,19 @@ for (const [name, viewport] of Object.entries(viewports)) {
         'Application scenes are conceptual visualizations',
       ];
       results.narrative = Object.fromEntries(requiredText.map(text => [text, bodyText.includes(text)]));
+
+      const imageSources = await page.locator('img').evaluateAll(nodes => nodes.map(node => node.currentSrc || node.src));
+      const evidenceSources = imageSources.filter(src => evidenceImageNames.some(imageName => src.includes(imageName)));
+      const missingEvidenceImages = evidenceImageNames.filter(imageName => !evidenceSources.some(src => src.includes(imageName)));
+      const unoptimizedEvidenceImages = evidenceSources.filter(src => !src.includes('/image/upload/f_auto/q_auto/'));
+      results.imageDelivery = {
+        imageCount: imageSources.length,
+        evidenceImageCount: evidenceSources.length,
+        expectedUniqueEvidenceImages: evidenceImageNames.length,
+        missingEvidenceImages,
+        unoptimizedEvidenceImages,
+        evidenceSources,
+      };
 
       const videos = await page.locator('video').count();
       results.video.count = videos;
@@ -143,6 +184,12 @@ for (const [name, data] of Object.entries(results.viewports)) {
 }
 for (const [text, present] of Object.entries(results.narrative)) {
   if (!present) failures.push(`Missing rendered narrative: ${text}`);
+}
+if (results.imageDelivery.missingEvidenceImages?.length) {
+  failures.push(`Missing expected evidence images in deployed DOM: ${results.imageDelivery.missingEvidenceImages.join(', ')}`);
+}
+if (results.imageDelivery.unoptimizedEvidenceImages?.length) {
+  failures.push(`Unoptimized evidence image URLs in deployed DOM: ${results.imageDelivery.unoptimizedEvidenceImages.join(', ')}`);
 }
 if (!results.video.hero?.muted || !results.video.hero?.playsInline || results.video.hero?.preload !== 'metadata') {
   failures.push('Hero video media safeguards are incomplete');
