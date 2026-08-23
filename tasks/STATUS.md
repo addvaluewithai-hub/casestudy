@@ -35,6 +35,8 @@ The later 98-product content/AI production system remains a separate follow-up s
 - Current branch: `feat/alamaar-rebuild-release-preview`, created directly from `release/new-site`.
 - Current review surface: draft PR #11 targeting `release/new-site`.
 - Cloudflare Pages builds the feature branch automatically; GitHub remains the source of truth.
+- Cloudflare confirmed commit `abbe6fa11f028473b77f3997ff7602b015d6e3e7` deployed successfully; stable branch preview is `https://feat-alamaar-rebuild-release.yasserhawas-preview.pages.dev`.
+- PR #11 currently reports `mergeable: true`; the earlier temporary mergeability concern is no longer an active blocker.
 - The feature branch contains the new headline `Rebuilding Alamaar HPL's digital product experience.` and the complete evidence-led narrative.
 
 ## Completed
@@ -48,30 +50,31 @@ The later 98-product content/AI production system remains a separate follow-up s
 - Case-study video respects `prefers-reduced-motion`.
 - Verified run-14 mobile Lighthouse evidence is preserved separately as the canonical paired mobile comparison.
 - Capture scripts were hardened after run 15 exposed false-success behavior: required capture validation now fails missing routes/media, and Lighthouse retries then exits non-zero when either target fails.
-- Capture validation is confirmed in practice: run 20 was complete, and the newer published run 21 also reports `capture: success`, `hero: success`, `audit: success`, with no errors.
-- Run-21 route evidence was rechecked against `evidence/bootstrap/manifest.json`; the canonical automated routes are old/new `/shop/`, old/new `/contact/`, old Alaska `/product/alaska-wood-5225-sf-2/`, and new Alaska `/shop/finishes/alaska-wood-5225-sf/`.
+- Capture validation is confirmed in practice through the latest published run 26: `capture: success`, `hero: success`, `audit: success`.
 - Added dedicated `Alamaar rebuild release QA` on `feat/alamaar-rebuild-release-preview` for `npm run check`, narrative guardrails and crawlable-route validation.
 - Fixed the release-preview rendering mismatch: the custom beige Alamaar story now renders shared case-study data rather than an older hard-coded Elementor narrative.
 - Added automated responsive QA for desktop/tablet/mobile, overflow/runtime checks, story assertions and reduced-motion video behavior.
-- The PR-triggered release QA is observable but remains blocked at GitHub Actions infrastructure level: run 9 (`32634593790`) and its rerun failed before any workflow step started, with no artifact. This is not evidence of a page-level responsive/build failure.
+- Portfolio-repo Actions continue to fail before any workflow step starts. Latest observable PR run 11 (`32640012514`) has an empty step list and no downloadable job log, confirming this remains infrastructure-level rather than page-level evidence.
+- **Removed that QA bottleneck from the critical path:** the working `casestudy` capture workflow now also tests the deployed Cloudflare branch preview at 1440×1000, 834×1112 and 390×844, captures full-page screenshots, checks status/content/horizontal overflow/runtime errors, records video attributes, and runs a reduced-motion assertion. Results publish under `evidence/bootstrap/portfolio-preview/` on the next successful capture run.
 - Fresh live shop verification still reports 98 results, but public/source evidence remains insufficient to prove whether collection counts 54 + 55 overlap.
 - Completed a line-by-line factual portfolio audit. Current live 98 count, matched Alaska evidence, retained desktop/run-14 mobile Lighthouse figures, Gutenberg/FSE + ACF architecture and shared English/Arabic/Hindi structure are reconciled. The source repo's separate 99-finish staging snapshot remains explicitly distinguished from current live production.
 - Confirmed the custom rebuild story contains no testimonial and uses the accurate generic collaborating-UI-designer credit. Media captions distinguish matched/live evidence from conceptual imagery.
-- **Completed the final editorial pass on the release-preview source.** Commit `abbe6fa11f028473b77f3997ff7602b015d6e3e7` tightens the seven-part narrative without changing facts: removes defensive/meta copy around conversion claims, replaces subjective performance phrasing with lab-test language, reduces repetition in discovery/PDP sections, and simplifies multilingual/next-chapter wording.
+- Completed the final editorial pass on the release-preview source. Commit `abbe6fa11f028473b77f3997ff7602b015d6e3e7` tightens the seven-part narrative without changing facts.
 
 ## Latest capture evidence
 
-- Latest committed scheduled evidence remains run 21, published by commit `4854dd5f8bb01a8522a832a23b02ff00a26e2ce8`.
-- `evidence/bootstrap/run-status.json`: capture success, hero success, audit success, no errors.
-- Run-21 mobile Lighthouse measured old/new performance 38 → 90 and LCP ~32.88s → 2.88s; these later valid numbers are retained as evidence but do not replace canonical run 14 in the published case study, avoiding cherry-picking normal Lighthouse variance.
+- Latest committed scheduled evidence is run 26, published by commit `6f7c823390f6409ee38ca279cfacd2210888a3d5`.
+- `evidence/bootstrap/run-status.json`: capture success, hero success, audit success.
+- Run-26 mobile Lighthouse measured old/new performance 35 → 88, LCP ~32.34s → 3.07s, and TBT 844.5ms → 0ms. These later valid measurements remain supporting evidence and do not replace canonical run 14 in the published case study, avoiding cherry-picking normal Lighthouse variance.
+- Run 26 also refreshed matched screenshots and all three WebM recordings in the repository evidence bundle.
 
 ## Immediate next work
 
-1. Re-check portfolio Actions after the latest source commit; when a job actually starts, inspect responsive screenshots/report and fix any page-level issue before closing responsive/reduced-motion QA.
-2. Run final PageSpeed on the actual release-preview case-study page once the final branch state is stable.
+1. Inspect the next `casestudy` capture publication after commit `64d0f39600101496c3f6656bc4634f6485b8abd7`; review `evidence/bootstrap/portfolio-preview/report.json` plus desktop/tablet/mobile screenshots and fix any real page-level issue before closing responsive/reduced-motion QA.
+2. Run final PageSpeed on the deployed release-preview case-study page once responsive QA is clean.
 3. Verify whether collection counts 54 + 55 overlap only if product-membership evidence becomes available; do not infer it from totals alone.
 4. Keep multilingual recording blocked until the Arabic `Generate ...` prompt leakage is fixed and re-verified.
-5. Resolve any branch/base divergence on PR #11 before moving it out of draft, but do not merge until responsive and final PageSpeed QA are complete.
+5. Keep PR #11 in draft until responsive and final PageSpeed QA are complete; no branch/base mergeability action is currently required.
 
 ## Blockers / unknowns
 
@@ -81,4 +84,4 @@ The later 98-product content/AI production system remains a separate follow-up s
 - Collection-count overlap remains unverified; current public/source checks do not expose enough membership data.
 - Arabic homepage still exposes English image-generation prompt text; do not record polished multilingual proof yet.
 - WordPress editor proof requires authenticated editor access and remains optional until access exists.
-- Portfolio responsive QA is temporarily blocked by a GitHub Actions run that fails before any step starts; no page-level failure has been established from that run.
+- Portfolio repository Actions are currently unusable for QA because jobs fail before their first step, but responsive QA is no longer fully blocked: equivalent checks have been moved into the working `casestudy` capture workflow against the deployed Cloudflare branch preview.
