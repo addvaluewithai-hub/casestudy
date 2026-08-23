@@ -65,10 +65,93 @@ async function loadLazyImages(page) {
   const images = page.locator('img');
   const count = await images.count();
   for (let index = 0; index < count; index += 1) {
-    await images.nth(index).scrollIntoViewIfNeeded().catch(() => {});
+    const image = images.nth(index);
+    await image.scrollIntoViewIfNeeded().catch(() => {});
+    await image.evaluate(node => {
+      if (node.complete) return;
+      return new Promise(resolve => {
+        const done = () => resolve();
+        node.addEventListener('load', done, { once: true });
+        node.addEventListener('error', done, { once: true });
+        setTimeout(done, 3000);
+      });
+    }).catch(() => {});
   }
-  await page.waitForTimeout(750);
+  await page.waitForTimeout(500);
   await page.evaluate(() => window.scrollTo(0, 0));
+}
+
+async function inspectVisualHealth(page) {
+  return page.evaluate(() => {
+    const textSelector = 'h1,h2,h3,p,li,a,figcaption,blockquote,button';
+    const textNodes = Array.from(document.querySelectorAll(textSelector));
+    const visible = element => {
+      const style = getComputedStyle(element);
+      const rect = element.getBoundingClientRect();
+      return style.display !== 'none' && style.visibility !== 'hidden' && rect.width > 0 && rect.height > 0;
+    };
+    const summarize = element => {
+      const rect = element.getBoundingClientRect();
+      return {
+        tag: element.tagName.toLowerCase(),
+        text: (element.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 140),
+        left: Math.round(rect.left),
+        right: Math.round(rect.right),
+        top: Math.round(rect.top),
+        width: Math.round(rect.width),
+        clientWidth: element.clientWidth,
+        scrollWidth: element.scrollWidth,
+        clientHeight: element.clientHeight,
+        scrollHeight: element.scrollHeight,
+        overflowX: getComputedStyle(element).overflowX,
+        overflowY: getComputedStyle(element).overflowY,
+      };
+    };
+
+    const offscreenText = textNodes
+      .filter(visible)
+      .filter(element => {
+        const rect = element.getBoundingClientRect();
+        return rect.left < -1 || rect.right > window.innerWidth + 1;
+      })
+      .map(summarize);
+
+    const clippedText = textNodes
+      .filter(visible)
+      .filter(element => {
+        const style = getComputedStyle(element);
+        const clipsX = ['hidden', 'clip'].includes(style.overflowX) && element.scrollWidth > element.clientWidth + 1;
+        const clipsY = ['hidden', 'clip'].includes(style.overflowY) && element.scrollHeight > element.clientHeight + 1;
+        return clipsX || clipsY;
+      })
+      .map(summarize);
+
+    const images = Array.from(document.images);
+    const brokenImages = images
+      .filter(image => image.complete && (image.naturalWidth === 0 || image.naturalHeight === 0))
+      .map(image => image.currentSrc || image.src);
+
+    const zeroSizedMedia = Array.from(document.querySelectorAll('img,video'))
+      .filter(element => {
+        const rect = element.getBoundingClientRect();
+        return rect.width < 1 || rect.height < 1;
+      })
+      .map(element => ({
+        tag: element.tagName.toLowerCase(),
+        src: element.currentSrc || element.src || null,
+      }));
+
+    return {
+      documentHeight: document.documentElement.scrollHeight,
+      sectionCount: document.querySelectorAll('main section').length,
+      figureCount: document.querySelectorAll('main figure').length,
+      imageCount: images.length,
+      brokenImages,
+      zeroSizedMedia,
+      offscreenText,
+      clippedText,
+    };
+  });
 }
 
 for (const [name, viewport] of Object.entries(viewports)) {
@@ -85,6 +168,7 @@ for (const [name, viewport] of Object.entries(viewports)) {
     horizontalOverflow: null,
     bodyWidth: null,
     scrollWidth: null,
+    visualHealth: null,
   };
 
   if (navigation.ok) {
@@ -101,6 +185,7 @@ for (const [name, viewport] of Object.entries(viewports)) {
       horizontalOverflow: await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth + 1),
       bodyWidth: await page.evaluate(() => document.documentElement.clientWidth),
       scrollWidth: await page.evaluate(() => document.documentElement.scrollWidth),
+      visualHealth: await inspectVisualHealth(page),
     };
 
     if (name === 'desktop') {
@@ -181,6 +266,10 @@ for (const [name, data] of Object.entries(results.viewports)) {
   if (!data.navigation.ok) failures.push(`${name}: navigation failed (${data.navigation.status ?? 'no status'}${data.navigation.error ? `; ${data.navigation.error}` : ''})`);
   if (data.horizontalOverflow) failures.push(`${name}: horizontal overflow (${data.scrollWidth}px > ${data.bodyWidth}px)`);
   if (data.pageErrors.length) failures.push(`${name}: ${data.pageErrors.length} page error(s)`);
+  if (data.visualHealth?.brokenImages.length) failures.push(`${name}: ${data.visualHealth.brokenImages.length} broken image(s)`);
+  if (data.visualHealth?.zeroSizedMedia.length) failures.push(`${name}: ${data.visualHealth.zeroSizedMedia.length} zero-sized media element(s)`);
+  if (data.visualHealth?.offscreenText.length) failures.push(`${name}: ${data.visualHealth.offscreenText.length} text element(s) extend outside the viewport`);
+  if (data.visualHealth?.clippedText.length) failures.push(`${name}: ${data.visualHealth.clippedText.length} clipped text element(s)`);
 }
 for (const [text, present] of Object.entries(results.narrative)) {
   if (!present) failures.push(`Missing rendered narrative: ${text}`);
