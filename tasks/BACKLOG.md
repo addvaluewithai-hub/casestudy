@@ -49,4 +49,4 @@ Work top-to-bottom unless a task is blocked. Every completed task should update 
 - [ ] Test case study at desktop/tablet/mobile. Automated evidence blocked by the pre-step Actions failure above.
 - [ ] Test video autoplay/mute/playsInline/reduced-motion behavior. Automated evidence blocked by the pre-step Actions failure above.
 - [ ] Run PageSpeed on final portfolio case-study page.
-- [ ] Final editorial pass: remove hype, redundancy, unexplained jargon, and claims not backed by proof.
+- [x] Final editorial pass: tightened the release-preview source on 2026-08-23 to remove defensive/meta wording, subjective performance language, repetition, and unnecessary jargon while preserving the locked evidence and role attribution.
