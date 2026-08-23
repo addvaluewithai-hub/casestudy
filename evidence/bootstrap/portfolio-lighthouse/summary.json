@@ -1,39 +1,39 @@
 {
-  "generatedAt": "2026-08-23T18:53:56.400Z",
+  "generatedAt": "2026-08-23T19:42:17.274Z",
   "url": "https://feat-alamaar-rebuild-release.yasserhawas-preview.pages.dev/case-studies/alamaar-website-rebuild/",
   "methodology": "Lighthouse CLI against the deployed Cloudflare branch preview on a GitHub Actions runner. Mobile uses simulated throttling; desktop uses the desktop preset. Lab measurements vary by run and are not field analytics.",
   "results": {
     "mobile": {
       "finalUrl": "https://feat-alamaar-rebuild-release.yasserhawas-preview.pages.dev/case-studies/alamaar-website-rebuild",
-      "fetchTime": "2026-08-23T18:53:59.355Z",
+      "fetchTime": "2026-08-23T19:42:20.726Z",
       "scores": {
-        "performance": 80,
+        "performance": 74,
         "accessibility": 98,
         "bestPractices": 100,
         "seo": 69
       },
       "metrics": {
-        "fcpMs": 2231.3565,
-        "lcpMs": 4784.352500000001,
-        "tbtMs": 54.5,
-        "speedIndexMs": 2231.3565,
+        "fcpMs": 3056.4484999999995,
+        "lcpMs": 5001.8785,
+        "tbtMs": 149.89849999999979,
+        "speedIndexMs": 3056.4484999999995,
         "cls": 0.001721783051121404
       }
     },
     "desktop": {
       "finalUrl": "https://feat-alamaar-rebuild-release.yasserhawas-preview.pages.dev/case-studies/alamaar-website-rebuild",
-      "fetchTime": "2026-08-23T18:54:11.496Z",
+      "fetchTime": "2026-08-23T19:42:33.579Z",
       "scores": {
-        "performance": 95,
+        "performance": 96,
         "accessibility": 98,
         "bestPractices": 100,
         "seo": 69
       },
       "metrics": {
-        "fcpMs": 898.114,
-        "lcpMs": 1318.4020000000005,
+        "fcpMs": 781.0645,
+        "lcpMs": 1333.8270000000002,
         "tbtMs": 0,
-        "speedIndexMs": 898.114,
+        "speedIndexMs": 781.0645,
         "cls": 0.0003654671440761205
       }
     }
