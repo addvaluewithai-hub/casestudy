@@ -31,39 +31,48 @@ Supporting proof: catalog discovery, same-product PDP before/after, contact-flow
 
 Secondary/follow-up story: scaling high-quality product content and application imagery consistently across 98 products. Keep the AI/catalog-production deep dive out of the main case study except as a teaser.
 
+## Portfolio design / branch decision
+
+- **The canonical portfolio design base is `release/new-site`**, which is the beige case-study design used by `/case-studies/wp-ai-kits` and the Cloudflare `release-new-site` preview.
+- The earlier implementation branch `feat/alamaar-rebuild-case-study` was based on the older `main` shell and is superseded. PR #10 was closed without merging.
+- Current working branch: **`feat/alamaar-rebuild-release-preview`**, created directly from `release/new-site`.
+- Current review surface: **draft PR #11**, targeting `release/new-site`.
+- Cloudflare Pages is already building this feature branch automatically. Do not depend on Cloudflare tooling for project control; GitHub is the source of truth.
+- The existing page visible on the plain `release-new-site` branch still shows the older Elementor-focused copy. The feature branch contains the new headline `Rebuilding Alamaar HPL's digital product experience.` and the complete evidence-led narrative.
+
 ## Completed
 
 - Reviewed old/new supplied screenshots and source repositories.
 - Created the dedicated case-study workspace, task system, Cloudinary folder, Playwright capture tooling, GitHub Actions workflow, and recurring work loop.
 - Verified matched Alaska routes and curated old/new homepage, products, Alaska, contact, mobile evidence, and catalog interaction video to Cloudinary.
 - Locked the headline, summary, role credit, seven-part story, Lighthouse methodology language, and AI-image disclosure in `STORYBOARD.md`.
-- Portfolio implementation is active on branch `feat/alamaar-rebuild-case-study` in `addvaluewithai-hub/yasserhawas.site`.
 - The case-study schema supports ordered image, video, before/after, gallery, and stats media blocks while retaining the legacy image field.
-- The complete Alamaar website-rebuild narrative is implemented on the portfolio branch using curated evidence and verified Lighthouse stats.
-- The misleading primary 67-product catalog-system framing has been removed; the primary Alamaar slug is now `alamaar-website-rebuild` and the 98-product production-system story is a separate next chapter.
+- The complete Alamaar website-rebuild narrative is implemented with curated evidence and verified Lighthouse stats.
+- The misleading primary 67-product catalog-system framing has been removed from the rebuild story; the 98-product production-system story is a separate next chapter.
 - Case-study videos respect `prefers-reduced-motion`; reduced-motion users do not receive forced autoplay/loop and get controls.
-- Draft portfolio PR #10 is open and mergeable, but remains draft until QA is complete.
 - Focused hero media is curated on Cloudinary at 1440×900, 25fps, 9.88s.
 - Verified paired mobile Lighthouse run 14 is preserved under `evidence/verified/mobile-lighthouse-run14/summary.json`, with source commit `3dec250846d447b491f6d376b637bccee955a3ba` retaining the original raw run artifacts.
-- The portfolio branch now generates a dedicated `/case-studies/alamaar-website-rebuild/index.html` during build with route-specific title, description, canonical/OG/Twitter metadata and progressive crawlable narrative fallback content.
-- Added cross-repository portfolio QA in `.github/workflows/portfolio-qa.yml` to run type/build checks, verify the generated route, start a production preview, capture desktop/tablet/mobile screenshots, detect horizontal overflow and page errors, verify rendered narrative, and test normal/reduced-motion video behavior.
-- Updated PR #10 description so completed hero/mobile evidence and crawlability work are reflected accurately.
-- **Evidence integrity issue found and fixed:** scheduled run 15 was marked `success` by step exit codes even though the old site timed out during route discovery and its Lighthouse run failed with `NO_FCP`. The scripts previously recorded errors but exited 0. `capture/validate-capture.mjs` now rejects missing routes/screenshots/videos, and `audit.mjs` now retries once, retains diagnostics, and exits non-zero if either Lighthouse target fails. Future `run-status.json` values will therefore reflect incomplete evidence correctly.
+- Added route-specific crawlability/static-generation work and cross-repository portfolio QA during the first implementation pass; re-validate or port only what is still needed on the `release/new-site`-based branch.
+- Evidence integrity issue found and fixed: scheduled run 15 was marked success by step exit codes even though the old site timed out during route discovery and its Lighthouse run failed with `NO_FCP`. `capture/validate-capture.mjs` now rejects missing required evidence, and `audit.mjs` retries and exits non-zero if either Lighthouse target fails.
+- Created `feat/alamaar-rebuild-release-preview` from `release/new-site` and ported the rich media schema, renderer, reduced-motion hook/hero behavior, and new `alamaar-website-rebuild` narrative onto the correct beige design system.
+- Opened draft PR #11 targeting `release/new-site` specifically for the Cloudflare/new-site preview workflow.
+- Updated hourly-agent instructions so future runs cannot accidentally continue against the older dark/main portfolio shell.
 
 ## Latest capture health
 
 - Run 15's committed `run-status.json` says success, but that status is **not trustworthy** because it predates the new validators.
 - Run 15 Lighthouse summary contains an old-site `NO_FCP` error; its new-site mobile result was 99 with LCP 1.86s, but it is not a valid paired before/after run and must not replace verified run 14 in the case study.
 - Run 15 route capture also timed out against the preserved old site and produced null old product/contact/Alaska discovery fields.
-- The capture and audit scripts have now been hardened so the next run will report these conditions as failures rather than false success.
+- The capture and audit scripts have been hardened so subsequent runs report these conditions as failures rather than false success.
 
 ## Immediate next work
 
-1. Inspect the next capture run after the validators were added and confirm `run-status.json` matches actual artifact completeness.
-2. Inspect `evidence/portfolio-qa/run-status.json`, `qa.json`, and desktop/tablet/mobile screenshots from the new cross-repo QA workflow; fix any build, overflow, rendering, crawlability, or media-behavior failures.
-3. Verify catalog collection-count overlap before interpreting 54 + 55 against 98 finishes.
-4. Keep multilingual recording blocked: a fresh 2026-08-23 crawl still exposes English `Generate ...` prompt text in Arabic collection content.
-5. Run final portfolio PageSpeed and complete the final fact/editorial pass before moving PR #10 out of draft.
+1. QA the actual Cloudflare build of `feat/alamaar-rebuild-release-preview` / PR #11 against the `release/new-site` beige visual system.
+2. Run build/type validation and responsive desktop/tablet/mobile review on the new-site-based branch; fix any layout/media issues without drifting from the established WP AI Kits design language.
+3. Confirm important narrative content and metadata remain crawlable on the new branch, porting the earlier static-route solution only if required by the `release/new-site` build architecture.
+4. Verify catalog collection-count overlap before interpreting 54 + 55 against 98 finishes.
+5. Keep multilingual recording blocked until the Arabic `Generate ...` prompt leakage is fixed and re-verified.
+6. Run final portfolio PageSpeed and complete the final fact/editorial pass before moving PR #11 out of draft.
 
 ## Blockers / unknowns
 
