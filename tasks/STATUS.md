@@ -1,6 +1,6 @@
 # Status
 
-Last updated: 2026-08-23
+Last updated: 2026-08-24
 
 ## Goal
 
@@ -63,7 +63,9 @@ The later 98-product content/AI production system remains a separate follow-up s
 - Copied the retained full-page QA captures into Cloudinary as `qa-run43-desktop`, `qa-run43-tablet`, and `qa-run43-mobile` for durable visual-review access while preserving the original repository evidence.
 - Run 47 provides valid post-optimization final-preview Lighthouse evidence: measured page weight fell to 2.85 MB mobile / 3.28 MB desktop from the earlier ~8.9 MB baseline; every known evidence image requested by Lighthouse was served through `f_auto/q_auto` as WebP with zero unoptimized URLs. Mobile measured Performance 78 / LCP 5.16s / TBT 93ms; desktop measured Performance 95 / LCP 1.42s / TBT 0ms. These remain preview lab measurements, not production analytics.
 - Run 47 responsive QA is fully green at desktop/tablet/mobile: HTTP 200, current H1 and narrative headings, no runtime errors, no horizontal overflow, and correct normal/reduced-motion video attributes.
-- Closed a remaining image-delivery QA blind spot in case-study commit `28000fff5efb5dd902ffbf3410b0a9e10a801794`: responsive Playwright QA now forces lazy evidence images into view, records deployed DOM image URLs, requires all 12 expected Alamaar evidence images, and fails if any deployed image URL lacks `/image/upload/f_auto/q_auto/`. This complements Lighthouse network evidence, which can omit below-fold lazy images.
+- Closed a remaining image-delivery QA blind spot in case-study commit `28000fff5efb5dd902ffbf3410b0a9e10a801794`: responsive Playwright QA forces lazy evidence images into view, records deployed DOM image URLs, requires all 12 expected Alamaar evidence images, and fails if any deployed image URL lacks `/image/upload/f_auto/q_auto/`. This complements Lighthouse network evidence, which can omit below-fold lazy images.
+- Added a final deployed-layout health layer in case-study commit `1a4720c8740132339a143f7bea62693c5b278b7f`: responsive QA now records broken images, zero-sized image/video elements, clipped text and text extending outside the viewport at desktop/tablet/mobile, and fails on any such regression. This targets the remaining responsive visual-review task without replacing the required human screenshot inspection.
+- Re-checked the durable Cloudinary QA screenshot assets during the 2026-08-24 run: desktop is 1440×13718 / 1.22 MB, tablet 834×12823 / 1.09 MB, and mobile 390×16610 / 0.82 MB; all three remain active assets with valid image dimensions and nonzero payloads.
 
 ## Latest capture / preview QA evidence
 
@@ -73,13 +75,13 @@ The later 98-product content/AI production system remains a separate follow-up s
 - Run 47 portfolio Lighthouse was generated at 2026-08-23T21:41:41Z, well after the confirmed image-optimization deployment, so it is valid post-optimization evidence.
 - Run 47 post-optimization preview scores: mobile Performance 78 / Accessibility 98 / Best Practices 100 / SEO 69, FCP 2.24s, LCP 5.16s, TBT 93ms, total byte weight 2.85 MB; desktop Performance 95 / Accessibility 98 / Best Practices 100 / SEO 69, FCP 0.90s, LCP 1.42s, TBT 0ms, total byte weight 3.28 MB.
 - Lighthouse requested 2 known evidence images on mobile and 4 on desktop; all were delivered through `/image/upload/f_auto/q_auto/` as WebP with zero unoptimized URLs.
-- The newer Playwright DOM-delivery assertion in commit `28000fff5efb5dd902ffbf3410b0a9e10a801794` triggers another run to verify all 12 expected evidence images, including below-fold lazy images, but the final PageSpeed task itself is now closed by run 47.
+- The newer Playwright DOM-delivery assertion in commit `28000fff5efb5dd902ffbf3410b0a9e10a801794` and deployed-layout assertions in `1a4720c8740132339a143f7bea62693c5b278b7f` trigger a fresh capture run. Until its report is published, run 47 remains the latest retained evidence and the new assertions must not be treated as passed.
 - PR #11's Cloudflare Pages bot reports the stable Branch Preview URL as `https://feat-alamaar-rebuild-release.yasserhawas-preview.pages.dev`; the capture workflow targets that URL.
 
 ## Immediate next work
 
-1. Visually inspect the retained desktop/tablet/mobile full-page screenshots, also copied to Cloudinary as `qa-run43-desktop`, `qa-run43-tablet`, and `qa-run43-mobile`, before closing the remaining responsive visual-review items.
-2. Inspect the next Playwright QA result after `28000fff5efb5dd902ffbf3410b0a9e10a801794` and confirm all 12 expected deployed evidence-image URLs are present and transformed; treat this as delivery-integrity confirmation, not a reason to replace run-47 PageSpeed numbers.
+1. Inspect the next published responsive QA result after commits `28000fff5efb5dd902ffbf3410b0a9e10a801794` and `1a4720c8740132339a143f7bea62693c5b278b7f`; require all 12 evidence images transformed plus zero broken/zero-sized media, clipped text or off-viewport text at desktop/tablet/mobile.
+2. Visually inspect the retained desktop/tablet/mobile full-page screenshots, also copied to Cloudinary as `qa-run43-desktop`, `qa-run43-tablet`, and `qa-run43-mobile`, before closing the remaining responsive visual-review items.
 3. Verify whether collection counts 54 + 55 overlap only if product-membership evidence becomes available; do not infer it from totals alone.
 4. Keep multilingual recording blocked until the Arabic `Generate ...` prompt leakage is fixed and re-verified.
 5. Keep PR #11 in draft until the final visual screenshot review is complete.
