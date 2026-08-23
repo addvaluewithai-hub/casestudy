@@ -54,6 +54,8 @@ The later 98-product content/AI production system remains a separate follow-up s
 - Completed a line-by-line factual portfolio audit. Current live 98 count, matched Alaska evidence, retained desktop/run-14 mobile Lighthouse figures, Gutenberg/FSE + ACF architecture and shared English/Arabic/Hindi structure are reconciled.
 - Confirmed the custom rebuild story contains no testimonial and uses the accurate generic collaborating-UI-designer credit. Media captions distinguish matched/live evidence from conceptual imagery.
 - Completed the final editorial pass on the release-preview source.
+- Synced the storyboard's performance chapter to the reviewed portfolio heading `More visual, faster in lab tests` and recorded the verified mobile methodology there.
+- Added final deployed-preview Lighthouse automation: `capture/portfolio-audit.mjs` runs mobile and desktop Lighthouse against the Cloudflare branch preview, retains raw reports plus a compact summary, and is wired into `capture-evidence.yml` as a required QA stage.
 
 ## Latest capture / preview QA evidence
 
@@ -64,11 +66,12 @@ The later 98-product content/AI production system remains a separate follow-up s
 - The only reported failure is a stale narrative assertion: QA expected `More visual, substantially faster`, while the current reviewed source intentionally uses `More visual, faster in lab tests`. This is a test-contract mismatch, not a rendered-page defect.
 - Commit `f2e7e2244570d90634ab62190d7564234f7a4172` updates the QA assertion to the current editorial heading. The next capture run should therefore determine whether automated responsive/reduced-motion QA is fully green.
 - PR #11's Cloudflare Pages bot reports the stable Branch Preview URL as `https://feat-alamaar-rebuild-release.yasserhawas-preview.pages.dev`; the capture workflow targets that URL.
+- The capture workflow now also records a `portfolio_audit` outcome and publishes `evidence/bootstrap/portfolio-lighthouse/{mobile.json,desktop.json,summary.json}`. The first retained result is still pending; no final portfolio PageSpeed score is claimed yet.
 
 ## Immediate next work
 
-1. Inspect the first capture run after `f2e7e2244570d90634ab62190d7564234f7a4172`. If `portfolio: success`, visually review its desktop/tablet/mobile screenshots before closing responsive/reduced-motion QA.
-2. Run final PageSpeed on the deployed release-preview case-study page once responsive QA is clean.
+1. Inspect the first capture run after `f2e7e2244570d90634ab62190d7564234f7a4172` and the newly added final Lighthouse stage. If `portfolio: success`, visually review its desktop/tablet/mobile screenshots before closing responsive/reduced-motion QA.
+2. Inspect `evidence/bootstrap/portfolio-lighthouse/summary.json`; only then close final PageSpeed QA and record the lab results with methodology.
 3. Verify whether collection counts 54 + 55 overlap only if product-membership evidence becomes available; do not infer it from totals alone.
 4. Keep multilingual recording blocked until the Arabic `Generate ...` prompt leakage is fixed and re-verified.
 5. Keep PR #11 in draft until responsive and final PageSpeed QA are complete.
