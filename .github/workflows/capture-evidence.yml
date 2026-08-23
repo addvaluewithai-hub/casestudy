@@ -14,11 +14,12 @@ permissions:
 
 env:
   CI: true
+  PORTFOLIO_PREVIEW_URL: https://feat-alamaar-rebuild-release.yasserhawas-preview.pages.dev
 
 jobs:
   capture:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 30
     defaults:
       run:
         working-directory: capture
@@ -54,6 +55,11 @@ jobs:
         continue-on-error: true
         run: npm run audit
 
+      - name: QA portfolio branch preview
+        id: portfolio
+        continue-on-error: true
+        run: npm run portfolio-qa
+
       - name: Write run status
         if: always()
         run: |
@@ -63,6 +69,7 @@ jobs:
             "capture": "${{ steps.capture.outcome }}",
             "hero": "${{ steps.hero.outcome }}",
             "audit": "${{ steps.audit.outcome }}",
+            "portfolio": "${{ steps.portfolio.outcome }}",
             "run_number": "${{ github.run_number }}",
             "event": "${{ github.event_name }}"
           }
@@ -97,7 +104,7 @@ jobs:
           fi
 
       - name: Fail job when a required capture failed
-        if: always() && (steps.capture.outcome == 'failure' || steps.hero.outcome == 'failure' || steps.audit.outcome == 'failure')
+        if: always() && (steps.capture.outcome == 'failure' || steps.hero.outcome == 'failure' || steps.audit.outcome == 'failure' || steps.portfolio.outcome == 'failure')
         run: |
-          echo "One or more evidence steps failed. See evidence/run-status.json and logs."
+          echo "One or more evidence/QA steps failed. See evidence/run-status.json and portfolio-preview/report.json."
           exit 1
