@@ -40,13 +40,33 @@ jobs:
         run: npx playwright install --with-deps chromium
 
       - name: Capture screenshots and recordings
+        id: capture
+        continue-on-error: true
         run: npm run capture
 
       - name: Capture focused hero montage
+        id: hero
+        continue-on-error: true
         run: npm run hero
 
       - name: Capture mobile Lighthouse evidence
+        id: audit
+        continue-on-error: true
         run: npm run audit
+
+      - name: Write run status
+        if: always()
+        run: |
+          mkdir -p evidence
+          cat > evidence/run-status.json <<JSON
+          {
+            "capture": "${{ steps.capture.outcome }}",
+            "hero": "${{ steps.hero.outcome }}",
+            "audit": "${{ steps.audit.outcome }}",
+            "run_number": "${{ github.run_number }}",
+            "event": "${{ github.event_name }}"
+          }
+          JSON
 
       - name: Upload evidence artifact
         if: always()
@@ -58,12 +78,14 @@ jobs:
           retention-days: 14
 
       - name: Publish latest evidence to repository
-        if: success() && github.event_name != 'workflow_dispatch'
+        if: always() && github.event_name != 'workflow_dispatch'
         run: |
           cd "$GITHUB_WORKSPACE"
           rm -rf evidence/bootstrap
           mkdir -p evidence/bootstrap
-          cp -R capture/evidence/. evidence/bootstrap/
+          if [ -d capture/evidence ]; then
+            cp -R capture/evidence/. evidence/bootstrap/
+          fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add evidence/bootstrap
@@ -73,3 +95,9 @@ jobs:
             git commit -m "Store latest Alamaar capture evidence"
             git push
           fi
+
+      - name: Fail job when a required capture failed
+        if: always() && (steps.capture.outcome == 'failure' || steps.hero.outcome == 'failure' || steps.audit.outcome == 'failure')
+        run: |
+          echo "One or more evidence steps failed. See evidence/run-status.json and logs."
+          exit 1
