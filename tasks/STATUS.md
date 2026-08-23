@@ -54,11 +54,12 @@ The later 98-product content/AI production system remains a separate follow-up s
 - Fixed a release-preview rendering mismatch discovered in Cloudflare: the listing card was reading the new `alamaarWebsiteRebuildCaseStudy.ts` data while `/case-studies/alamaar-website-rebuild` still rendered an older hard-coded `AlamaarWebsiteRebuildStory.tsx`. The custom beige story now renders `study.headline`, `study.summary`, metrics and `study.sections` from the shared new data source.
 - Added automated responsive QA to the release branch. `scripts/alamaar-responsive-qa.mjs` launches the production build at desktop/tablet/mobile widths, captures full-page screenshots, checks for horizontal overflow, runtime/console errors, the new headline/98-finish narrative, absence of superseded Elementor copy, video flags and reduced-motion behavior.
 - Diagnosed a QA evidence blind spot: no `qa-artifacts/alamaar/run-status.json` has yet been published from the self-publishing push workflow. The workflow now also listens to `pull_request` updates targeting `release/new-site`, so PR synchronizations create an additional inspectable QA run even if branch self-publishing fails. Commit: `334d2fac68eec0cb8069d5b9cfb2aa1764232c1d`.
+- **The new PR-triggered release QA is now observable, but it is currently failing before any workflow step starts.** Run 9 (`32634593790`) failed with an empty step list and no artifacts; a manual rerun produced the same pre-step failure. This means the current blocker is GitHub Actions execution/runner infrastructure for the private portfolio repo, not a demonstrated build or responsive failure in the page itself. Do not mark responsive QA passed or failed from this run.
 - Fresh live shop verification still reports `Showing 1–16 of 98 results` and exposes collection navigation, but public HTML/source evidence remains insufficient to prove whether the supplied collection counts 54 + 55 overlap. The claim remains intentionally unresolved rather than inferred.
 
 ## Immediate next work
 
-1. Inspect the next `Alamaar rebuild release QA` run triggered after commit `334d2fac68eec0cb8069d5b9cfb2aa1764232c1d`; review its build result, responsive report/screenshots and reduced-motion checks, then fix any failure before closing responsive QA.
+1. Re-check the portfolio Actions run after the runner/infrastructure condition changes; when a job actually starts, inspect build logs plus responsive screenshots/report and fix any page-level failure before closing responsive QA.
 2. Verify whether collection counts 54 + 55 overlap only if product-membership evidence becomes available; do not infer it from totals alone.
 3. Keep multilingual recording blocked until the Arabic `Generate ...` prompt leakage is fixed and re-verified.
 4. Run final portfolio PageSpeed and complete final fact/editorial QA before moving PR #11 out of draft.
@@ -71,3 +72,4 @@ The later 98-product content/AI production system remains a separate follow-up s
 - Collection-count overlap remains unverified; current public/source checks do not expose enough membership data.
 - Arabic homepage still exposes English image-generation prompt text; do not record polished multilingual proof yet.
 - WordPress editor proof requires authenticated editor access and remains optional until access exists.
+- Portfolio responsive QA is temporarily blocked by a GitHub Actions run that fails before any step starts; no page-level failure has been established from that run.
