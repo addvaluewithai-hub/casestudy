@@ -61,6 +61,7 @@ The later 98-product content/AI production system remains a separate follow-up s
 - Cloudflare Pages confirmed commit `19637914b7ff6320aa443a89847387bd6b22eb36` deployed successfully to the release-preview branch at 2026-08-23T19:43:30Z; the bot reported immutable preview `https://09ce347b.yasserhawas-preview.pages.dev` and the stable branch preview URL.
 - Hardened the final portfolio Lighthouse audit in case-study commit `b2e92aa237daba8a5e6f038cf5cf081fc25b0800`: each profile now records total byte weight, largest network resources, and counts optimized vs unoptimized known Alamaar evidence-image requests. The audit fails if a known evidence image is still requested without `/image/upload/f_auto/q_auto/`, making the post-optimization verification deterministic rather than inferred from score movement alone.
 - Copied the retained full-page QA captures into Cloudinary as `qa-run43-desktop`, `qa-run43-tablet`, and `qa-run43-mobile` for durable visual-review access while preserving the original repository evidence.
+- Closed an image-delivery QA blind spot in case-study commit `28000fff5efb5dd902ffbf3410b0a9e10a801794`: responsive Playwright QA now forces lazy evidence images into view, records the deployed DOM image URLs, requires all 12 expected Alamaar evidence images to be present, and fails if any deployed image URL lacks `/image/upload/f_auto/q_auto/`. This complements Lighthouse network evidence, which can legitimately omit below-fold lazy images.
 
 ## Latest capture / preview QA evidence
 
@@ -68,12 +69,12 @@ The later 98-product content/AI production system remains a separate follow-up s
 - Run 44 responsive QA remained green: HTTP 200 at desktop/tablet/mobile, correct current H1 and required narrative headings, no runtime errors, no horizontal overflow, and reduced-motion autoplay=false / loop=false / controls=true / paused=true.
 - Run 44 portfolio Lighthouse was generated at 19:42:17Z, with mobile fetch at 19:42:20Z and desktop fetch at 19:42:33Z. That is **before** Cloudflare confirmed the optimization deployment at 19:43:30Z, so run 44 is not valid post-optimization evidence and must not be used to close final PageSpeed QA.
 - Run 44 pre-optimization preview scores were mobile Performance 74 / Accessibility 98 / Best Practices 100 / SEO 69, LCP 5.00s; desktop Performance 96 / Accessibility 98 / Best Practices 100 / SEO 69, LCP 1.33s. These values illustrate normal lab variance and are retained, not promoted as final results.
-- The hardened audit commit `b2e92aa237daba8a5e6f038cf5cf081fc25b0800` was pushed after the confirmed Cloudflare deployment and triggers the next capture run. Its resulting summary will include payload diagnostics and explicit transformed-image verification.
+- No newer capture evidence has been committed yet after the post-deployment audit hardening. The new Playwright DOM-delivery check in commit `28000fff5efb5dd902ffbf3410b0a9e10a801794` triggers another capture run and will make transformed delivery verifiable even for below-fold lazy images.
 - PR #11's Cloudflare Pages bot reports the stable Branch Preview URL as `https://feat-alamaar-rebuild-release.yasserhawas-preview.pages.dev`; the capture workflow targets that URL.
 
 ## Immediate next work
 
-1. Inspect the capture run triggered by `b2e92aa237daba8a5e6f038cf5cf081fc25b0800`; require zero unoptimized known evidence-image requests, then compare total byte weight and mobile LCP/Performance against the earlier baseline before closing final PageSpeed QA.
+1. Inspect the next committed capture run after `28000fff5efb5dd902ffbf3410b0a9e10a801794`; require zero missing/unoptimized deployed DOM evidence images and zero unoptimized known image requests in Lighthouse when those images are requested, then compare total byte weight and mobile LCP/Performance against the earlier baseline before closing final PageSpeed QA.
 2. Visually inspect the retained desktop/tablet/mobile full-page screenshots, also copied to Cloudinary as `qa-run43-desktop`, `qa-run43-tablet`, and `qa-run43-mobile`, before closing the remaining responsive visual-review items. Automated layout/runtime/reduced-motion checks are already green.
 3. Verify whether collection counts 54 + 55 overlap only if product-membership evidence becomes available; do not infer it from totals alone.
 4. Keep multilingual recording blocked until the Arabic `Generate ...` prompt leakage is fixed and re-verified.
