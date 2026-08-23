@@ -37,7 +37,7 @@ Work top-to-bottom unless a task is blocked. Every completed task should update 
 - [x] Add build-time dedicated Alamaar case-study HTML generation with route-specific metadata and crawlable progressive fallback content.
 - [x] Fix the custom-route content split: `AlamaarWebsiteRebuildStory.tsx` now renders the shared new case-study data rather than maintaining the old Elementor narrative separately.
 - [x] Add release-branch QA guardrails that reject the superseded Elementor/67-product wording and require the custom story to render shared headline/sections.
-- [ ] Add responsive/mobile QA for the case-study page. Automated production-build QA is implemented, but portfolio Actions run 9 fails before any step starts and publishes no artifact; this task is blocked on a runnable Actions job, not yet on a known page defect.
+- [ ] Add responsive/mobile QA for the case-study page. Portfolio-repo Actions still fail before any step starts, so equivalent QA has now been added to the working `casestudy` capture workflow against the stable Cloudflare branch preview. Inspect the next published `evidence/bootstrap/portfolio-preview/` report/screenshots before marking complete.
 - [x] Ensure important narrative copy is crawlable HTML and route-specific metadata; build-time output and QA assertions are implemented.
 
 ## P3 — Final QA
@@ -46,7 +46,7 @@ Work top-to-bottom unless a task is blocked. Every completed task should update 
 - [x] Confirm no unrelated testimonial is shown. The custom Alamaar rebuild story and route wrapper contain no testimonial block.
 - [ ] Confirm UI designer is credited accurately if name becomes available. Current generic collaborating-designer credit is accurate; specific name remains unavailable.
 - [x] Verify media captions distinguish factual evidence from retrospective diagrams. Current rebuild media is matched capture/live evidence or explicitly labelled conceptual application imagery; no retrospective process diagram is presented as historical evidence.
-- [ ] Test case study at desktop/tablet/mobile. Automated evidence blocked by the pre-step Actions failure above.
-- [ ] Test video autoplay/mute/playsInline/reduced-motion behavior. Automated evidence blocked by the pre-step Actions failure above.
+- [ ] Test case study at desktop/tablet/mobile. Automated preview capture is now running from the working `casestudy` evidence workflow; review the first published report/screenshots before closing.
+- [ ] Test video autoplay/mute/playsInline/reduced-motion behavior. The preview QA now asserts video attributes under normal and `prefers-reduced-motion: reduce`; review the first published report before closing.
 - [ ] Run PageSpeed on final portfolio case-study page.
 - [x] Final editorial pass: tightened the release-preview source on 2026-08-23 to remove defensive/meta wording, subjective performance language, repetition, and unnecessary jargon while preserving the locked evidence and role attribution.
