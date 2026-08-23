@@ -6,7 +6,8 @@
     "capture": "node capture.mjs && node validate-capture.mjs",
     "hero": "node hero.mjs",
     "audit": "node audit.mjs",
-    "portfolio-qa": "node portfolio-qa.mjs \"$PORTFOLIO_PREVIEW_URL\" evidence/portfolio-preview"
+    "portfolio-qa": "node portfolio-qa.mjs \"$PORTFOLIO_PREVIEW_URL\" evidence/portfolio-preview",
+    "portfolio-audit": "node portfolio-audit.mjs \"$PORTFOLIO_PREVIEW_URL\" evidence/portfolio-lighthouse"
   },
   "dependencies": {
     "playwright": "^1.55.0"
