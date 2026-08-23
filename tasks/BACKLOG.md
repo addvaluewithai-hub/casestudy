@@ -37,7 +37,7 @@ Work top-to-bottom unless a task is blocked. Every completed task should update 
 - [x] Add build-time dedicated Alamaar case-study HTML generation with route-specific metadata and crawlable progressive fallback content.
 - [x] Fix the custom-route content split: `AlamaarWebsiteRebuildStory.tsx` now renders the shared new case-study data rather than maintaining the old Elementor narrative separately.
 - [x] Add release-branch QA guardrails that reject the superseded Elementor/67-product wording and require the custom story to render shared headline/sections.
-- [ ] Add responsive/mobile QA for the case-study page. Root cause of the missing diagnostic report was found: `npm run portfolio-qa` invoked stale `portfolio-preview-qa.mjs` while hardening had been applied to `portfolio-qa.mjs`. Commit `0f05139ce83bd8098953beada959ec25fe2d70ac` now invokes the hardened script against Cloudflare's bot-reported branch preview and writes to `evidence/portfolio-preview`. Inspect the next published report/screenshots before marking complete.
+- [ ] Add responsive/mobile QA for the case-study page. Run 38 produced the first useful structured report: all three viewports returned 200, correct H1, no runtime errors and no horizontal overflow. Its sole failure was a stale expected heading (`More visual, substantially faster`) versus the current editorial source (`More visual, faster in lab tests`). Commit `f2e7e2244570d90634ab62190d7564234f7a4172` aligns the assertion; review the next report and screenshots before marking complete.
 - [x] Ensure important narrative copy is crawlable HTML and route-specific metadata; build-time output and QA assertions are implemented.
 
 ## P3 — Final QA
@@ -46,7 +46,7 @@ Work top-to-bottom unless a task is blocked. Every completed task should update 
 - [x] Confirm no unrelated testimonial is shown. The custom Alamaar rebuild story and route wrapper contain no testimonial block.
 - [ ] Confirm UI designer is credited accurately if name becomes available. Current generic collaborating-designer credit is accurate; specific name remains unavailable.
 - [x] Verify media captions distinguish factual evidence from retrospective diagrams. Current rebuild media is matched capture/live evidence or explicitly labelled conceptual application imagery; no retrospective process diagram is presented as historical evidence.
-- [ ] Test case study at desktop/tablet/mobile. The working capture workflow now invokes the hardened preview QA script that always writes structured diagnostics; review the first report after commit `0f05139ce83bd8098953beada959ec25fe2d70ac` before closing.
-- [ ] Test video autoplay/mute/playsInline/reduced-motion behavior. The same hardened preview QA inspects normal media safeguards and `prefers-reduced-motion: reduce`; review its next published report before closing.
+- [ ] Test case study at desktop/tablet/mobile. Run 38 passed navigation, H1, runtime-error and overflow checks at 1440, 834 and 390px; only the stale narrative assertion prevented a green status. Await the post-fix run and visual screenshot review before closing.
+- [ ] Test video autoplay/mute/playsInline/reduced-motion behavior. Run 38 report shows normal muted/playsInline/metadata safeguards and reduced-motion autoplay=false, loop=false, controls=true, paused=true. Await the post-fix green run and screenshot review before closing with responsive QA.
 - [ ] Run PageSpeed on final portfolio case-study page.
 - [x] Final editorial pass: tightened the release-preview source on 2026-08-23 to remove defensive/meta wording, subjective performance language, repetition, and unnecessary jargon while preserving the locked evidence and role attribution.
