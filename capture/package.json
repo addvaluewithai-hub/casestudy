@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "capture": "node capture.mjs",
+    "hero": "node hero.mjs",
     "audit": "node audit.mjs"
   },
   "dependencies": {
