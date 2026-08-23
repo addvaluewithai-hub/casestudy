@@ -12,6 +12,7 @@
 - The new product detail experience adds richer product context, specifications, application imagery, sample/enquiry CTAs, benefits, and related finishes.
 - Many application images are AI-generated; exact product/material reference should remain visually and editorially distinct from conceptual scenes.
 - Desktop PageSpeed/Lighthouse evidence supplied by the user shows performance 45 → 96 and LCP 6.8s → 1.1s. Present these as lab measurements, not business outcomes.
+- Automated mobile Lighthouse evidence retained in the case-study repo shows performance 37 → 91, LCP 34.29s → 2.87s, and TBT 759ms → 0ms in a Lighthouse CLI mobile run using simulated throttling on a GitHub Actions runner. Always include or preserve that methodology context.
 
 ## Claims requiring care
 
@@ -22,6 +23,7 @@
 - "I designed the UI" — inaccurate. Use UX strategy / information architecture / design direction; credit UI designer separately.
 - "Perfect accessibility" / "perfect SEO" — do not infer from Lighthouse 100 scores.
 - "AI accurately reproduces the material in real spaces" — too strong. Application scenes are conceptual unless a specific validation process proves otherwise.
+- Do not generalize the old mobile LCP of 34.29s into a real-user loading-time claim. It is one retained automated lab run, not field telemetry.
 
 ## Preferred role wording
 
