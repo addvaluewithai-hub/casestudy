@@ -1,17 +1,14 @@
 {
-  "generatedAt": "2026-08-23T05:48:01.642Z",
+  "generatedAt": "2026-08-23T07:04:49.986Z",
   "urls": {
     "oldHome": "https://feedbackcentral.site/",
     "newHome": "https://alamaarhpl.com/",
-    "oldProducts": null,
+    "oldProducts": "https://feedbackcentral.site/shop/",
     "newProducts": "https://alamaarhpl.com/shop/",
-    "oldContact": null,
+    "oldContact": "https://feedbackcentral.site/contact/",
     "newContact": "https://alamaarhpl.com/contact/",
-    "oldAlaska": null,
+    "oldAlaska": "https://feedbackcentral.site/product/alaska-wood-5225-sf-2/",
     "newAlaska": "https://alamaarhpl.com/shop/finishes/alaska-wood-5225-sf/"
   },
-  "notes": [
-    "old links: TimeoutError: page.goto: Timeout 60000ms exceeded.\nCall log:\n  - navigating to \"https://feedbackcentral.site/\", waiting until \"domcontentloaded\"\n",
-    "oldHome: TimeoutError: page.goto: Timeout 60000ms exceeded.\nCall log:\n  - navigating to \"https://feedbackcentral.site/\", waiting until \"domcontentloaded\"\n"
-  ]
+  "notes": []
 }
