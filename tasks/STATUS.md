@@ -56,6 +56,7 @@ The later 98-product content/AI production system remains a separate follow-up s
 - Run 47 established the retained post-optimization PageSpeed baseline and closed final PageSpeed/video QA.
 - Added DOM-level image-delivery validation requiring all 12 expected unique evidence images and transformed Cloudinary URLs.
 - Added deployed-layout visual-health assertions for broken images, zero-sized media, clipped text and off-viewport text at desktop/tablet/mobile.
+- Re-inspected the committed run-51 artifacts on 2026-08-24: `run-status.json`, the deployed `portfolio-preview/qa.json`, and the latest evidence commit all agree that capture, hero, Alamaar audit, portfolio responsive QA and portfolio Lighthouse completed successfully. PR #11 is still open, draft and mergeable on the expected release-preview branch.
 
 ## Latest capture / preview QA evidence
 
@@ -82,3 +83,4 @@ The later 98-product content/AI production system remains a separate follow-up s
 - Arabic homepage still exposes English image-generation prompt text; do not record polished multilingual proof yet.
 - WordPress editor proof requires authenticated editor access and remains optional until access exists.
 - Portfolio repository Actions remain unreliable for QA because jobs can fail before their first step; the working `casestudy` capture workflow is the active QA path against the deployed Cloudflare preview.
+- Final human screenshot inspection is now the only completion-condition task not already covered by automated evidence. The current automation runtime can read the GitHub/Cloudinary asset metadata and QA reports but cannot render the retained remote PNG pixels for a genuine human visual judgment; do not mark responsive visual review complete without an actual visual inspection.
