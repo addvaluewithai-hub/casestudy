@@ -1,60 +1,60 @@
 {
-  "generatedAt": "2026-08-24T14:10:08.964Z",
+  "generatedAt": "2026-08-24T15:06:47.721Z",
   "url": "https://feat-alamaar-rebuild-release.yasserhawas-preview.pages.dev/case-studies/alamaar-website-rebuild/",
   "methodology": "Lighthouse CLI against the deployed Cloudflare branch preview on a GitHub Actions runner. Mobile uses simulated throttling; desktop uses the desktop preset. Lab measurements vary by run and are not field analytics.",
   "results": {
     "mobile": {
       "finalUrl": "https://feat-alamaar-rebuild-release.yasserhawas-preview.pages.dev/case-studies/alamaar-website-rebuild",
-      "fetchTime": "2026-08-24T14:10:12.346Z",
+      "fetchTime": "2026-08-24T15:06:50.645Z",
       "scores": {
-        "performance": 80,
+        "performance": 75,
         "accessibility": 98,
         "bestPractices": 100,
         "seo": 69
       },
       "metrics": {
-        "fcpMs": 3212.2880000000005,
-        "lcpMs": 3764.6640000000007,
-        "tbtMs": 170.5,
-        "speedIndexMs": 3212.2880000000005,
+        "fcpMs": 2913.78,
+        "lcpMs": 5004.961,
+        "tbtMs": 129.5,
+        "speedIndexMs": 2913.78,
         "cls": 0.001721783051121404
       },
       "payload": {
-        "totalByteWeight": 4760651,
+        "totalByteWeight": 10470170,
         "topResources": [
           {
+            "url": "https://res.cloudinary.com/as9o12al/video/upload/v1787463716/hero-montage-focused.webm",
+            "transferSize": 6966720,
+            "resourceSize": 3145728,
+            "mimeType": "video/webm"
+          },
+          {
             "url": "https://res.cloudinary.com/as9o12al/image/upload/f_auto/q_auto/v1787442230/new-home-desktop.png",
-            "transferSize": 1344279,
+            "transferSize": 1344297,
             "resourceSize": 1343054,
             "mimeType": "image/webp"
           },
           {
-            "url": "https://res.cloudinary.com/as9o12al/video/upload/v1787463716/hero-montage-focused.webm",
-            "transferSize": 1256961,
-            "resourceSize": 1255730,
-            "mimeType": "video/webm"
-          },
-          {
             "url": "https://res.cloudinary.com/as9o12al/video/upload/v1787442311/catalog-search-filter.webm",
-            "transferSize": 1234852,
+            "transferSize": 1234987,
             "resourceSize": 1233848,
             "mimeType": "video/webm"
           },
           {
             "url": "https://res.cloudinary.com/as9o12al/image/upload/f_auto/q_auto/v1787442223/old-home-desktop.png",
-            "transferSize": 453548,
+            "transferSize": 453556,
             "resourceSize": 452956,
             "mimeType": "image/webp"
           },
           {
             "url": "https://www.googletagmanager.com/gtag/js?id=G-R9BZJPVP9E",
-            "transferSize": 169803,
-            "resourceSize": 496938,
+            "transferSize": 169793,
+            "resourceSize": 496920,
             "mimeType": "application/javascript"
           },
           {
             "url": "https://feat-alamaar-rebuild-release.yasserhawas-preview.pages.dev/assets/index-D66acrWl.js",
-            "transferSize": 139934,
+            "transferSize": 139744,
             "resourceSize": 419593,
             "mimeType": "application/javascript"
           },
@@ -80,68 +80,68 @@
     },
     "desktop": {
       "finalUrl": "https://feat-alamaar-rebuild-release.yasserhawas-preview.pages.dev/case-studies/alamaar-website-rebuild",
-      "fetchTime": "2026-08-24T14:10:26.325Z",
+      "fetchTime": "2026-08-24T15:07:02.879Z",
       "scores": {
-        "performance": 95,
+        "performance": 96,
         "accessibility": 98,
         "bestPractices": 100,
         "seo": 69
       },
       "metrics": {
-        "fcpMs": 940.41,
-        "lcpMs": 1392.0839999999998,
+        "fcpMs": 815.7935,
+        "lcpMs": 1321.649,
         "tbtMs": 0,
-        "speedIndexMs": 940.41,
+        "speedIndexMs": 815.7935,
         "cls": 0.0003654671440761205
       },
       "payload": {
-        "totalByteWeight": 5947832,
+        "totalByteWeight": 9936527,
         "topResources": [
           {
+            "url": "https://res.cloudinary.com/as9o12al/video/upload/v1787463716/hero-montage-focused.webm",
+            "transferSize": 5245518,
+            "resourceSize": 3145728,
+            "mimeType": "video/webm"
+          },
+          {
             "url": "https://res.cloudinary.com/as9o12al/image/upload/f_auto/q_auto/v1787442230/new-home-desktop.png",
-            "transferSize": 1344242,
+            "transferSize": 1344165,
             "resourceSize": 1343054,
             "mimeType": "image/webp"
           },
           {
-            "url": "https://res.cloudinary.com/as9o12al/video/upload/v1787463716/hero-montage-focused.webm",
-            "transferSize": 1256961,
-            "resourceSize": 1255730,
-            "mimeType": "video/webm"
-          },
-          {
             "url": "https://res.cloudinary.com/as9o12al/video/upload/v1787442311/catalog-search-filter.webm",
-            "transferSize": 1234914,
+            "transferSize": 1234978,
             "resourceSize": 1233848,
             "mimeType": "video/webm"
           },
           {
             "url": "https://res.cloudinary.com/as9o12al/image/upload/f_auto/q_auto/v1787442244/new-products-desktop.png",
-            "transferSize": 641445,
+            "transferSize": 641585,
             "resourceSize": 640698,
             "mimeType": "image/webp"
           },
           {
             "url": "https://res.cloudinary.com/as9o12al/image/upload/f_auto/q_auto/v1787442238/old-products-desktop.png",
-            "transferSize": 545675,
+            "transferSize": 545717,
             "resourceSize": 544972,
             "mimeType": "image/webp"
           },
           {
             "url": "https://res.cloudinary.com/as9o12al/image/upload/f_auto/q_auto/v1787442223/old-home-desktop.png",
-            "transferSize": 453692,
+            "transferSize": 453586,
             "resourceSize": 452956,
             "mimeType": "image/webp"
           },
           {
             "url": "https://www.googletagmanager.com/gtag/js?id=G-R9BZJPVP9E",
-            "transferSize": 169793,
-            "resourceSize": 496920,
+            "transferSize": 169806,
+            "resourceSize": 496938,
             "mimeType": "application/javascript"
           },
           {
             "url": "https://feat-alamaar-rebuild-release.yasserhawas-preview.pages.dev/assets/index-D66acrWl.js",
-            "transferSize": 139913,
+            "transferSize": 139867,
             "resourceSize": 419593,
             "mimeType": "application/javascript"
           }
