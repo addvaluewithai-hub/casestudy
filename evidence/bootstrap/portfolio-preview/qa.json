@@ -1,6 +1,6 @@
 {
   "url": "https://feat-alamaar-rebuild-release.yasserhawas-preview.pages.dev/case-studies/alamaar-website-rebuild/",
-  "checkedAt": "2026-08-24T10:59:19.132Z",
+  "checkedAt": "2026-08-24T11:48:33.154Z",
   "viewports": {
     "desktop": {
       "navigation": {
@@ -15,7 +15,7 @@
       "bodyWidth": 1440,
       "scrollWidth": 1440,
       "visualHealth": {
-        "documentHeight": 23988,
+        "documentHeight": 24244,
         "sectionCount": 8,
         "figureCount": 10,
         "imageCount": 13,
@@ -38,7 +38,7 @@
       "bodyWidth": 834,
       "scrollWidth": 834,
       "visualHealth": {
-        "documentHeight": 24817,
+        "documentHeight": 25068,
         "sectionCount": 8,
         "figureCount": 10,
         "imageCount": 13,
@@ -61,7 +61,7 @@
       "bodyWidth": 390,
       "scrollWidth": 390,
       "visualHealth": {
-        "documentHeight": 44565,
+        "documentHeight": 46572,
         "sectionCount": 8,
         "figureCount": 10,
         "imageCount": 13,
