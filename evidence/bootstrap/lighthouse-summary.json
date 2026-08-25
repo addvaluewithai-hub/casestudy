@@ -1,40 +1,40 @@
 {
-  "generatedAt": "2026-08-24T23:42:08.124Z",
+  "generatedAt": "2026-08-25T03:16:35.282Z",
   "methodology": "Lighthouse CLI mobile form factor, simulated throttling, GitHub Actions runner. Lab measurements vary by run.",
   "results": {
     "old-mobile": {
       "url": "https://feedbackcentral.site/",
       "finalUrl": "https://alamaarhpl.com/",
-      "fetchTime": "2026-08-24T23:42:22.178Z",
+      "fetchTime": "2026-08-25T03:16:38.856Z",
       "scores": {
-        "performance": 67,
+        "performance": 69,
         "accessibility": 100,
         "bestPractices": 100,
         "seo": 100
       },
       "metrics": {
-        "fcpMs": 2953.8379999999997,
-        "lcpMs": 3754.1389999999997,
-        "tbtMs": 531,
-        "speedIndexMs": 4961.247412725589,
+        "fcpMs": 4955.012999999999,
+        "lcpMs": 5030.012999999999,
+        "tbtMs": 0,
+        "speedIndexMs": 4955.012999999999,
         "cls": 0
       }
     },
     "new-mobile": {
       "url": "https://alamaarhpl.com/",
       "finalUrl": "https://alamaarhpl.com/",
-      "fetchTime": "2026-08-24T23:42:37.259Z",
+      "fetchTime": "2026-08-25T03:16:53.381Z",
       "scores": {
-        "performance": 90,
+        "performance": 86,
         "accessibility": 100,
         "bestPractices": 100,
         "seo": 100
       },
       "metrics": {
-        "fcpMs": 2890.895,
-        "lcpMs": 2970.093,
+        "fcpMs": 2918.3875,
+        "lcpMs": 3477.5045,
         "tbtMs": 0,
-        "speedIndexMs": 2890.895,
+        "speedIndexMs": 2918.3875,
         "cls": 0
       }
     }
