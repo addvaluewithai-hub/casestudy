@@ -1,40 +1,26 @@
 {
-  "generatedAt": "2026-09-03T01:10:41.529Z",
+  "generatedAt": "2026-09-03T05:55:27.774Z",
   "methodology": "Lighthouse CLI mobile form factor, simulated throttling, GitHub Actions runner. Lab measurements vary by run.",
   "results": {
     "old-mobile": {
       "url": "https://feedbackcentral.site/",
-      "finalUrl": "https://alamaarhpl.com/",
-      "fetchTime": "2026-09-03T01:10:45.522Z",
-      "scores": {
-        "performance": 74,
-        "accessibility": 100,
-        "bestPractices": 100,
-        "seo": 100
-      },
-      "metrics": {
-        "fcpMs": 4370.756,
-        "lcpMs": 4370.756,
-        "tbtMs": 0,
-        "speedIndexMs": 4370.756,
-        "cls": 0
-      }
+      "error": "Runtime error encountered: The page did not paint any content. Please ensure you keep the browser window in the foreground during the load and try again. (NO_FCP)"
     },
     "new-mobile": {
       "url": "https://alamaarhpl.com/",
       "finalUrl": "https://alamaarhpl.com/",
-      "fetchTime": "2026-09-03T01:11:00.612Z",
+      "fetchTime": "2026-09-03T06:00:13.101Z",
       "scores": {
-        "performance": 84,
+        "performance": 91,
         "accessibility": 100,
         "bestPractices": 100,
         "seo": 100
       },
       "metrics": {
-        "fcpMs": 2984.842,
-        "lcpMs": 3620.6790000000005,
+        "fcpMs": 2744.0425,
+        "lcpMs": 2744.0425000000005,
         "tbtMs": 0,
-        "speedIndexMs": 2984.842,
+        "speedIndexMs": 2744.0425,
         "cls": 0
       }
     }
