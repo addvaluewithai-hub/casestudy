@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-04T01:02:00.259Z",
+  "generatedAt": "2026-09-04T06:04:55.623Z",
   "urls": {
     "oldHome": "https://feedbackcentral.site/",
     "newHome": "https://alamaarhpl.com/",
@@ -10,7 +10,5 @@
     "oldAlaska": "https://alamaarhpl.com/shop/finishes/alaska-wood-5225-sf/",
     "newAlaska": "https://alamaarhpl.com/shop/finishes/alaska-wood-5225-sf/"
   },
-  "notes": [
-    "oldHome: TimeoutError: page.goto: Timeout 60000ms exceeded.\nCall log:\n  - navigating to \"https://feedbackcentral.site/\", waiting until \"domcontentloaded\"\n"
-  ]
+  "notes": []
 }
